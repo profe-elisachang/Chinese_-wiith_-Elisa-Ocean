@@ -1,0 +1,685 @@
+/* ==================== 基礎設定 ==================== */
+body {
+    margin: 0;
+    font-family: "Microsoft JhengHei", sans-serif;
+    background: #E3F2F2;
+    display: flex;
+    min-height: 100vh;
+}
+/* --- 回首页按钮样式 --- */
+.home-button {
+    /* 基础样式：使其占据整个顶部空间 */
+    display: block;
+    
+    /* 关键：使用负外边距抵消 .sidebar 的内边距，使按钮贴合顶部和左右两边 */
+    margin: -25px -20px 20px -20px; 
+
+    /* 字体和对齐 */
+    font-size: 1.5em; 
+    font-weight: 900;
+    text-align: center;
+    text-decoration: none;
+    
+    /* 配色方案：使用你的亮黄色 (#FFD93D) 作为文字，深蓝作为背景 */
+    background: #16476A; 
+    color: #FFD93D !important; /* 使用 !important 确保颜色不被其他 a 标签规则覆盖 */
+    padding: 20px 0; /* 增加上下内边距，使其更显眼 */
+    transition: background-color 0.3s;
+}
+
+.home-button:hover {
+    background: #3B9797; /* 悬停时使用主题绿色 */
+    color: white !important;
+}
+
+/* --- 补充：确保主内容区域留出空间（关键！）--- */
+/* 如果你还没有这个，请确保你的主内容容器（例如 .main）加上这个规则，否则它会被 fixed 的侧边栏盖住 */
+.main {
+    margin-left: 260px; /* 宽度必须等于 .sidebar 的宽度 */
+    /* ... 其他主内容样式 ... */
+}
+/* ==================== 深海側邊欄 ==================== */
+.sidebar {
+    width: 260px;
+    height: 100vh;
+    overflow-y: auto;
+    background: #132440;
+    color: white;
+    padding: 25px 20px;
+    box-sizing: border-box;
+    position: fixed;
+    border-right: 4px solid #3B9797;
+}
+
+.sidebar h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: 700;
+    font-size: 17px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    letter-spacing: 1px;
+}
+
+.sidebar h2.lessons { 
+    background: #FFD93D;
+    color: #132440;
+    border-left: 5px solid #6BCB77;
+}
+
+.sidebar a {
+    display: block;
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 12px 15px;
+    margin: 6px 0;
+    font-size: 15px;
+    background: #16476A;
+    border-radius: 8px;
+    border-left: 4px solid transparent;
+    transition: all 0.3s;
+}
+
+.sidebar a:hover {
+    background: #3B9797;
+    border-left: 4px solid #FFD93D;
+    transform: translateX(5px);
+    box-shadow: 0 3px 8px rgba(59, 151, 151, 0.4);
+}
+
+/* 🌟 活动链接 (当前页面) 的高亮样式 🌟 */
+.sidebar a.active {
+    background-color: #3B9797; /* 突出显示的背景色 (使用你网站主题色) */
+    color: white; /* 突出显示时的文字颜色 */
+    font-weight: 700; /* 加粗 */
+    border-left: 5px solid #FFD93D; /* 或者添加一个亮眼的左边框 */
+    padding-left: 10px; /* 调整内边距以适应新的边框 */
+}
+
+.section-gap {
+    height: 18px;
+}
+
+/* ==================== 主內容區 ==================== */
+.main {
+    margin-left: 280px;
+    padding: 40px;
+    width: calc(100% - 280px);
+}
+
+.main h1 {
+    color: #132440;
+    font-size: clamp(28px, 4vw, 42px);
+    margin-bottom: 15px;
+    padding: 15px 25px;
+    background: white;
+    display: block;
+    max-width: 90%;
+    border-radius: 12px;
+    border-left: 8px solid #FF6B6B;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-sizing: border-box;
+}
+
+/* ==================== 沙灘卡片 ==================== */
+.card {
+    background: #FFFEF7;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    max-width: 90%;
+    margin-top: 25px;
+    border-top: 6px solid #3B9797;
+    position: relative;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background: #FF6B6B;
+    border-radius: 12px 0 0 12px;
+}
+
+.card h2 {
+    color: #16476A;
+    margin-top: 0;
+    font-size: 26px;
+    margin-bottom: 15px;
+}
+
+.card p {
+    color: #2C3E50;
+    line-height: 1.9;
+    font-size: 16px;
+}
+
+/* ==================== 高亮區塊 ==================== */
+.highlight {
+    background: #FFF4E6;
+    padding: 18px 20px;
+    border-left: 5px solid #FF6B6B;
+    border-radius: 8px;
+    margin-top: 20px;
+    box-shadow: 0 2px 8px rgba(255, 107, 107, 0.15);
+}
+
+.accent-text {
+    color: #FF6B6B;
+    font-weight: 700;
+    font-size: 17px;
+}
+
+/* ==================== 彩色標籤 ==================== */
+.tag {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    margin: 5px 5px 5px 0;
+}
+
+.tag.coral { background: #FF6B6B; color: white; }
+.tag.sun { background: #FFD93D; color: #132440; }
+.tag.seaweed { background: #6BCB77; color: white; }
+.tag.ocean { background: #3B9797; color: white; }
+
+/* ==================== 歡迎橫幅 ==================== */
+.welcome-banner {
+    background: #16476A;
+    color: white;
+    padding: 30px 35px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    max-width: 90%;
+    box-shadow: 0 4px 15px rgba(59, 151, 151, 0.3);
+}
+
+.welcome-banner h2 {
+    margin: 0 0 10px 0;
+    font-size: clamp(24px, 3.5vw, 36px);
+    color: #FFD93D;
+    font-weight: 700;
+}
+
+.welcome-banner p {
+    margin: 10px 0 0 0;
+    color: #E3F2F2;
+    font-size: 15px;
+}
+
+/* ==================== Tab 切換樣式 ==================== */
+.tabs {
+    display: flex;
+    gap: 0;
+    margin: 30px 0 0 0;
+    border-bottom: 3px solid #3B9797;
+    max-width: 90%;
+    flex-wrap: wrap;
+}
+
+.tab-button {
+    background: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #16476A;
+    cursor: pointer;
+    border-radius: 8px 8px 0 0;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+    border-bottom: none;
+}
+
+.tab-button:hover {
+    background: #E3F2F2;
+}
+
+.tab-button.active {
+    background: #3B9797;
+    color: white;
+    border-color: #3B9797;
+}
+
+.tab-content {
+    display: none;
+    max-width: 90%;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* ==================== 生詞表樣式 ==================== */
+.vocab-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.vocab-table th {
+    background: #16476A;
+    color: white;
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 1.05em;
+}
+
+.vocab-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #E3F2F2;
+}
+
+.vocab-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+.char-number {
+    font-weight: bold;
+    color: #3B9797;
+    text-align: center;
+}
+
+.character {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #132440;
+}
+
+.pinyin {
+    color: #FF6B6B;
+    font-style: italic;
+    font-weight: 600;
+}
+
+.english {
+    color: #555;
+}
+
+.example {
+    color: #333;
+    font-size: 0.95em;
+}
+
+/* ==================== 短句高亮 ==================== */
+.sentence-highlight {
+    background: #E3F2F2;
+    padding: 25px;
+    border-radius: 12px;
+    border-left: 5px solid #FF6B6B;
+    margin: 25px 0;
+    font-size: 1.3em;
+    line-height: 1.8;
+    color: #132440;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* ==================== 詞組網格 ==================== */
+.phrases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.phrase-card {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #3B9797;
+    transition: all 0.3s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.phrase-card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(59, 151, 151, 0.2);
+}
+
+.phrase-chinese {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #132440;
+    margin-bottom: 5px;
+}
+
+.phrase-english {
+    color: #666;
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+/* ==================== 對話樣式 ==================== */
+.dialogue-box {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    line-height: 2;
+    font-size: 1.15em;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin: 20px 0;
+}
+
+.dialogue-title {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #16476A;
+    margin: 25px 0 15px 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #3B9797;
+}
+
+.dialogue-title:first-child {
+    margin-top: 0;
+}
+
+.dialogue-box p {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.speaker {
+    color: #3B9797;
+    font-weight: bold;
+}
+
+/* ==================== 練習題樣式 ==================== */
+.question-card {
+    background: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    border: 2px solid #E3F2F2;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.question-number {
+    font-size: 1.2em;
+    color: #3B9797;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.question-text {
+    font-size: 1.3em;
+    color: #132440;
+    margin-bottom: 20px;
+    line-height: 1.8;
+}
+
+.blank-option {
+    display: inline-block;
+    min-width: 50px;
+    padding: 5px 12px;
+    margin: 0 5px;
+    border: 2px dashed #3B9797;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: white;
+    font-weight: 600;
+}
+
+.blank-option:hover {
+    border-color: #FF6B6B;
+    background: #FFF4E6;
+}
+
+.blank-option.selected {
+    border: 2px solid #3B9797;
+    background: #3B9797;
+    color: white;
+}
+
+.choices {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.choice-btn {
+    padding: 15px 20px;
+    font-size: 1.1em;
+    background: white;
+    border: 2px solid #E3F2F2;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 600;
+    color: #132440;
+    text-align: center;
+}
+
+.choice-btn:hover {
+    border-color: #3B9797;
+    background: #E3F2F2;
+}
+
+.choice-btn.selected {
+    border: 2px solid #3B9797;
+    background: #3B9797;
+    color: white;
+}
+
+.submit-btn {
+    display: block;
+    margin: 20px auto 0;
+    padding: 12px 30px;
+    font-size: 1.1em;
+    background: #3B9797;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.3s;
+}
+
+.submit-btn:hover {
+    background: #16476A;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 151, 151, 0.3);
+}
+
+.feedback {
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-align: center;
+    display: none;
+}
+
+.feedback.correct {
+    background: #c6f6d5;
+    color: #22543d;
+    border: 2px solid #6BCB77;
+    display: block;
+}
+
+.feedback.incorrect {
+    background: #fed7d7;
+    color: #742a2a;
+    border: 2px solid #FF6B6B;
+    display: block;
+}
+
+/* ==================== 課程卡片網格（主頁用）==================== */
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    margin: 30px 0;
+}
+
+.course-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    border-left: 6px solid #3B9797;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(59, 151, 151, 0.2);
+}
+
+.course-card.shizi {
+    border-left-color: #FF6B6B;
+}
+
+.course-card.conversation {
+    border-left-color: #3B9797;
+}
+
+.course-number {
+    font-size: 3em;
+    font-weight: 900;
+    color: #E3F2F2;
+    position: absolute;
+    top: -10px;
+    right: 15px;
+    z-index: 0;
+}
+
+.course-title {
+    font-size: 1.5em;
+    color: #132440;
+    margin-bottom: 10px;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+}
+
+.course-subtitle {
+    color: #16476A;
+    font-size: 0.95em;
+    margin-bottom: 15px;
+}
+
+.course-meta {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 15px 0;
+}
+
+.meta-badge {
+    background: #E3F2F2;
+    color: #16476A;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+.course-link {
+    display: inline-block;
+    background: #3B9797;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 15px;
+    transition: all 0.3s;
+}
+
+.course-link:hover {
+    background: #16476A;
+    transform: translateX(5px);
+}
+
+.section-header {
+    margin: 50px 0 25px 0;
+    padding-bottom: 15px;
+    border-bottom: 4px solid #3B9797;
+}
+
+.section-header h2 {
+    color: #16476A;
+    font-size: 2em;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.section-icon {
+    font-size: 1.2em;
+}
+
+.progress-mini {
+    width: 100%;
+    height: 8px;
+    background: #E3F2F2;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 12px;
+}
+
+.progress-mini-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3B9797, #6BCB77);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+
+    
+}
+
+/* ==================== 響應式設計 ==================== */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 4px solid #3B9797;
+    }
+    
+    .main {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px;
+    }
+    
+    .tabs {
+        flex-direction: column;
+    }
+    
+    .tab-button {
+        border-radius: 8px;
+        margin-bottom: 5px;
+    }
+    
+    .choices {
+        grid-template-columns: 1fr;
+    }
+    
+    .phrases-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    
+    .course-grid {
+        grid-template-columns: 1fr;
+    }
+}
+

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>识字X - Chinese with Elisa</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <!-- 側邊欄（自動載入）-->
+    <div class="sidebar" id="sidebar"></div>
+    
+    <!-- 主內容 -->
+    <div class="main">
+        <h1>📘 识字X</h1>
+        
+        <div class="welcome-banner">
+            <h2>识字X：【主題名稱】</h2>
+            <p>学习 30 个常用汉字，掌握【主題描述】📝</p>
+        </div>
+        
+        <!-- Tab 切換 -->
+        <div class="tabs">
+            <button class="tab-button active" onclick="switchTab('vocab')">生词表</button>
+            <button class="tab-button" onclick="switchTab('phrases')">词组与口语</button>
+            <button class="tab-button" onclick="switchTab('exercises')">练习</button>
+        </div>
+        
+        <!-- ========== Tab 1: 生词表 ========== -->
+        <div class="tab-content active" id="vocab-tab">
+            <div class="card">
+                <h2>生词表 Vocabulary List</h2>
+                <div style="overflow-x: auto;">
+                    <table class="vocab-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 8%;">序号</th>
+                                <th style="width: 10%;">字</th>
+                                <th style="width: 12%;">拼音</th>
+                                <th style="width: 35%;">英文释义</th>
+                                <th style="width: 35%;">词组示例</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- 從這裡開始複製你的生詞 -->
+                            <tr>
+                                <td class="char-number">1</td>
+                                <td class="character">字</td>
+                                <td class="pinyin">zì</td>
+                                <td class="english">English meaning</td>
+                                <td class="example">词组 cízǔ <em>phrase</em></td>
+                            </tr>
+                            <!-- 繼續添加更多字... -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- 短句 -->
+                <div class="sentence-highlight">
+                    【把本課的短句貼在這裡】
+                </div>
+            </div>
+        </div>
+        
+        <!-- ========== Tab 2: 词组与口语 ========== -->
+        <div class="tab-content" id="phrases-tab">
+            <!-- 词组 -->
+            <div class="card">
+                <h2>词组 Phrases</h2>
+                <div class="phrases-grid">
+                    <!-- 從這裡開始複製你的詞組 -->
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">词组</div>
+                        <div class="phrase-english">phrase</div>
+                    </div>
+                    <!-- 繼續添加更多詞組... -->
+                </div>
+            </div>
+            
+            <!-- 口语对话 -->
+            <div class="card">
+                <h2>口语对话 Dialogues</h2>
+                <div class="dialogue-box">
+                    <div class="dialogue-title">(一)</div>
+                    <p><span class="speaker">◆</span> 对话内容1</p>
+                    <p><span class="speaker">◇</span> 对话内容2</p>
+                    
+                    <div class="dialogue-title">(二)</div>
+                    <p><span class="speaker">◆</span> 对话内容3</p>
+                    <p><span class="speaker">◇</span> 对话内容4</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ========== Tab 3: 练习 ========== -->
+        <div class="tab-content" id="exercises-tab">
+            <div class="card">
+                <h2>练习 Exercises</h2>
+                
+                <!-- 填空題範例 -->
+                <div class="question-card">
+                    <div class="question-number">1. 选择正确的位置</div>
+                    <div class="question-text">
+                        句子<span class="blank-option" data-position="A" onclick="selectBlank(1, 'A')">A</span>内容<span class="blank-option" data-position="B" onclick="selectBlank(1, 'B')">B</span>继续<span class="blank-option" data-position="C" onclick="selectBlank(1, 'C')">C</span>。
+                        <div style="margin-top: 10px; font-size: 0.9em; color: #666;">选项：的</div>
+                    </div>
+                    <button class="submit-btn" onclick="checkAnswer(1, 'B')">提交</button>
+                    <div class="feedback" id="feedback1"></div>
+                </div>
+                
+                <!-- 選擇題範例 -->
+                <div class="question-card">
+                    <div class="question-number">2. 选择正确答案</div>
+                    <div class="question-text">
+                        题目内容_____。
+                    </div>
+                    <div class="choices">
+                        <button class="choice-btn" onclick="selectChoice(2, 'A', this)">A. 选项一</button>
+                        <button class="choice-btn" onclick="selectChoice(2, 'B', this)">B. 选项二</button>
+                        <button class="choice-btn" onclick="selectChoice(2, 'C', this)">C. 选项三</button>
+                        <button class="choice-btn" onclick="selectChoice(2, 'D', this)">D. 选项四</button>
+                    </div>
+                    <button class="submit-btn" onclick="checkMultipleAnswer(2, ['A'])">提交</button>
+                    <div class="feedback" id="feedback2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript：自動載入側邊欄 + 練習題功能 -->
+    <script>
+        // 載入側邊欄
+        fetch('../assets/sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar').innerHTML = data;
+            });
+        
+        // Tab 切換功能
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        // 練習題功能
+        let selectedOptions = {};
+        
+        function selectBlank(questionNum, position) {
+            selectedOptions[questionNum] = position;
+            const card = document.getElementById('feedback' + questionNum).parentElement;
+            card.querySelectorAll('.blank-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            card.querySelector(`[data-position="${position}"]`).classList.add('selected');
+        }
+        
+        function checkAnswer(questionNum, correctAnswer) {
+            const feedback = document.getElementById('feedback' + questionNum);
+            const selected = selectedOptions[questionNum];
+            
+            if (!selected) {
+                feedback.className = 'feedback incorrect';
+                feedback.textContent = '请先选择一个位置！';
+                return;
+            }
+            
+            if (selected === correctAnswer) {
+                feedback.className = 'feedback correct';
+                feedback.textContent = '✓ 正确！Correct!';
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.textContent = `✗ 不对。应该是 ${correctAnswer}。`;
+            }
+        }
+        
+        function selectChoice(questionNum, choice, element) {
+            selectedOptions[questionNum] = choice;
+            const card = element.closest('.question-card');
+            card.querySelectorAll('.choice-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            element.classList.add('selected');
+        }
+        
+        function checkMultipleAnswer(questionNum, correctAnswers) {
+            const feedback = document.getElementById('feedback' + questionNum);
+            const selected = selectedOptions[questionNum];
+            
+            if (!selected) {
+                feedback.className = 'feedback incorrect';
+                feedback.textContent = '请先选择一个答案！';
+                return;
+            }
+            
+            if (correctAnswers.includes(selected)) {
+                feedback.className = 'feedback correct';
+                feedback.textContent = '✓ 正确！Correct!';
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.textContent = `✗ 不对。正确答案是 ${correctAnswers.join('、')}。`;
+            }
+        }
+    </script>
+</body>
+</html>

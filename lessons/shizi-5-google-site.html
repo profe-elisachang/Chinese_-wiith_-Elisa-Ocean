@@ -1,0 +1,3328 @@
+
+   <!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>识字五 - Chinese with Elisa</title>
+    <style>
+       
+                
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e3f2f2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .main {
+            max-width: 1800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 30px;
+        }
+        
+        h1 {
+            color: #16476A;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .welcome-banner {
+            background: linear-gradient(135deg, #3B9797 0%, #16476A 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(59, 151, 151, 0.3);
+        }
+        
+        .welcome-banner h2 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        
+        .welcome-banner p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        /* Tab 切换样式 */
+        .tabs {
+            display: flex;
+            gap: 0;
+            margin: 30px 0 0 0;
+            border-bottom: 3px solid #3B9797;
+            max-width: 100%;
+            flex-wrap: wrap;
+        }
+        
+        .tab-button {
+            background: white;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #16476A;
+            cursor: pointer;
+            border-radius: 8px 8px 0 0;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            border-bottom: none;
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .tab-button:hover {
+            background: #E3F2F2;
+        }
+        
+        .tab-button.active {
+            background: #3B9797;
+            color: white;
+            border-color: #3B9797;
+        }
+        
+        .tab-content {
+            display: none;
+            max-width: 100%;
+            padding: 30px 0;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+        
+        .card h2 {
+            color: #16476A;
+            font-size: 1.6em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #E3F2F2;
+        }
+        
+        /* 部件 Tab 样式 */
+        .components-grid {
+            display:block;
+           
+        }
+        
+        .component-card {
+            margin-bottom: 20px;
+            
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        
+        .component-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .component-header {
+            background: #3B9797;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+        
+        .component-body {
+            padding: 20px;
+        }
+        
+        .component-info {
+            margin-bottom: 15px;
+        }
+        
+        .component-info h3 {
+            color: #16476A;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+        
+        .component-info p {
+            color: #555;
+            line-height: 1.5;
+        }
+        
+        .stroke-order {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+        }
+        
+        .stroke {
+            width: 40px;
+            height: 40px;
+            background: #E3F2F2;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #16476A;
+        }
+        
+        .component-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #3B9797;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .component-link:hover {
+            text-decoration: underline;
+        }
+        /* 部件Tab专用样式 */
+.components-intro {
+    text-align: center;
+    padding: 20px 0;
+    color: #666;
+    border-bottom: 1px solid #E3F2F2;
+    margin-bottom: 25px;
+}
+/* 部件子Tab样式 */
+.sub-tabs {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0 30px 0;
+    justify-content: center;
+}
+
+.sub-tab-button {
+    background: white;
+    border: 2px solid #E3F2F2;
+    padding: 12px 30px;
+    font-size: 1.05em;
+    font-weight: 600;
+    color: #16476A;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: all 0.3s;
+}
+
+.sub-tab-button:hover {
+    background: #E3F2F2;
+}
+
+.sub-tab-button.active {
+    background: linear-gradient(135deg, #3B9797, #16476A);
+    color: white;
+    border-color: #3B9797;
+}
+
+.sub-tab-content {
+    display: none;
+}
+
+.sub-tab-content.active {
+    display: block;
+}
+
+/* 基础部件卡片用蓝绿色 */
+.basic-component {
+    background: #3B9797
+    
+}
+
+/* 复合字卡片用橙红色 */
+.compound-component {
+    background: linear-gradient(135deg, #FFF4E6 0%, #c1afaf 100%);
+    border-left: 5px solid #FF6B6B;
+}
+.category-section {
+    margin-bottom: 40px;
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #E3F2F2;
+}
+
+.category-header h3 {
+    color: #16476A;
+    font-size: 1.5em;
+}
+
+.category-icon {
+    font-size: 1.4em;
+}
+
+.components-grid {
+    display: block;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.component-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #E3F2F2;
+}
+
+.component-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* 基础部件和复合字的背景色区分 */
+.basic-component {
+    border-left: 5px solid #3B9797;
+}
+
+.compound-component {
+    border-left: 5px solid #FF6B6B;
+}
+
+.character-header {
+    background: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 1px solid #E3F2F2;
+}
+
+.character-symbol {
+    font-size: 3em;
+    font-weight: bold;
+    color: #16476A;
+    margin-bottom: 8px;
+}
+
+.character-pinyin {
+    font-size: 1.3em;
+    color: #FF6B6B;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.character-meaning {
+    font-size: 1.1em;
+    color: #555;
+}
+
+.character-body {
+    padding: 20px;
+}
+
+.info-section {
+    margin-bottom: 18px;
+}
+
+.info-section:last-child {
+    margin-bottom: 0;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: #16476A;
+    margin-bottom: 10px;
+}
+
+.section-icon {
+    font-size: 1.1em;
+}
+
+.section-content {
+    line-height: 1.5;
+    color: #333;
+}
+
+.components-list {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.component {
+    padding: 6px 12px;
+    background: #E3F2F2;
+    border-radius: 6px;
+    font-weight: 600;
+    color: #16476A;
+    font-size: 0.9em;
+}
+
+.story-text {
+    background: #FFF4E6;
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 3px solid #FFA500;
+    font-size: 0.95em;
+}
+
+.pronunciation-cue {
+    background: #E3F2F2;
+    padding: 12px;
+    border-radius: 8px;
+    font-style: italic;
+    color: #16476A;
+    font-size: 0.95em;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .components-grid {
+      
+    }
+    
+    .character-header {
+        padding: 15px;
+    }
+    
+    .character-symbol {
+        font-size: 2.5em;
+    }
+}        /* 语言样式 */
+.chinese {
+    color: #16476A; /* 深蓝色 */
+    font-weight: 600;
+}
+
+.english {
+    color: #FF6B6B; /* 红色 */
+    font-style: italic;
+}
+
+.spanish {
+    color: #3B9797; /* 青色 */
+    font-style: normal;
+}
+        /* 生词表样式 */
+        .vocab-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        .vocab-table th {
+            background: #16476A;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.05em;
+        }
+        
+        .vocab-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #E3F2F2;
+        }
+        
+        .vocab-table tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .char-number {
+            font-weight: bold;
+            color: #3B9797;
+            text-align: center;
+        }
+        
+        .character {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #132440;
+        }
+        
+        .pinyin {
+            color: #FF6B6B;
+            font-style: italic;
+            font-weight: 600;
+        }
+        
+        .english {
+            color: #555;
+        }
+        
+        .example {
+            color: #333;
+            font-size: 0.95em;
+        }
+        
+        /* 词组网格 */
+        .phrases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .phrase-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #3B9797;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .phrase-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(59, 151, 151, 0.2);
+        }
+        
+        .phrase-chinese {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #132440;
+            margin-bottom: 5px;
+        }
+        
+        .phrase-english {
+            color: #666;
+            font-style: italic;
+            font-size: 0.9em;
+        }
+        
+        /* 对话样式 */
+        .dialogue-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            line-height: 2;
+            font-size: 1.15em;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin: 20px 0;
+        }
+        
+        .dialogue-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #16476A;
+            margin: 25px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3B9797;
+        }
+        
+        .dialogue-title:first-child {
+            margin-top: 0;
+        }
+        
+        .dialogue-box p {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .speaker {
+            color: #3B9797;
+            font-weight: bold;
+        }
+        
+        /* 语法样式 */
+        .grammar-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .grammar-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-left: 5px solid #FF6B6B;
+        }
+        
+        .grammar-header {
+            background: #FF6B6B;
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .grammar-body {
+            padding: 20px;
+        }
+        
+        .grammar-example {
+            background: #FFF4E6;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 3px solid #FFA500;
+        }
+        
+        .grammar-note {
+            background: #E3F2F2;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-style: italic;
+            color: #16476A;
+        }
+        
+        /* 练习样式 */
+        .question-card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            border: 2px solid #E3F2F2;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .question-number {
+            font-size: 1.2em;
+            color: #3B9797;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .question-text {
+            font-size: 1.3em;
+            color: #132440;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .blank-option {
+            display: inline-block;
+            min-width: 50px;
+            padding: 5px 12px;
+            margin: 0 5px;
+            border: 2px dashed #3B9797;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: white;
+            font-weight: 600;
+        }
+        
+        .blank-option:hover {
+            border-color: #FF6B6B;
+            background: #FFF4E6;
+        }
+        
+        .blank-option.selected {
+            border: 2px solid #3B9797;
+            background: #3B9797;
+            color: white;
+        }
+        
+        .choices {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .choice-btn {
+            padding: 15px 20px;
+            font-size: 1.1em;
+            background: white;
+            border: 2px solid #E3F2F2;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            color: #132440;
+        }
+        
+        .choice-btn:hover {
+            border-color: #3B9797;
+            background: #E3F2F2;
+        }
+        
+        .choice-btn.selected {
+            border: 2px solid #3B9797;
+            background: #3B9797;
+            color: white;
+        }
+        
+        .submit-btn {
+            display: block;
+            margin: 20px auto 0;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            background: #3B9797;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: #16476A;
+            transform: translateY(-2px);
+        }
+        
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+            display: none;
+        }
+        
+        .feedback.correct {
+            background: #c6f6d5;
+            color: #22543d;
+            border: 2px solid #6BCB77;
+            display: block;
+        }
+        
+        .feedback.incorrect {
+            background: #fed7d7;
+            color: #742a2a;
+            border: 2px solid #FF6B6B;
+            display: block;
+        }
+        
+        .progress-container {
+            background: #E3F2F2;
+            border-radius: 10px;
+            height: 12px;
+            margin: 30px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #3B9797, #16476A);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            text-align: center;
+            font-weight: 600;
+            color: #16476A;
+            margin-bottom: 10px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab-button {
+                border-radius: 8px;
+                margin-bottom: 5px;
+                border: 2px solid #E3F2F2;
+            }
+            
+            .components-grid, .grammar-points {
+                grid-template-columns: 1fr;
+            }
+            
+            .choices {
+                grid-template-columns: 1fr;
+            }
+            
+            .vocab-table {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main">
+        <div class="welcome-banner">
+            <h2>识字五：日常学习与生活</h2>
+            <p>学习与日常生活相关的汉字、词组和表达方式</p>
+        </div>
+        
+        <!-- Tab 切换 -->
+        <div class="tabs">
+            <button class="tab-button active" onclick="switchTab('components')">部件</button>
+            <button class="tab-button" onclick="switchTab('vocab')">生词表</button>
+            <button class="tab-button" onclick="switchTab('phrases')">词组与口语</button>
+            <button class="tab-button" onclick="switchTab('grammar')">语法</button>
+            <button class="tab-button" onclick="switchTab('exercises')">练习</button>
+        </div>
+        
+     <!-- 部件 Tab -->
+<div class="tab-content active" id="components-tab">
+    <div class="card">
+        <h2>汉字部件与结构</h2>
+        <div class="components-intro">
+   
+    <p class="chinese">了解汉字的构成部件和书写顺序，有助于更好地记忆和理解汉字。</p>
+            <p class="english">Understanding the components and stroke order of Chinese characters helps in better memorization and comprehension.</p>
+            <p class="spanish">Comprender los componentes y el orden de trazos de los caracteres chinos ayuda a una mejor memorización y comprensión.</p>
+            <a href="#" class="component-link">Click for more info</a>
+        </div>
+        
+        <!-- 子Tab切换按钮 -->
+        <div class="sub-tabs">
+            <button class="sub-tab-button active" onclick="switchSubTab('basic')">
+                🧩 基础部件 (12)
+            </button>
+            <button class="sub-tab-button" onclick="switchSubTab('compound')">
+                🔤 复合字 (18)
+            </button>
+        </div>
+        
+        <!-- 基础部件内容 -->
+        <div class="sub-tab-content active" id="basic-content">
+            <div class="components-grid">
+                <!-- 你原来的基础部件卡片都放这里 -->
+                                      
+                <!-- 台 -->
+                <div class="component-card basic-component">
+                    <div class="character-header">
+                        <div class="character-symbol">台</div>
+                        <div class="character-info">
+                            <div class="character-pinyin">tái</div>
+                            <div class="character-meaning">platform, stage</div>
+                        </div>
+                    </div>
+                    <div class="character-body">
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🧩 </div>
+                                <span>Components</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="components-list">
+                                    <div class="component">厶 cocoon</div>
+                                    <div class="component">口 mouth</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">📘</div>
+                                <span>Book Story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">A person hides inside a cocoon, leaving only the mouth sticking out. People have to lift this cocoon-person onto the platform.</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">😂</div>
+                                <span>Fun-story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">Someone wraps themselves like a cocoon burrito, but still insists on giving a speech. Friends end up carrying the burrito onto the stage.</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🔊</div>
+                                <span>Pronunciation cue</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="pronunciation-cue">tái ≈ "tie" → "He tied himself like a cocoon and got carried on stage."</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 亥 -->
+                <div class="component-card basic-component">
+                    <div class="character-header">
+                        <div class="character-symbol">亥</div>
+                        <div class="character-info">
+                            <div class="character-pinyin">hài</div>
+                            <div class="character-meaning">pig</div>
+                        </div>
+                    </div>
+                    <div class="character-body">
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🧩 </div>
+                                <span>Components</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="components-list">
+                                    <div class="component">无（独体字）</div>                                    
+                                </div>
+                                
+            <img src="/assets/images/亥.png" alt="亥"
+            class="story-image "
+               
+        </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">📘</div>
+                                <span>Book Story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">The floor is covered with words carved into the stones. The pig walks around and says, "It ought to be here somewhere."</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">😂</div>
+                                <span>Fun-story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">A pig wears a giant pot lid as armor, yelling: "No one can hài (harm) me!" He immediately trips over the lid.</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🔊</div>
+                                <span>Pronunciation cue</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="pronunciation-cue">hài → "high" (English). Think of a pig jumping high for food.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 奇 -->
+                <div class="component-card basic-component">
+                    <div class="character-header">
+                        <div class="character-symbol">奇</div>
+                        <div class="character-info">
+                            <div class="character-pinyin">qí</div>
+                            <div class="character-meaning">strange</div>
+                        </div>
+                    </div>
+                    <div class="character-body">
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🧩 </div>
+                                <span>Components</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="components-list">
+                                    <div class="component">大 big</div>
+                                    <div class="component">可 can/be able</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">📘</div>
+                                <span>Book Story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">The extra big maypole is for the most senior students; it's really strange to see them dancing round it like small children.</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">😂</div>
+                                <span>Fun-story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">A big person carries an absurdly oversized can of cola. It feels a bit strange — Why is a big person holding a can like a toy?</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🔊</div>
+                                <span>Pronunciation cue</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="pronunciation-cue">qí → "chee". Like "Gee, that's strange!"</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 东 -->
+                <div class="component-card basic-component">
+                    <div class="character-header">
+                        <div class="character-symbol">东</div>
+                        <div class="character-info">
+                            <div class="character-pinyin">dōng</div>
+                            <div class="character-meaning">east</div>
+                        </div>
+                    </div>
+                    <div class="character-body">
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🧩 </div>
+                                <span>Components</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="components-list">
+                                    <div class="component">独体字</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">📘</div>
+                                <span>Book Story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">The giant took the big wheel from the east gate of the city and made a quick getaway on his donkey!</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">😂</div>
+                                <span>Fun-story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">When the sun rises in the East (东), it looks very Small (小) on the horizont. A wheel rolls fast toward the sunrise. A donkey laughs and follows it.</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🔊</div>
+                                <span>Pronunciation cue</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="pronunciation-cue">dōng → "dong" (like a bell). Imagine a bell sound in the east morning.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 己 -->
+                <div class="component-card basic-component">
+                    <div class="character-header">
+                        <div class="character-symbol">己</div>
+                        <div class="character-info">
+                            <div class="character-pinyin">jǐ</div>
+                            <div class="character-meaning">self</div>
+                        </div>
+                    </div>
+                    <div class="character-body">
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🧩 </div>
+                                <span>Components</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="components-list">
+                                    <div class="component">独体字 (looks like 5 in a mirror)</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">📘</div>
+                                <span>Book Story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">none</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">😂</div>
+                                <span>Fun-story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">The number 5 once got stuck in a funhouse mirror and flipped into the character 己 (jǐ). It shouted, “Gee, myself!” because it realized the mirror made it look like its own reflection (myself)!</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🔊</div>
+                                <span>Pronunciation cue</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="pronunciation-cue">jǐ → "gee". As in "Gee, myself?"</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 甲 -->
+                <div class="component-card basic-component">
+                    <div class="character-header">
+                        <div class="character-symbol">甲</div>
+                        <div class="character-info">
+                            <div class="character-pinyin">jiǎ</div>
+                            <div class="character-meaning">shell; armor; first</div>
+                        </div>
+                        
+                    </div>
+                    <div class="character-body">
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🧩 </div>
+                                <span>Components</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="components-list">
+                                    <div class="component">甲</div>                                         
+                                 </div>
+                                 <img src="/assets/images/甲.png" alt="甲">
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">📘</div>
+                                <span>Book Story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">none</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">😂</div>
+                                <span>Fun-story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">It looks like a turtle shell. Someone hides inside the shell for safety. This is the first safe place they think of.</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🔊</div>
+                                <span>Pronunciation cue</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="pronunciation-cue">jiǎ → like "ja!" (Spanish "ya"). Imagine someone inside the shell shouting "¡Ya!"</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 司 -->
+                <div class="component-card basic-component">
+                    <div class="character-header">
+                        <div class="character-symbol">司</div>
+                        <div class="character-info">
+                            <div class="character-pinyin">sī</div>
+                            <div class="character-meaning">to manage; department</div>
+                        </div>
+                    </div>
+                    <div class="character-body">
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🧩 </div>
+                                <span>Components</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="components-list">
+                                    <div class="component">一 one</div>
+                                    <div class="component">口 mouth</div>
+                                    <div class="component">丨 (classic structure)</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">📘</div>
+                                <span>Book Story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">none</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">😂</div>
+                                <span>Fun-story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">One mouth gives orders. A boss stands at the office entrance yelling. People stand in a line to listen. This is the department that manages things.</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🔊</div>
+                                <span>Pronunciation cue</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="pronunciation-cue">sī → "see". Everyone must see the manager.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 与 -->
+                <div class="component-card basic-component">
+                    <div class="character-header">
+                        <div class="character-symbol">与</div>
+                        <div class="character-info">
+                            <div class="character-pinyin">yǔ</div>
+                            <div class="character-meaning">to give; with</div>
+                        </div>
+                    </div>
+                    <div class="character-body">
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🧩 </div>
+                                <span>Components</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="components-list">
+                                    <div class="component">独体字</div>
+                                                                    </div>
+                            </div>
+                         
+                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHEAAADNCAMAAAC4qG/sAAAABlBMVEX///8AAABVwtN+AAADcUlEQVR4nO3ZyYLaMBAEUPr/fzqHZDJY6qWqF8Ew9g2srqfFGAsej/u4j/t400NEjoNnRZHDpDSJcIT0iViItIpIShsIr067GCT9n9MfKWLTOjFGP2pE9LKkUcSyGkURKGxKtNP6RHm1aObNgdPiDlqJ58We7yrNiwf5M0Uos2Mh1wg/M15pWLS70C0q5U4ksNIgqIpKZJ9oxAZkxlQrJ0W9EBd5U6/yAleRJRtEzoxTEZEhgbVCxL+tMLtRREdL31fWM/kJtkZhnQWb94lWQR007g52SR1ExOe6NGhGmLlF0Y6wc3Pis3JCvE6knmCvV0F0E1rFJcsXzXs8DUZ9FpN8f3FvH4nWnacq2s9A68ncGOOEUKTIqA+7qMxJ4Z4Licp2xQRDEpnVSwNnpikyFNdtoNe0S9QfeWjPIJ2ssueKi+CJ+6cgI67jjYbfJX6/Z4kUR4iXUwWPFvGPekDyYtpT4wGxANrTOizCgxwVnSfWhnWEr51Z0dvqFkT36wPs4JuI0fVuJBM7hK2J6G3NhLS4geqzGbE/jUQFVA+v+KDI3h0YMqo+JypAWPHVxvHd4v3DgxQpfYbBa48z4oLCBVt1jqSqSsUF8JUildAmUpdCVsx8wh6pK9wXk7vxEsneSMbJmujdrN2SNAh9PzSLiNktAmi/GLBKuxbRJLVmPaL7g9OQ+C/Rfxa13p87joPOLmQQvMUJ8BZv8RYt8JTofYX1RWNf0uNecfN4rUe4jGjWgyApOvUoSIluAACxYtBjZBBDYhRRA/fzcUgB1BoAKbRYSmOmFVglNOUkyJBNIC52DRG/dnpF9H+StWmuD3nR/mBOiNHNIEqCe3ZSvCTvHjuvpFj0aDEPsd0qj6wujnpvIQ57I2KUMgK6QVMibjaS/m/qR0dZvnaMH1vtqOrlqpX4UZvIoWoBL5b/B0yIiW2L8i4lJvYtVbE4yjcWsQ2qlcGK13cIUOtlKDL5nvnOYtN27royfu+aRHl+5bdsHaSfuF+rJVEe0bSJdJFfIUGcSBspAoWBzcxKO8r3MtfPXgGIl3P0MNcCfEr3ApaU5WUwp2YCQwp2DW7nKuRy2O2NDFBkn5LUUy0iXJ46TnuvEBt2LmXzhPjI3EA61fPiC8hbvMWkeV786Hn9VSt5XvzslfwNYtNvGbR4EnyA/5l9yPEHx2YTKkt/2P4AAAAASUVORK5CYII=" width="50" style="border-radius: 8px; margin-top: 10px;"
+                                    class="story-image img-center">
+                                
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">📘</div>
+                                
+                                <span>Book Story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">none</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">😂</div>
+                                <span>Fun-story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">Two hands try to give something to each other. They share one small object. It means "with" or "to give".</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🔊</div>
+                                <span>Pronunciation cue</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="pronunciation-cue">yǔ → "you". "You give it to me. I give it to you."</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 合 -->
+                <div class="component-card basic-component">
+                    <div class="character-header">
+                        <div class="character-symbol">合</div>
+                        <div class="character-info">
+                            <div class="character-pinyin">hé</div>
+                            <div class="character-meaning">to join, combine</div>
+                        </div>
+                    </div>
+                    <div class="character-body">
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🧩 </div>
+                                <span>Components</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="components-list">
+                                    <div class="component">人 person</div>
+                                    <div class="component">一 one</div>
+                                    <div class="component">口 mouth</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">📘</div>
+                                <span>Book Story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">They combined mouths in a kiss for so long that they found they had become joined together…</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">😂</div>
+                                <span>Fun-story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">Two people put their mouths together. They join something into one. Everything becomes one group.</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🔊</div>
+                                <span>Pronunciation cue</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="pronunciation-cue">hé → "her". They join "her" and him.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 页 -->
+                <div class="component-card basic-component">
+                    <div class="character-header">
+                        <div class="character-symbol">页</div>
+                        <div class="character-info">
+                            <div class="character-pinyin">yè</div>
+                            <div class="character-meaning">page</div>
+                        </div>
+                    </div>
+                    <div class="character-body">
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🧩 </div>
+                                <span>Components</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="components-list">
+                                    <div class="component">thumb tack</div>
+                                    <div class="component">贝 (from book system)</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">📘</div>
+                                <span>Book Story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">The small boy tried to use a thumb tack to pin the sea shell to the page.</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">😂</div>
+                                <span>Fun-story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">A page is heavy like a shell. You try to pin it down, but it still flips in the wind.</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🔊</div>
+                                <span>Pronunciation cue</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="pronunciation-cue">yè → "yeah!". When you find the right page, you say "Yeah!"</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 果 -->
+                <div class="component-card basic-component">
+                    <div class="character-header">
+                        <div class="character-symbol">果</div>
+                        <div class="character-info">
+                            <div class="character-pinyin">guǒ</div>
+                            <div class="character-meaning">fruit</div>
+                        </div>
+                    </div>
+                    <div class="character-body">
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🧩 </div>
+                                <span>Components</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="components-list">
+                                    <div class="component">田 field</div>
+                                    <div class="component">木 tree</div>
+                           
+                                    <img src="/assets/images/果.png" alt="果"
+                                    .story-image>
+                              
+
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">📘</div>
+                                <span>Book Story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">The tree in the field produces a rare fruit… The teddy says, "Go away, Go away!"</div>
+                                
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">😂</div>
+                                <span>Fun-story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">A tree grows in the middle of a field. The fruits look shiny and sweet. Everyone wants to take one.</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🔊</div>
+                                <span>Pronunciation cue</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="pronunciation-cue">guǒ → "guo" (Spanish). Think of "gordo likes fruit."</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 棵 -->
+                <div class="component-card basic-component">
+                    <div class="character-header">
+                        <div class="character-symbol">棵</div>
+                        <div class="character-info">
+                            <div class="character-pinyin">kē</div>
+                            <div class="character-meaning">measure word for trees</div>
+                        </div>
+                    </div>
+                    <div class="character-body">
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🧩 </div>
+                                <span>Components</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="components-list">
+                                    <div class="component">木 tree</div>
+                                    <div class="component">果 fruit</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">📘</div>
+                                <span>Book Story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">Each tree only bore a few fruits, so it took a number of trees…</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">😂</div>
+                                <span>Fun-story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">A tree with fruit stands tall. Many such trees make a small forest. We count them one by one.</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🔊</div>
+                                <span>Pronunciation cue</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="pronunciation-cue">kē → "ke" (like Spanish "qué"). "What (qué) tree is this?" → one kē.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+          </div> <!-- 关闭 components-grid -->
+        </div> <!-- 关闭 sub-tab-content (basic) -->
+        
+        <!-- 复合字内容 -->
+        <div class="sub-tab-content" id="compound-content">
+            <div class="components-grid">
+                <!-- 你原来的复合字卡片都放这里 -->
+                     <!-- 复合字区 -->
+ 
+                <!-- 始 -->
+                <div class="component-card compound-component">
+                    <div class="character-header">
+                        <div class="character-symbol">始</div>
+                        <div class="character-info">
+                            <div class="character-pinyin">shǐ</div>
+                            <div class="character-meaning">begin</div>
+                        </div>
+                    </div>
+                    <div class="character-body">
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🧩 </div>
+                                <span>Components</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="components-list">
+                                    <div class="component">女 woman</div>
+                                    <div class="component">台 platform</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">📘</div>
+                                <span>Book Story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">none</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">😂</div>
+                                <span>Fun-story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">A woman stands on a platform. She says, "Let's begin the show!" Everyone listens.</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🔊</div>
+                                <span>Pronunciation cue</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="pronunciation-cue">shǐ → "sure?" "Sure, let's begin!"</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 每 -->
+                <div class="component-card compound-component">
+                    <div class="character-header">
+                        <div class="character-symbol">每</div>
+                        <div class="character-info">
+                            <div class="character-pinyin">měi</div>
+                            <div class="character-meaning">every</div>
+                        </div>
+                    </div>
+                    <div class="character-body">
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🧩 </div>
+                                <span>Components</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="components-list">
+                                    <div class="component">/一 cloud</div>
+                                    <div class="component">母 mom</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">📘</div>
+                                <span>Book Story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">none</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">😂</div>
+                                <span>Fun-story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text"> Every day mom looks at the clouds.</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🔊</div>
+                                <span>Pronunciation cue</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="pronunciation-cue">měi → "may". "Every day may be the same."</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 早 -->
+                <div class="component-card compound-component">
+                    <div class="character-header">
+                        <div class="character-symbol">早</div>
+                        <div class="character-info">
+                            <div class="character-pinyin">zǎo</div>
+                            <div class="character-meaning">morning</div>
+                        </div>
+                    </div>
+                    <div class="character-body">
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🧩 </div>
+                                <span>Components</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="components-list">
+                                    <div class="component">日 sun</div>
+                                    <div class="component">十 cross</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">📘</div>
+                                <span>Book Story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">none</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">😂</div>
+                                <span>Fun-story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">The sun rises over the land. It climbs up like a cross shape. A new morning starts.</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🔊</div>
+                                <span>Pronunciation cue</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="pronunciation-cue">zǎo → "zao" like Spanish "sau". Say "Zao!" in the morning.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 点 -->
+                <div class="component-card compound-component">
+                    <div class="character-header">
+                        <div class="character-symbol">点</div>
+                        <div class="character-info">
+                            <div class="character-pinyin">diǎn</div>
+                            <div class="character-meaning">o'clock; point</div>
+                           <div class="character-meaning">  This is used for any dot, point or speck, including the marks on a clock face, hence 
+it also means “o’clock”.</div>
+<div class="character-meaning">to check one by one 点名</div>
+<div class="character-meaning"> to burn 点火</div>
+                        </div>
+                    </div>
+                     <img src="/assets/images/点.png"   class="story-image "  >
+
+                    <div class="character-body">
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🧩 </div>
+                                <span>Components</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="components-list">
+                                    <div class="component">占 occupy</div>
+                                    <div class="component">灬 fire</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">📘</div>
+                                <span>Book Story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">All the places round the camp fire were occupied, except two seats with white specks/spots on them. It was toothpaste left by the two teddies who'd gone to the dentist.</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">😂</div>
+                                <span>Fun-story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">He occupied a torch/fire, and lit it up into a bright point.</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🔊</div>
+                                <span>Pronunciation cue</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="pronunciation-cue">diǎn → "dee-en". "Dee-en, what time is it? One o'clock."</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 刻 -->
+                <div class="component-card compound-component">
+                    <div class="character-header">
+                        <div class="character-symbol">刻</div>
+                        <div class="character-info">
+                            <div class="character-pinyin">kè</div>
+                            <div class="character-meaning">quarter (15 min)</div>
+                        </div>
+                    </div>
+                    <div class="character-body">
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🧩 </div>
+                                <span>Components</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="components-list">
+                                    <div class="component">亥 pig</div>
+                                    <div class="component">刂 knife</div>
+                                </div>
+                            </div>
+                        
+                            <div class="section-title">
+                                <div class="section-icon">📘</div>
+                                <span>Book Story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">The pig uses a knife to cut his lunch apple neatly into quarters.</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">😂</div>
+                                <span>Fun-story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">A pig holds a knife. He cuts the apple into four quarters. He eats one piece.</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🔊</div>
+                                <span>Pronunciation cue</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="pronunciation-cue">kè → "cut" (English). Quarter → cut into 4.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 骑 -->
+                <div class="component-card compound-component">
+                    <div class="character-header">
+                        <div class="character-symbol">骑</div>
+                        <div class="character-info">
+                            <div class="character-pinyin">qí</div>
+                            <div class="character-meaning">ride</div>
+                        </div>
+                    </div>
+                    <div class="character-body">
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🧩 </div>
+                                <span>Components</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="components-list">
+                                    <div class="component">马 horse</div>
+                                    <div class="component">奇 strange</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">📘</div>
+                                <span>Book Story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">horse + strange (The extra big maypole for senior students...)</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">😂</div>
+                                <span>Fun-story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">A horse sees something strange. Someone rides on it anyway. The horse thinks, "Strange rider!"</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🔊</div>
+                                <span>Pronunciation cue</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="pronunciation-cue">qí → "chee". "Chee! Ride the horse!"</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 室 -->
+                <div class="component-card compound-component">
+                    <div class="character-header">
+                        <div class="character-symbol">室</div>
+                        <div class="character-info">
+                            <div class="character-pinyin">shì</div>
+                            <div class="character-meaning">room</div>
+                        </div>
+                    </div>
+                    <div class="character-body">
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🧩 </div>
+                                <span>Components</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="components-list">
+                                    <div class="component">宀 roof</div>
+                                    <div class="component">至 until</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">📘</div>
+                                <span>Book Story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">He went from house to house until he found a room he liked.</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">😂</div>
+                                <span>Fun-story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">A roof covers the room. You walk until you find the right one. This room is your space.</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🔊</div>
+                                <span>Pronunciation cue</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="pronunciation-cue">shì → "she". "She has her own room."</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 课 -->
+                <div class="component-card compound-component">
+                    <div class="character-header">
+                        <div class="character-symbol">课</div>
+                        <div class="character-info">
+                            <div class="character-pinyin">kè</div>
+                            <div class="character-meaning">class, lesson</div>
+                        </div>
+                    </div>
+                    <div class="character-body">
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🧩 </div>
+                                <span>Components</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="components-list">
+                                    <div class="component">讠 words</div>
+                                    <div class="component">果 fruit</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">📘</div>
+                                <span>Book Story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">none</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">😂</div>
+                                <span>Fun-story</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="story-text">Words + fruit. The teacher gives sweet lessons like fruit. Students like this class.</div>
+                            </div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">
+                                <div class="section-icon">🔊</div>
+                                <span>Pronunciation cue</span>
+                            </div>
+                            <div class="section-content">
+                                <div class="pronunciation-cue">kè → "cut". Cut the fruit → start the class.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!-- 练 -->
+<div class="component-card compound-component">
+    <div class="character-header">
+        <div class="character-symbol">练</div>
+        <div class="character-info">
+            <div class="character-pinyin">liàn</div>
+            <div class="character-meaning">practice</div>
+        </div>
+    </div>
+    <div class="character-body">
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">1️⃣</div>
+                <span>Components</span>
+            </div>
+            <div class="section-content">
+                <div class="components-list">
+                    <div class="component">纟 thread</div>
+                    <div class="component">select(东 with extra stroke)</div>
+                </div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">📘</div>
+                <span>Book Story</span>
+            </div>
+            <div class="section-content">
+                <div class="story-text">"You must learn how to select the correct thread if you want to train…"</div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">😂</div>
+                <span>Fun-story</span>
+            </div>
+            <div class="section-content">
+                <div class="story-text">Oriental Pearl Tower（东）＋ threads（纟）→ practice.A woman in a white silk martial arts uniform practices kung fu at the base of the Oriental Pearl Tower, pulling glowing threads of light from her hands that connect to and illuminate the tower's spheres.</div>
+            </div>
+        </div>
+        <img src="/assets/images/练.png"   class="story-image "  >
+
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">🔊</div>
+                <span>Pronunciation cue</span>
+            </div>
+            <div class="section-content">
+                <div class="pronunciation-cue">liàn → "lee-en". Practice again → "Lee-en!"</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 发 fā -->
+<div class="component-card compound-component">
+    <div class="character-header">
+        <div class="character-symbol">发</div>
+        <div class="character-info">
+            <div class="character-pinyin">fā</div>
+            <div class="character-meaning">send; produce</div>
+        </div>
+    </div>
+    <div class="character-body">
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">1️⃣</div>
+                <span>Components</span>
+            </div>
+            <div class="section-content">
+                <div class="components-list">
+                    <div class="component">none (book uses hair/hand movement origins)</div>
+                </div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">📘</div>
+                <span>Book Story</span>
+            </div>
+            <div class="section-content">
+                <div class="story-text">none</div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">😂</div>
+                <span>Fun-story</span>
+            </div>
+            <div class="section-content">
+                <div class="story-text">A hand sends something out fast. It goes like a small burst of air. Something is sent out.</div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">🔊</div>
+                <span>Pronunciation cue</span>
+            </div>
+            <div class="section-content">
+                <div class="pronunciation-cue">fā → "fa!". Like saying "Fa!" to send power forward.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 发 fà -->
+<div class="component-card compound-component">
+    <div class="character-header">
+        <div class="character-symbol">发</div>
+        <div class="character-info">
+            <div class="character-pinyin">fà</div>
+            <div class="character-meaning">hair</div>
+        </div>
+    </div>
+    <div class="character-body">
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">1️⃣</div>
+                <span>Components</span>
+            </div>
+            <div class="section-content">
+                <div class="components-list">
+                    <div class="component">same form</div>
+                </div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">📘</div>
+                <span>Book Story</span>
+            </div>
+            <div class="section-content">
+                <div class="story-text">none</div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">😂</div>
+                <span>Fun-story</span>
+            </div>
+            <div class="section-content">
+                <div class="story-text">Hair grows like tiny lines. It falls down softly. It is simple and light.</div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">🔊</div>
+                <span>Pronunciation cue</span>
+            </div>
+            <div class="section-content">
+                <div class="pronunciation-cue">fà → "fa" (as in Spanish "fa" in scale). Think of a hair salon singing "fa~".</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 音 -->
+<div class="component-card compound-component">
+    <div class="character-header">
+        <div class="character-symbol">音</div>
+        <div class="character-info">
+            <div class="character-pinyin">yīn</div>
+            <div class="character-meaning">music sound, music note </div>
+        </div>
+    </div>
+    <div class="character-body">
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">1️⃣</div>
+                <span>Components</span>
+            </div>
+            <div class="section-content">
+                <div class="components-list">
+                    <div class="component">立 stand</div>
+                    <div class="component">日 sun</div>
+                </div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">📘</div>
+                <span>Book Story</span>
+            </div>
+            <div class="section-content">
+                <div class="story-text">If you stand this in the sun for a while it will make a deep, resonant sound.</div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">😂</div>
+                <span>Fun-story</span>
+            </div>
+            <div class="section-content">
+                <div class="story-text">The sun rose, people stood up, the first note of the day rang out, and a tiny drop of golden ink floated from it, painting the sound in the sky.</div>
+            </div>
+        </div>
+        <img src="/assets/images/音.png" alt="音"            class="story-image ">
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">🔊</div>
+                <span>Pronunciation cue</span>
+            </div>
+            <div class="section-content">
+                <div class="pronunciation-cue">yīn → "yin". Like the soft "yin" sound.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 念 -->
+<div class="component-card compound-component">
+    <div class="character-header">
+        <div class="character-symbol">念</div>
+        <div class="character-info">
+            <div class="character-pinyin">niàn</div>
+            <div class="character-meaning">read aloud; study</div>
+        </div>
+    </div>
+    <div class="character-body">
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">1️⃣</div>
+                <span>Components</span>
+            </div>
+            <div class="section-content">
+                <div class="components-list">
+                    <div class="component">今 now</div>
+                    <div class="component">心 heart</div>
+                </div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">📘</div>
+                <span>Book Story</span>
+            </div>
+            <div class="section-content">
+                <div class="story-text">"Now I think it is time for the heart," said the surgeon…</div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">😂</div>
+                <span>Fun-story</span>
+            </div>
+            <div class="section-content">
+                <div class="story-text">Now + heart. When you study, your heart and mind work together. You read with feeling.</div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">🔊</div>
+                <span>Pronunciation cue</span>
+            </div>
+            <div class="section-content">
+                <div class="pronunciation-cue">niàn → "knee-en". Knee + en → read aloud.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 记 -->
+<div class="component-card compound-component">
+    <div class="character-header">
+        <div class="character-symbol">记</div>
+        <div class="character-info">
+            <div class="character-pinyin">jì</div>
+            <div class="character-meaning">remember; note down</div>
+        </div>
+    </div>
+    <div class="character-body">
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">1️⃣</div>
+                <span>Components</span>
+            </div>
+            <div class="section-content">
+                <div class="components-list">
+                    <div class="component">讠 words</div>
+                    <div class="component">己 self</div>
+                </div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">📘</div>
+                <span>Book Story</span>
+            </div>
+            <div class="section-content">
+                <div class="story-text">He has no paper, so he has to write the words down on himself…</div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">😂</div>
+                <span>Fun-story</span>
+            </div>
+            <div class="section-content">
+                <div class="story-text">Words + self. He writes on himself to remember. He does not want to forget.</div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">🔊</div>
+                <span>Pronunciation cue</span>
+            </div>
+            <div class="section-content">
+                <div class="pronunciation-cue">jì → "gee". "Gee, remember this!"</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 单 -->
+<div class="component-card compound-component">
+    <div class="character-header">
+        <div class="character-symbol">单</div>
+        <div class="character-info">
+            <div class="character-pinyin">dān</div>
+            <div class="character-meaning">single</div>
+            <div class="character-meaning">单身single(person), 单一single,unitary（stye/poslicy/monotonous)</div>
+        </div>
+    </div>
+    <div class="character-body">
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">1️⃣</div>
+                <span>Components</span>
+            </div>
+            <div class="section-content">
+                <div class="components-list">
+                    <div class="component">丷 horns</div>
+                    <div class="component">田 field</div>
+                    <div class="component">十 cross</div>
+                </div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">📘</div>
+                <span>Book Story</span>
+            </div>
+            <div class="section-content">
+                <div class="story-text">They carried horns into the field and 
+                                        tied them to a cross which marked where 
+                                        the single rare flower would bloom. / 
+                                        Unfortunately the giant came along and 
+                                        picked it, thinking it was a dandelion!</div>
+            </div>
+        </div>
+           <img src="/assets/images/单.png" alt="单"    class="story-image ">
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">😂</div>
+                <span>Fun-story</span>
+            </div>
+            <div class="section-content">
+                <div class="story-text">Horns + field + cross. One rare single flower grows in the field. The single giant picks it.</div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">🔊</div>
+                <span>Pronunciation cue</span>
+            </div>
+            <div class="section-content">
+                <div class="pronunciation-cue">dān → "done". One thing → done.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 词 -->
+<div class="component-card compound-component">
+    <div class="character-header">
+        <div class="character-symbol">词</div>
+        <div class="character-info">
+            <div class="character-pinyin">cí</div>
+            <div class="character-meaning">word</div>
+            <div class="character-meaning">生词  a new word (in a language lesson)</div>
+<div class="character-meaning">名词 noun.动词verb</div>
+
+        </div>
+    </div>
+    <div class="character-body">
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">1️⃣</div>
+                <span>Components</span>
+            </div>
+            <div class="section-content">
+                <div class="components-list">
+                    <div class="component">讠 words</div>
+                    <div class="component">司 department</div>
+                </div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">📘</div>
+                <span>Book Story</span>
+            </div>
+            <div class="section-content">
+                <div class="story-text">(a new boy is being shown round the 
+                        factory) “the words department makes 
+                        the words, so whenever you need a word 
+                        they will supply it. / The fairy keeps 
+                        statistics on which words are being 
+                        requested most often.”</div>
+                                    </div>
+        </div>
+      
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">😂</div>
+                <span>Fun-story</span>
+            </div>
+            <div class="section-content">
+                <div class="story-text">Words + department. This room creates words. Ask them anytime.</div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">🔊</div>
+                <span>Pronunciation cue</span>
+            </div>
+            <div class="section-content">
+                <div class="pronunciation-cue">cí → "tsi" (like Spanish "sí" with t). Words? "Tsi!"</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 听 -->
+<div class="component-card compound-component">
+    <div class="character-header">
+        <div class="character-symbol">听</div>
+        <div class="character-info">
+            <div class="character-pinyin">tīng</div>
+            <div class="character-meaning">listen</div>
+        </div>
+    </div>
+    <div class="character-body">
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">1️⃣</div>
+                <span>Components</span>
+            </div>
+            <div class="section-content">
+                <div class="components-list">
+                    <div class="component">口 mouth</div>
+                    <div class="component">斤 tool</div>
+                </div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">📘</div>
+                <span>Book Story</span>
+            </div>
+            <div class="section-content">
+                <div class="story-text">at the mouth of the cave he was working 
+                away with an axe (to clear the trees which 
+                had blocked it) when he thought he heard 
+                something and stopped to listen. / A tingle 
+                ran up the giant’s spine.</div>
+            </div>
+            <img src="/assets/images/听.png" alt="听"    class="story-image ">
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">😂</div>
+                <span>Fun-story</span>
+            </div>
+            <div class="section-content">
+                <div class="story-text">A mouth opens. A strong tool hits something. You stop and listen.</div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">🔊</div>
+                <span>Pronunciation cue</span>
+            </div>
+            <div class="section-content">
+                <div class="pronunciation-cue">tīng → "ting!". Like a bell you listen to.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 写 -->
+<div class="component-card compound-component">
+    <div class="character-header">
+        <div class="character-symbol">写</div>
+        <div class="character-info">
+            <div class="character-pinyin">xiě</div>
+            <div class="character-meaning">write</div>
+        </div>
+    </div>
+    <div class="character-body">
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">1️⃣</div>
+                <span>Components</span>
+            </div>
+            <div class="section-content">
+                <div class="components-list">
+                    <div class="component">冖 cover</div>
+                    <div class="component">与 give</div>
+                </div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">📘</div>
+                <span>Book Story</span>
+            </div>
+            <div class="section-content">
+                <div class="story-text">(In the school exam) The boy covers his 
+                paper with his hand so that his neighbor 
+                can’t see what he writes. / The two teddies 
+                have been put one at each end of the shelf 
+                (so that they can’t distract anyone during 
+                the exam).</div>
+            </div>
+            <img src="/assets/images/写.png" alt="写"    class="story-image ">
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">😂</div>
+                <span>Fun-story</span>
+            </div>
+            <div class="section-content">
+                <div class="story-text">Cover + give. He covers the paper, but he still writes his ideas.</div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">🔊</div>
+                <span>Pronunciation cue</span>
+            </div>
+            <div class="section-content">
+                <div class="pronunciation-cue">xiě → "shyeah". Write fast → "shyeah!"</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 回 -->
+<div class="component-card compound-component">
+    <div class="character-header">
+        <div class="character-symbol">回</div>
+        <div class="character-info">
+            <div class="character-pinyin">huí</div>
+            <div class="character-meaning">return</div>
+        </div>
+    </div>
+    <div class="character-body">
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">1️⃣</div>
+                <span>Components</span>
+            </div>
+            <div class="section-content">
+                <div class="components-list">
+                    <div class="component">口 + 回 shape（enclosed）</div>
+                </div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">📘</div>
+                <span>Book Story</span>
+            </div>
+            <div class="section-content">
+                <div class="story-text">none</div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">😂</div>
+                <span>Fun-story</span>
+            </div>
+            <div class="section-content">
+                <div class="story-text">A path goes inside a box and comes back out again. You return to the start.</div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">🔊</div>
+                <span>Pronunciation cue</span>
+            </div>
+            <div class="section-content">
+                <div class="pronunciation-cue">huí → "way". You go back the same way.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 答 -->
+<div class="component-card compound-component">
+    <div class="character-header">
+        <div class="character-symbol">答</div>
+        <div class="character-info">
+            <div class="character-pinyin">dá</div>
+            <div class="character-meaning">answer</div>
+        </div>
+    </div>
+    <div class="character-body">
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">1️⃣</div>
+                <span>Components</span>
+            </div>
+            <div class="section-content">
+                <div class="components-list">
+                    <div class="component">⺮ bamboo</div>
+                    <div class="component">合 join</div>
+                </div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">📘</div>
+                <span>Book Story</span>
+            </div>
+            <div class="section-content">
+                <div class="story-text">In the old days a couple had to ask the 
+            village bamboo pipe if they were suitable 
+            to join together in marriage — a lot 
+            depended on the answer it gave. / But it 
+            was really only the fairy in the dark who 
+            was whispering the answers.</div>
+            </div>
+            <img src="/assets/images/答.png" alt="答"    class="story-image ">
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">😂</div>
+                <span>Fun-story</span>
+            </div>
+            <div class="section-content">
+                <div class="story-text">Bamboo + join. They join together to ask. The bamboo gives the answer.</div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">🔊</div>
+                <span>Pronunciation cue</span>
+            </div>
+            <div class="section-content">
+                <div class="pronunciation-cue">dá → "da!" (Spanish "¡da!"). Like giving an answer quickly.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 题 -->
+<div class="component-card compound-component">
+    <div class="character-header">
+        <div class="character-symbol">题</div>
+        <div class="character-info">
+            <div class="character-pinyin">tí</div>
+            <div class="character-meaning">topic; question</div>
+        </div>
+    </div>
+    <div class="character-body">
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">1️⃣</div>
+                <span>Components</span>
+            </div>
+            <div class="section-content">
+                <div class="components-list">
+                    <div class="component">是 is</div>
+                    <div class="component">页 page</div>
+                </div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">📘</div>
+                <span>Book Story</span>
+            </div>
+            <div class="section-content">
+                <div class="story-text">Teacher to schoolchild: “I told you to 
+                write a page, this isn’t a page!” “It is, it 
+                is a page,” said the child, “just not a full 
+                page. It’s all I can write on this topic.” / 
+                The fairy said to the teacher, “You have 
+                to admit, there’s not a lot you can write 
+                about teaspoons.”</div>
+            </div>
+              <img src="/assets/images/题.png" alt="题"    ">
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">😂</div>
+                <span>Fun-story</span>
+            </div>
+            <div class="section-content">
+                <div class="story-text">Is + page. If the page is not full, the topic is small.</div>
+            </div>
+        </div>
+        <div class="info-section">
+            <div class="section-title">
+                <div class="section-icon">🔊</div>
+                <span>Pronunciation cue</span>
+            </div>
+            <div class="section-content">
+                <div class="pronunciation-cue">tí → "tee". A topic is like a "T" title.</div>
+            </div>
+        </div>
+    </div>
+</div>
+                               <!-- 继续添加其他... -->
+                <!-- 由于篇幅限制，这里只显示前8个复合字作为示例 -->
+            </div> <!-- 关闭 components-grid -->
+        </div> <!-- 关闭 sub-tab-content (compound) -->
+        
+    </div> <!-- 关闭 card -->
+</div> <!-- 关闭 tab-content (components-tab) -->
+
+
+       <!-- 生词表 Tab -->
+<div class="tab-content" id="vocab-tab">
+            <div class="card">
+                <h2>生词表 Vocabulary List</h2>
+                <div style="overflow-x: auto;">
+                    <table class="vocab-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 8%;">序号</th>
+                                <th style="width: 12%;">字</th>
+                                <th style="width: 15%;">拼音</th>
+                                <th style="width: 30%;">英文释义</th>
+                                <th style="width: 35%;">词组示例</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="char-number">1</td>
+                                <td class="character">从 [從]</td>
+                                <td class="pinyin">cóng</td>
+                                <td class="english">from, ever</td>
+                                <td class="example"></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">2</td>
+                                <td class="character">明</td>
+                                <td class="pinyin">míng</td>
+                                <td class="english">bright, clear</td>
+                                <td class="example">明天 míngtiān <em>tomorrow</em></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">3</td>
+                                <td class="character">开 [開]</td>
+                                <td class="pinyin">kāi</td>
+                                <td class="english">open, start</td>
+                                <td class="example"></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">4</td>
+                                <td class="character">始</td>
+                                <td class="pinyin">shǐ</td>
+                                <td class="english">beginning; begin</td>
+                                <td class="example">开始 kāishǐ <em>begin</em></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">5</td>
+                                <td class="character">每</td>
+                                <td class="pinyin">měi</td>
+                                <td class="english">every</td>
+                                <td class="example">每天 měitiān <em>every day</em></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">6</td>
+                                <td class="character">早</td>
+                                <td class="pinyin">zǎo</td>
+                                <td class="english">morning, long ago</td>
+                                <td class="example">早上 zǎoshang <em>morning</em></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">7</td>
+                                <td class="character">点 [點]</td>
+                                <td class="pinyin">diǎn</td>
+                                <td class="english">o'clock, point, drop</td>
+                                <td class="example">七点 qī diǎn <em>seven o'clock</em></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">8</td>
+                                <td class="character">刻</td>
+                                <td class="pinyin">kè</td>
+                                <td class="english">a quarter; carve</td>
+                                <td class="example">一刻 yī kè <em>a quarter</em></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">9</td>
+                                <td class="character">都</td>
+                                <td class="pinyin">dōu</td>
+                                <td class="english">all</td>
+                                <td class="example"></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">10</td>
+                                <td class="character">要</td>
+                                <td class="pinyin">yào</td>
+                                <td class="english">want, ask for, need</td>
+                                <td class="example"></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">11</td>
+                                <td class="character">骑 [騎]</td>
+                                <td class="pinyin">qí</td>
+                                <td class="english">ride (an animal or bicycle)</td>
+                                <td class="example"></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">12</td>
+                                <td class="character">自</td>
+                                <td class="pinyin">zì</td>
+                                <td class="english">self; from</td>
+                                <td class="example"></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">13</td>
+                                <td class="character">行</td>
+                                <td class="pinyin">xíng</td>
+                                <td class="english">walk; all right</td>
+                                <td class="example"></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">14</td>
+                                <td class="character">车 [車]</td>
+                                <td class="pinyin">chē</td>
+                                <td class="english">vehicle</td>
+                                <td class="example">自行车 zìxíngchē <em>bicycle</em></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">15</td>
+                                <td class="character">到</td>
+                                <td class="pinyin">dào</td>
+                                <td class="english">arrive, go to</td>
+                                <td class="example"></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">16</td>
+                                <td class="character">室</td>
+                                <td class="pinyin">shì</td>
+                                <td class="english">room</td>
+                                <td class="example">教室 jiàoshì <em>classroom</em></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">17</td>
+                                <td class="character">课 [課]</td>
+                                <td class="pinyin">kè</td>
+                                <td class="english">course, class, lesson</td>
+                                <td class="example">上课 shàngkè <em>go to class</em></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">18</td>
+                                <td class="character">练 [練]</td>
+                                <td class="pinyin">liàn</td>
+                                <td class="english">practice</td>
+                                <td class="example"></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">19</td>
+                                <td class="character">发 [發]</td>
+                                <td class="pinyin">fā</td>
+                                <td class="english">utter, send out</td>
+                                <td class="example"></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">19</td>
+                                <td class="character">发 [髮]</td>
+                                <td class="pinyin">fà</td>
+                                <td class="english">hair</td>
+                                <td class="example"></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">20</td>
+                                <td class="character">音</td>
+                                <td class="pinyin">yīn</td>
+                                <td class="english">sound</td>
+                                <td class="example">发音 fāyīn <em>pronunciation</em></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">21</td>
+                                <td class="character">念</td>
+                                <td class="pinyin">niàn</td>
+                                <td class="english">read aloud</td>
+                                <td class="example"></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">22</td>
+                                <td class="character">文</td>
+                                <td class="pinyin">wén</td>
+                                <td class="english">writing, article</td>
+                                <td class="example">课文 kèwén <em>text</em></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">23</td>
+                                <td class="character">记 [記]</td>
+                                <td class="pinyin">jì</td>
+                                <td class="english">remember, note</td>
+                                <td class="example"></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">24</td>
+                                <td class="character">单 [單]</td>
+                                <td class="pinyin">dān</td>
+                                <td class="english">single</td>
+                                <td class="example"></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">25</td>
+                                <td class="character">词 [詞]</td>
+                                <td class="pinyin">cí</td>
+                                <td class="english">word</td>
+                                <td class="example">单词 dāncí <em>word</em></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">26</td>
+                                <td class="character">听 [聽]</td>
+                                <td class="pinyin">tīng</td>
+                                <td class="english">listen</td>
+                                <td class="example"></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">27</td>
+                                <td class="character">写 [寫]</td>
+                                <td class="pinyin">xiě</td>
+                                <td class="english">write</td>
+                                <td class="example">听写 tīngxiě <em>dictate; dictation</em></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">28</td>
+                                <td class="character">回</td>
+                                <td class="pinyin">huí</td>
+                                <td class="english">return, answer; time</td>
+                                <td class="example"></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">29</td>
+                                <td class="character">答</td>
+                                <td class="pinyin">dá</td>
+                                <td class="english">reply, answer</td>
+                                <td class="example">回答 huídá <em>answer</em></td>
+                            </tr>
+                            <tr>
+                                <td class="char-number">30</td>
+                                <td class="character">题 [題]</td>
+                                <td class="pinyin">tí</td>
+                                <td class="english">problem, subject</td>
+                                <td class="example">问题 wèntí <em>question, problem</em></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="sentence-highlight" style="background: #FFF4E6; padding: 20px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #FFA500;">
+                    <p style="font-size: 1.2em; color: #16476A; font-weight: 600;">短句：</p>
+                    <p style="font-size: 1.3em; margin-top: 10px; line-height: 1.8;">从明天开始，每天早上七点一刻我都要骑自行车到教室上课，练发音、念课文、记单词、听写汉字、回答问题。</p>
+                </div>
+            </div>
+        </div>
+    </div>    
+        <!-- 词组与口语 Tab -->
+        <div class="tab-content" id="phrases-tab">
+            <div class="card">
+                <h2>词组 Phrases</h2>
+                <div class="phrases-grid">
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">明年</div>
+                        <div class="phrase-english">next year</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">明星</div>
+                        <div class="phrase-english">star</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">开车</div>
+                        <div class="phrase-english">drive a car</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">开学</div>
+                        <div class="phrase-english">school opens</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">打开</div>
+                        <div class="phrase-english">open</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">每个月</div>
+                        <div class="phrase-english">every month</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">早饭</div>
+                        <div class="phrase-english">breakfast</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">一点儿</div>
+                        <div class="phrase-english">a little</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">有点儿</div>
+                        <div class="phrase-english">a little, some</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">要是</div>
+                        <div class="phrase-english">if, in case</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">上车</div>
+                        <div class="phrase-english">get on a bus</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">练习</div>
+                        <div class="phrase-english">exercise</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">发现</div>
+                        <div class="phrase-english">discover</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">汉语课</div>
+                        <div class="phrase-english">class in Chinese</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">语文</div>
+                        <div class="phrase-english">中小学的汉语课</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">中文</div>
+                        <div class="phrase-english">Chinese</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">法文</div>
+                        <div class="phrase-english">French</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">日文</div>
+                        <div class="phrase-english">Japanese</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">作文</div>
+                        <div class="phrase-english">composition</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">文学</div>
+                        <div class="phrase-english">literature</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">听说</div>
+                        <div class="phrase-english">heard of</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">听见</div>
+                        <div class="phrase-english">hear</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">好听</div>
+                        <div class="phrase-english">pleasant to hear</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">打听</div>
+                        <div class="phrase-english">ask about</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">语音</div>
+                        <div class="phrase-english">pronunciation</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">单位</div>
+                        <div class="phrase-english">unit</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">生词</div>
+                        <div class="phrase-english">new word</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">名词</div>
+                        <div class="phrase-english">noun</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">代词</div>
+                        <div class="phrase-english">pronoun</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">回国</div>
+                        <div class="phrase-english">return to homeland</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">回去</div>
+                        <div class="phrase-english">go back</div>
+                    </div>
+                    <div class="phrase-card">
+                        <div class="phrase-chinese">上去</div>
+                        <div class="phrase-english">go up</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>口语对话 Dialogues</h2>
+                <div class="dialogue-box">
+                    <div class="dialogue-title">(一)</div>
+                    <p><span class="speaker">◆</span> 小王，你打听打听，他在哪个单位工作？</p>
+                    <p><span class="speaker">◇</span> 好，我今天就去问问他的朋友。</p>
+                    <p><span class="speaker">◆</span> 你们明天开学吗？</p>
+                    <p><span class="speaker">◇</span> 我们明天开学，我去教室上课。</p>
+                    <p><span class="speaker">◆</span> 你们每天都有汉语课吗？</p>
+                    <p><span class="speaker">◇</span> 从星期一到星期五每天都有，星期一有三个小时语音练习，星期二是汉字课，星期四上现代文学，星期五有作文课，星期六不上课。</p>
+                    <p><span class="speaker">◆</span> 你最喜欢上哪个老师的课？</p>
+                    <p><span class="speaker">◇</span> 常老师的课，他从不听写汉字，从不问问题。</p>
+                    <p><span class="speaker">◆</span> 你们每个人怎么去学校？</p>
+                    <p><span class="speaker">◇</span> 有的人骑车去，有的人开车去。</p>
+                    
+                    <div class="dialogue-title">(二)</div>
+                    <p><span class="speaker">◆</span> 王老师什么时候回国？</p>
+                    <p><span class="speaker">◇</span> 听说，他明天早上八点一刻到北京。</p>
+                    <p><span class="speaker">◆</span> 我发现，王老师每年三月都出国。</p>
+                    <p><span class="speaker">◇</span> 是的，这回去的是法国。他现在有点儿不怎么爱出国了。我听他爱人经常说，他不喜欢吃法国早餐。</p>
+                    <p><span class="speaker">◆</span> 是吗？我最喜欢吃了。明年三月，要是他不去，我去。</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 语法 Tab -->
+  <div class="tab-content" id="grammar-tab">
+    <div class="card">
+        <h2>语法要点 Grammar Points</h2>
+        
+        <div class="grammar-points">
+
+            <!-- 1 -->
+            <div class="grammar-card">
+                <div class="grammar-header">1. 连动句 Serial-Verb Construction</div>
+                <div class="grammar-body">
+                    <p>
+                        <strong>ES：</strong> En este tipo de oración, el primer verbo indica la manera en que se realiza la acción del segundo verbo.  
+                        <br>
+                        <strong>EN：</strong> In this type of sentence, the first verb indicates the manner of the action expressed by the second verb.
+                    </p>
+
+                    <div class="grammar-example">
+                        <p><strong>结构：</strong> S V O V O</p>
+                        <p><strong>例句：</strong> 我骑自行车到教室上课。</p>
+                        <p><strong>例句：</strong> 我开车去大学。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2 -->
+            <div class="grammar-card">
+                <div class="grammar-header">2. 动词重叠 Verb Reduplication</div>
+                <div class="grammar-body">
+                    <p>
+                        <strong>ES：</strong> Los verbos que indican acciones pueden repetirse para expresar que la acción es corta, ligera o realizada de manera informal.  
+                        <br>
+                        <strong>EN：</strong> Action verbs can be reduplicated to show that the action is brief, light, relaxed, or casual.
+                    </p>
+
+                    <div class="grammar-example">
+                        <p><strong>结构：</strong> S V V</p>
+                        <p><strong>例句：</strong> 你打听打听。</p>
+                        <p><strong>例句：</strong> 我问问他的朋友。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3 -->
+            <div class="grammar-card">
+                <div class="grammar-header">3. 介词“从”“到” Prepositions “从” and “到”</div>
+                <div class="grammar-body">
+                    <p>
+                        <strong>ES：</strong> Los objetos de “从” y “到” normalmente son palabras que expresan tiempo o lugar.  
+                        <br>
+                        <strong>EN：</strong> The objects of the prepositions 从 and 到 are usually words or phrases denoting time or place.
+                    </p>
+
+                    <div class="grammar-example">
+                        <p><strong>结构：</strong> 从 N 到 N</p>
+                        <p><strong>例句：</strong> 从八点到十点</p>
+                        <p><strong>例句：</strong> 从教室到食堂</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4 -->
+            <div class="grammar-card">
+                <div class="grammar-header">4. 小句作宾语 Clause as Object</div>
+                <div class="grammar-body">
+                    <p>
+                        <strong>ES：</strong> Una oración puede usarse como el objeto de los verbos “听说” y “发现”.  
+                        <br>
+                        <strong>EN：</strong> A clause can be used as the object of the verbs 听说 and 发现.
+                    </p>
+
+                    <div class="grammar-example">
+                        <p><strong>结构：</strong> S V (S V O)</p>
+                        <p><strong>例句：</strong> 我听说他明天到北京。</p>
+                        <p><strong>例句：</strong> 我发现他每年三月都出国。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5 -->
+            <div class="grammar-card">
+                <div class="grammar-header">5. “的”字结构 DE-construction</div>
+                <div class="grammar-body">
+                    <p>
+                        <strong>ES：</strong> En estas oraciones, la estructura con “的” formada por un sujeto y un verbo funciona como un sustantivo.  
+                        <br>
+                        <strong>EN：</strong> In these sentences, the 的-construction formed by a subject and verb functions as a noun phrase.
+                    </p>
+
+                    <div class="grammar-example">
+                        <p><strong>结构：</strong> (S V 的) V O</p>
+                        <p><strong>例句：</strong> 他去的(地方)是法国。</p>
+                        <p><strong>例句：</strong> 我吃的(饭)是中国饭。</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+        
+        <!-- 练习 Tab -->
+        <div class="tab-content" id="exercises-tab">
+            <div class="card">
+                <h2>练习 Exercises</h2>
+                
+                <div class="progress-text">完成进度: <span id="progress-percent">0%</span></div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question-number">1. 选择正确的位置</div>
+                    <div class="question-text">
+                        我<span class="blank-option" data-position="A" onclick="selectBlank(1, 'A')">A</span>每天早上<span class="blank-option" data-position="B" onclick="selectBlank(1, 'B')">B</span>去大学<span class="blank-option" data-position="C" onclick="selectBlank(1, 'C')">C</span>上课<span class="blank-option" data-position="D" onclick="selectBlank(1, 'D')">D</span>。
+                        <div style="margin-top: 10px; font-size: 0.9em; color: #666;">选项：骑车</div>
+                    </div>
+                    <button class="submit-btn" onclick="checkAnswer(1, 'B')">提交</button>
+                    <div class="feedback" id="feedback1"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question-number">2. 选择正确的位置</div>
+                    <div class="question-text">
+                        今天<span class="blank-option" data-position="A" onclick="selectBlank(2, 'A')">A</span>他们上<span class="blank-option" data-position="B" onclick="selectBlank(2, 'B')">B</span>是语法<span class="blank-option" data-position="C" onclick="selectBlank(2, 'C')">C</span>课<span class="blank-option" data-position="D" onclick="selectBlank(2, 'D')">D</span>。
+                        <div style="margin-top: 10px; font-size: 0.9em; color: #666;">选项：的</div>
+                    </div>
+                    <button class="submit-btn" onclick="checkAnswer(2, 'B')">提交</button>
+                    <div class="feedback" id="feedback2"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question-number">3. 选择正确的位置</div>
+                    <div class="question-text">
+                        我<span class="blank-option" data-position="A" onclick="selectBlank(3, 'A')">A</span>朋友<span class="blank-option" data-position="B" onclick="selectBlank(3, 'B')">B</span>开<span class="blank-option" data-position="C" onclick="selectBlank(3, 'C')">C</span>车<span class="blank-option" data-position="D" onclick="selectBlank(3, 'D')">D</span>是中国的。
+                        <div style="margin-top: 10px; font-size: 0.9em; color: #666;">选项：的</div>
+                    </div>
+                    <button class="submit-btn" onclick="checkAnswer(3, 'C')">提交</button>
+                    <div class="feedback" id="feedback3"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question-number">4. 选择正确的位置</div>
+                    <div class="question-text">
+                        我<span class="blank-option" data-position="A" onclick="selectBlank(4, 'A')">A</span>北京人<span class="blank-option" data-position="B" onclick="selectBlank(4, 'B')">B</span>非常<span class="blank-option" data-position="C" onclick="selectBlank(4, 'C')">C</span>喜欢<span class="blank-option" data-position="D" onclick="selectBlank(4, 'D')">D</span>骑自行车。
+                        <div style="margin-top: 10px; font-size: 0.9em; color: #666;">选项：发现</div>
+                    </div>
+                    <button class="submit-btn" onclick="checkAnswer(4, 'A')">提交</button>
+                    <div class="feedback" id="feedback4"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question-number">5. 选择正确答案</div>
+                    <div class="question-text">
+                        今天星期一，他们明天开学。他们从什么时候开始上课？
+                    </div>
+                    <div class="choices">
+                        <button class="choice-btn" onclick="selectChoice(5, 'A', this)">A. 从星期三</button>
+                        <button class="choice-btn" onclick="selectChoice(5, 'B', this)">B. 从星期二</button>
+                        <button class="choice-btn" onclick="selectChoice(5, 'C', this)">C. 从今天</button>
+                        <button class="choice-btn" onclick="selectChoice(5, 'D', this)">D. 从九点</button>
+                    </div>
+                    <button class="submit-btn" onclick="checkAnswer(5, 'B')">提交</button>
+                    <div class="feedback" id="feedback5"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question-number">6. 选择正确答案</div>
+                    <div class="question-text">
+                        我的老师说："日本饭不怎么好吃。"他喜欢吃日本饭吗？
+                    </div>
+                    <div class="choices">
+                        <button class="choice-btn" onclick="selectChoice(6, 'A', this)">A. 喜欢</button>
+                        <button class="choice-btn" onclick="selectChoice(6, 'B', this)">B. 有点儿喜欢</button>
+                        <button class="choice-btn" onclick="selectChoice(6, 'C', this)">C. 不喜欢</button>
+                        <button class="choice-btn" onclick="selectChoice(6, 'D', this)">D. 非常喜欢</button>
+                    </div>
+                    <button class="submit-btn" onclick="checkAnswer(6, 'C')">提交</button>
+                    <div class="feedback" id="feedback6"></div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question-number">7. 选择正确答案</div>
+                    <div class="question-text">
+                        ______你不爱吃法国饭，你可以吃中国饭。
+                    </div>
+                    <div class="choices">
+                        <button class="choice-btn" onclick="selectChoice(7, 'A', this)">A. 发现</button>
+                        <button class="choice-btn" onclick="selectChoice(7, 'B', this)">B. 要是</button>
+                        <button class="choice-btn" onclick="selectChoice(7, 'C', this)">C. 如果</button>
+                        <button class="choice-btn" onclick="selectChoice(7, 'D', this)">D. 打听</button>
+                    </div>
+                    <button class="submit-btn" onclick="checkMultipleAnswer(7, ['B', 'C'])">提交</button>
+                    <div class="feedback" id="feedback7"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchSubTab(tabName) {
+    // 移除所有active类
+    document.querySelectorAll('.sub-tab-button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    document.querySelectorAll('.sub-tab-content').forEach(content => {
+        content.classList.remove('active');
+    });
+    
+    // 添加active到选中的
+    event.target.classList.add('active');
+    document.getElementById(tabName + '-content').classList.add('active');
+}
+        let selectedOptions = {};
+        let answers = {};
+        let completedQuestions = new Set();
+        
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        function selectBlank(questionNum, position) {
+            selectedOptions[questionNum] = position;
+            const card = document.getElementById('feedback' + questionNum).parentElement;
+            card.querySelectorAll('.blank-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            card.querySelector(`[data-position="${position}"]`).classList.add('selected');
+        }
+        
+        function checkAnswer(questionNum, correctAnswer) {
+            const feedback = document.getElementById('feedback' + questionNum);
+            const selected = selectedOptions[questionNum];
+            
+            if (!selected) {
+                feedback.className = 'feedback incorrect';
+                feedback.textContent = '请先选择一个位置！';
+                return;
+            }
+            
+            if (selected === correctAnswer) {
+                feedback.className = 'feedback correct';
+                feedback.textContent = '✓ 正确！Correct!';
+                completedQuestions.add(questionNum);
+                updateProgress();
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.textContent = `✗ 不对。应该是 ${correctAnswer}。`;
+            }
+        }
+        
+        function selectChoice(questionNum, choice, element) {
+            selectedOptions[questionNum] = choice;
+            const card = element.closest('.question-card');
+            card.querySelectorAll('.choice-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            element.classList.add('selected');
+        }
+        
+        function checkMultipleAnswer(questionNum, correctAnswers) {
+            const feedback = document.getElementById('feedback' + questionNum);
+            const selected = selectedOptions[questionNum];
+            
+            if (!selected) {
+                feedback.className = 'feedback incorrect';
+                feedback.textContent = '请先选择一个答案！';
+                return;
+            }
+            
+            if (correctAnswers.includes(selected)) {
+                feedback.className = 'feedback correct';
+                feedback.textContent = '✓ 正确！Correct!';
+                completedQuestions.add(questionNum);
+                updateProgress();
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedback.textContent = `✗ 不对。正确答案可以是 ${correctAnswers.join('、')}。`;
+            }
+        }
+        
+        function updateProgress() {
+            const totalQuestions = 7; // 根据实际题目数量调整
+            const progress = (completedQuestions.size / totalQuestions) * 100;
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('progress-percent').textContent = Math.round(progress) + '%';
+        }
+        
+        // 初始化进度条
+        updateProgress();
+    </script>
+</body>
+</html>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>识字九：家庭与时间 - Chinese with Elisa</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+    <script>
+    // =======================================================
+    // <!-- sideabr 侧边栏 -->     // 活动状态
+    // =======================================================     
+                // 1. 获取当前页面的路径 (例如: /lessons/shizi-5.html)
+                const currentPath = window.location.pathname;
+
+                // 2. 加载侧边栏内容
+                fetch('/sidebar.html') 
+                    .then(response => response.text())
+                    .then(data => {
+                        // 将侧边栏内容插入到占位符中
+                        const sidebarPlaceholder = document.getElementById('sidebar-placeholder');
+                        sidebarPlaceholder.innerHTML = data;
+
+                        // --- 3. 设置活动状态 (高亮) ---
+                        
+                        // 找到侧边栏中所有的链接
+                        const sidebarLinks = sidebarPlaceholder.querySelectorAll('a');
+                        
+                        sidebarLinks.forEach(link => {
+                            // 获取链接的 href 属性 (例如: /lessons/shizi-5.html)
+                            const linkPath = link.getAttribute('href');
+                            
+                            // 检查链接的路径是否与当前页面的路径匹配
+                            // 注意: linkPath 可能包含查询参数或哈希，所以用 startsWith 进行宽松匹配
+                            if (currentPath.endsWith(linkPath)) {
+                                // 如果匹配，则给这个链接添加 'active' 类
+                                link.classList.add('active');
+                            }
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error loading sidebar:', error);
+                    });
+
+
+
+    // =======================================================
+    // 1. 识字九答案数据
+    // =======================================================
+    const correctAnswers = {
+        // 识字九 练习题答案：一、D /二、AD /三、C /四、C/◆一、C/二、B/ 三、B
+        'q1': 'D', 
+        'q2': ['A', 'D'], // 两个正确位置: '在' (A) 和 '呢' (D)
+        'q3': 'C',
+        'q4': 'C',
+        'qa1': 'C', 
+        'qa2': 'B', 
+        'qa3': 'B' 
+    };
+
+    // 存储多选答案 (仅用于 Q2: '在...呢')
+    const userAnswers = {};
+
+    // =======================================================
+    // 2. 标签页切换功能
+    // =======================================================
+    function switchTab(tabId) {
+        // 隐藏所有内容区域
+        const contents = document.querySelectorAll('.tab-content');
+        contents.forEach(content => {
+            content.classList.remove('active');
+        });
+
+        // 移除所有按钮的激活状态
+        const buttons = document.querySelectorAll('.tab-button');
+        buttons.forEach(button => {
+            button.classList.remove('active');
+        });
+
+        // 显示目标内容区域
+        document.getElementById(tabId + '-tab').classList.add('active');
+
+        // 激活点击的按钮
+        const targetButton = document.querySelector(`.tab-button[onclick="switchTab('${tabId}')"]`);
+        if (targetButton) {
+            targetButton.classList.add('active');
+        }
+    }
+
+    // =======================================================
+    // 3. 练习题答案反馈功能
+    // =======================================================
+
+    // 辅助函数：清除所有视觉反馈
+    function clearVisualFeedback(questionId, cardElement) {
+        cardElement.querySelectorAll('.choice-btn, .blank-option').forEach(el => 
+            el.classList.remove('correct', 'incorrect', 'user-selected')
+        );
+        document.getElementById(`result_${questionId}`).innerHTML = '';
+        document.getElementById(`result_${questionId}`).classList.remove('correct', 'incorrect');
+    }
+
+    function checkAnswer(questionId, choice) {
+        const cardElement = document.getElementById(questionId + '-card');
+        const resultBlock = document.getElementById(`result_${questionId}`);
+        const correct = correctAnswers[questionId];
+        
+        // 确保每次新的点击都清除旧的反馈 (多选Q2除外，它需要累积)
+        if (questionId !== 'q2') {
+            clearVisualFeedback(questionId, cardElement);
+        }
+        
+        // --- 1. 处理选择正确的答案 (单选题 QA1-QA3) ---
+        if (questionId.startsWith('qa')) {
+            const chosenButton = cardElement.querySelector(`.choice-btn[onclick="checkAnswer('${questionId}', '${choice}')"]`);
+            const correctButton = cardElement.querySelector(`.choice-btn[onclick="checkAnswer('${questionId}', '${correct}')"]`);
+            
+            if (choice === correct) {
+                resultBlock.innerHTML = `✅ **答对了!**`;
+                resultBlock.classList.add('correct');
+                chosenButton.classList.add('correct');
+            } else {
+                resultBlock.innerHTML = `❌ **答错了!** 正确答案是 **${correct}**。`;
+                resultBlock.classList.add('incorrect');
+                chosenButton.classList.add('incorrect');
+                correctButton.classList.add('correct'); // 给出正确答案标记
+            }
+        
+        // --- 2. 处理选择正确的位置 Q2 (多选填空: 在...呢) ---
+        } else if (questionId === 'q2') {
+            userAnswers[questionId] = userAnswers[questionId] || [];
+            const choiceElement = document.getElementById(questionId + '_' + choice);
+
+            // 切换选中状态
+            if (userAnswers[questionId].includes(choice)) {
+                userAnswers[questionId] = userAnswers[questionId].filter(c => c !== choice);
+                choiceElement.classList.remove('user-selected');
+            } else {
+                userAnswers[questionId].push(choice);
+                choiceElement.classList.add('user-selected');
+            }
+            
+            // 检查当前状态 (需要排序来比较数组)
+            const selected = userAnswers[questionId].sort().join('');
+            const correctStr = correct.sort().join('');
+            const allOptions = ['A', 'B', 'C', 'D']; // 所有选项用于清除样式
+
+            // 清除 Q2 的正确/错误样式 (只保留用户选中的样式)
+            allOptions.forEach(opt => document.getElementById(questionId + '_' + opt).classList.remove('correct', 'incorrect'));
+            resultBlock.classList.remove('correct', 'incorrect');
+
+
+            if (selected.length === correctStr.length) {
+                if (selected === correctStr) {
+                     resultBlock.innerHTML = `✅ **答对了!**`;
+                     resultBlock.classList.add('correct');
+                     correct.forEach(c => document.getElementById(questionId + '_' + c).classList.add('correct')); // 标记正确位置
+                } else {
+                     resultBlock.innerHTML = `❌ **答错了!** 正确位置是 **${correct.join(', ')}**。`;
+                     resultBlock.classList.add('incorrect');
+                     correct.forEach(c => document.getElementById(questionId + '_' + c).classList.add('correct')); // 给出正确答案标记
+                }
+            } else if (selected.length > correctStr.length) {
+                resultBlock.innerHTML = `⚠️ **选多了!** 请选择两个位置。`;
+            } else {
+                resultBlock.innerHTML = `请选择两个位置... (已选 ${selected.length} 个)`;
+            }
+            
+        // --- 3. 处理选择正确的位置 Q1, Q3, Q4 (单选填空) ---
+        } else { 
+            const choiceElement = document.getElementById(questionId + '_' + choice);
+            const correctElement = document.getElementById(questionId + '_' + correct);
+            
+            if (choice === correct) {
+                resultBlock.innerHTML = `✅ **答对了!**`;
+                resultBlock.classList.add('correct');
+                choiceElement.classList.add('correct');
+            } else {
+                resultBlock.innerHTML = `❌ **答错了!** 正确位置是 **${correct}**。`;
+                resultBlock.classList.add('incorrect');
+                choiceElement.classList.add('incorrect');
+                correctElement.classList.add('correct'); // 给出正确答案标记
+            }
+        }
+    }
+    
+    // 确保在页面加载完成后，默认激活第一个标签
+    document.addEventListener('DOMContentLoaded', () => {
+        // 默认激活 'components' tab
+        switchTab('components'); 
+    });
+
+    
+</script>
+
+
+
+<body>
+ <!-- 側邊欄容器 占位符 标签-->
+<div id="sidebar-placeholder"></div>
+        
+        <!-- 主內容區 -->
+
+
+<div class="main">
+    <h1>📘 识字九</h1>
+    <div class="welcome-banner">
+        <h2>识字九：家庭与时间</h2>
+        <p>学习与家庭成员、亲属关系以及时间相关的常用汉字、词组和基础语法，并进行口语练习。</p>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-button active" onclick="switchTab('components')">部件</button>
+        <button class="tab-button" onclick="switchTab('vocab')">生词表</button>
+        <button class="tab-button" onclick="switchTab('phrases')">词组与口语</button>
+        <button class="tab-button" onclick="switchTab('grammar')">语法</button>
+        <button class="tab-button" onclick="switchTab('exercises')">练习</button>
+    </div>
+
+    <div class="tab-content active" id="components-tab">
+        <div class="card">
+            <h2>汉字部件与结构</h2>
+            <div class="components-intro">
+                <p>了解汉字的构成部件和书写顺序，有助于更好地记忆和理解汉字。</p>
+                <p>本课重点汉字：**林、叔、家、口、真、多、爸、妈、哥、嫂、子、弟、妹、另、外、祖、父、母、呢、前、军、队、干、已、退、休、很、长、间**。</p>
+                <a href="#" class="component-link">点击查看详细信息 →</a>
+            </div>
+           
+        </div>
+    </div>
+
+    <div class="tab-content" id="vocab-tab">
+        <div class="card">
+            <h2>生词表</h2>
+            <table class="vocab-table">
+                <thead>
+                    <tr>
+                        <th class="char-number">序号</th>
+                        <th class="character">汉字/词语</th>
+                        <th class="pinyin">拼音</th>
+                        <th class="english">英文释义</th>
+                        <th class="example">词组示例</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="char-number">1</td><td class="character">林</td><td class="pinyin">lín</td><td class="english">forest, (a surname)</td><td class="example"></td></tr>
+                    <tr><td class="char-number">2</td><td class="character">叔</td><td class="pinyin">shū</td><td class="english">uncle</td><td class="example">叔叔 shūshu (uncle, a child's form of address for any young man one generation its senior)</td></tr>
+                    <tr><td class="char-number">3</td><td class="character">家</td><td class="pinyin">jiā</td><td class="english">family, home, specialist</td><td class="example"></td></tr>
+                    <tr><td class="char-number">4</td><td class="character">口</td><td class="pinyin">kǒu</td><td class="english">mouth</td><td class="example">人口 rénkǒu (population)</td></tr>
+                    <tr><td class="char-number">5</td><td class="character">真</td><td class="pinyin">zhēn</td><td class="english">real, true; really</td><td class="example"></td></tr>
+                    <tr><td class="char-number">6</td><td class="character">多</td><td class="pinyin">duō</td><td class="english">many, much</td><td class="example"></td></tr>
+                    <tr><td class="char-number">7</td><td class="character">爸</td><td class="pinyin">bà</td><td class="english">dad, father</td><td class="example">爸爸 bàba (dad)</td></tr>
+                    <tr><td class="char-number">8</td><td class="character">妈</td><td class="pinyin">mā</td><td class="english">mum, mother</td><td class="example">妈妈 māma (mum)</td></tr>
+                    <tr><td class="char-number">9</td><td class="character">哥</td><td class="pinyin">gē</td><td class="english">elder brother</td><td class="example">哥哥 gēge (elder brother)</td></tr>
+                    <tr><td class="char-number">10</td><td class="character">嫂</td><td class="pinyin">sǎo</td><td class="english">elder brother's wife</td><td class="example">嫂子 sǎozi (elder brother's wife)</td></tr>
+                    <tr><td class="char-number">11</td><td class="character">子</td><td class="pinyin">zi</td><td class="english">child, (suffix)</td><td class="example"></td></tr>
+                    <tr><td class="char-number">12</td><td class="character">弟</td><td class="pinyin">dì</td><td class="english">younger brother</td><td class="example">弟弟 dìdi (younger brother)</td></tr>
+                    <tr><td class="char-number">13</td><td class="character">妹</td><td class="pinyin">mèi</td><td class="english">younger sister</td><td class="example">妹妹 mèimei (younger sister)</td></tr>
+                    <tr><td class="char-number">14</td><td class="character">另</td><td class="pinyin">lìng</td><td class="english">other, another</td><td class="example">另外 lìngwài (besides, moreover)</td></tr>
+                    <tr><td class="char-number">15</td><td class="character">外</td><td class="pinyin">wài</td><td class="english">outside</td><td class="example"></td></tr>
+                    <tr><td class="char-number">16</td><td class="character">祖</td><td class="pinyin">zǔ</td><td class="english">ancestor, grandfather</td><td class="example">祖父母 zǔfùmǔ (grandfather and grandmother)</td></tr>
+                    <tr><td class="char-number">17</td><td class="character">父</td><td class="pinyin">fù</td><td class="english">father</td><td class="example"></td></tr>
+                    <tr><td class="char-number">18</td><td class="character">母</td><td class="pinyin">mǔ</td><td class="english">mother</td><td class="example"></td></tr>
+                    <tr><td class="char-number">19</td><td class="character">呢</td><td class="pinyin">ne</td><td class="english">(a modal particle)</td><td class="example"></td></tr>
+                    <tr><td class="char-number">20</td><td class="character">前</td><td class="pinyin">qián</td><td class="english">forward, before</td><td class="example">以前 yǐqián (before, formerly)</td></tr>
+                    <tr><td class="char-number">21</td><td class="character">军</td><td class="pinyin">jūn</td><td class="english">army</td><td class="example">军队 jūnduì (armed.forces, troops)</td></tr>
+                    <tr><td class="char-number">22</td><td class="character">队</td><td class="pinyin">duì</td><td class="english">team</td><td class="example"></td></tr>
+                    <tr><td class="char-number">23</td><td class="character">干</td><td class="pinyin">gàn</td><td class="english">do</td><td class="example">干杯 gānbēi (drink a toast)</td></tr>
+                    <tr><td class="char-number"></td><td class="character">干</td><td class="pinyin">gān</td><td class="english">dry, empty</td><td class="example">干部 gànbù (cadre)</td></tr>
+                    <tr><td class="char-number">24</td><td class="character">部</td><td class="pinyin">bù</td><td class="english">part, unit, ministry</td><td class="example"></td></tr>
+                    <tr><td class="char-number">25</td><td class="character">已</td><td class="pinyin">yǐ</td><td class="english">already</td><td class="example">已经 yǐjīng (already)</td></tr>
+                    <tr><td class="char-number">26</td><td class="character">退</td><td class="pinyin">tuì</td><td class="english">retreat, return</td><td class="example">退休 tuìxiū (retire)</td></tr>
+                    <tr><td class="char-number">27</td><td class="character">休</td><td class="pinyin">xiū</td><td class="english">rest, stop, cease</td><td class="example"></td></tr>
+                    <tr><td class="char-number">28</td><td class="character">很</td><td class="pinyin">hěn</td><td class="english">very</td><td class="example"></td></tr>
+                    <tr><td class="char-number">29</td><td class="character">长</td><td class="pinyin">cháng</td><td class="english">long; length</td><td class="example">部长 bùzhǎng (minister)</td></tr>
+                    <tr><td class="char-number"></td><td class="character">长</td><td class="pinyin">zhǎng</td><td class="english">chief; grow; older</td><td class="example"></td></tr>
+                    <tr><td class="char-number">30</td><td class="character">间</td><td class="pinyin">jiān</td><td class="english">time or space</td><td class="example">时间 shíjiān (time)</td></tr>
+                </tbody>
+            </table>
+            <div style="background: #FFF4E6; padding: 20px; border-radius: 12px; margin-top: 25px; border-left: 4px solid #FFA500;">
+                    <p style="font-size: 1.15em; line-height: 1.8; color: #333;">                       
+                <p>短文：**林叔**家人口真多，有**爸爸**、**妈妈**、**哥哥**、**嫂子**、**弟弟**和**妹妹**。另外，他**祖父母**呢，以前是**军队干部**，已经**退休**很**长**时间了。</p>
+            </div>
+        </div>
+    </div>
+                    
+               
+    <div class="tab-content" id="phrases-tab">
+        <div class="card">
+            <h2>词组</h2>
+            <div class="phrases-grid">
+                <div class="phrase-card">
+                    <div class="phrase-chinese">国家</div>
+                    <div class="phrase-english">country</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">作家</div>
+                    <div class="phrase-english">writer</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">文学家</div>
+                    <div class="phrase-english">man of letters</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">大家</div>
+                    <div class="phrase-english">everybody</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">家务</div>
+                    <div class="phrase-english">household duties</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">口语</div>
+                    <div class="phrase-english">spoken language</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">口音</div>
+                    <div class="phrase-english">voice, accent</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">多少</div>
+                    <div class="phrase-english">how many (much)</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">多么</div>
+                    <div class="phrase-english">how</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">多长时间</div>
+                    <div class="phrase-english">how long</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">差不多</div>
+                    <div class="phrase-english">nearly, similar</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">儿子</div>
+                    <div class="phrase-english">son</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">本子</div>
+                    <div class="phrase-english">notebook</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">裤子</div>
+                    <div class="phrase-english">trousers, pants</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">杯子</div>
+                    <div class="phrase-english">cup, glass</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">瓶子</div>
+                    <div class="phrase-english">bottle</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">盘子</div>
+                    <div class="phrase-english">tray, plate</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">个子</div>
+                    <div class="phrase-english">height, size</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">单子</div>
+                    <div class="phrase-english">form, list</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">国外</div>
+                    <div class="phrase-english">abroad</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">外国</div>
+                    <div class="phrase-english">foreign country</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">外语(文)</div>
+                    <div class="phrase-english">foreign language</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">外面</div>
+                    <div class="phrase-english">outside</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">外号</div>
+                    <div class="phrase-english">nickname</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">祖国</div>
+                    <div class="phrase-english">one's country</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">祖父</div>
+                    <div class="phrase-english">grandfather</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">祖母</div>
+                    <div class="phrase-english">grandmother</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">前天</div>
+                    <div class="phrase-english">day before yesterday</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">前年</div>
+                    <div class="phrase-english">the year before last</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">部分</div>
+                    <div class="phrase-english">part</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">中间</div>
+                    <div class="phrase-english">among; middle</div>
+                </div>
+                <div class="phrase-card">
+                    <div class="phrase-chinese">期间</div>
+                    <div class="phrase-english">time, period</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>口语练习</h2>
+            <div class="dialogue-box">
+                <div class="dialogue-title">（一）</div>
+                <p>小 姐，杂志多少钱一本？</p>
+                <p>◇ 十二块五一本。</p>
+                <p>这 张北京导游图多少钱？</p>
+                <p>◇ 导游图五毛钱一张。</p>
+                <p>我 买了两个盘子、三个瓶子、一个花瓶、一支钢笔、半斤花茶、两条裤子，一共多少钱？</p>
+                <p>◇ 一 共二百四十七块六毛钱。</p>
+
+                <div class="dialogue-title">（二）</div>
+                <p>小 张，你在家干什么呢？</p>
+                <p>◇ 我 念十一课的课文呢，你呢？</p>
+                <p>我 写汉字呢。你父母在家吗？</p>
+                <p>◇ 他 们都在家。我妈妈在喝茶，我爸爸备课呢。</p>
+                <p>听 说，你哥哥去外国留学了，是真的吗？他去的是哪个国家？</p>
+                <p>◇ 是 真的，他去的是日本。</p>
+                <p>他 去日本多长时间了？</p>
+                <p>◇ 他 是前年去的，到现在差不多一年半了。</p>
+                <p>你 法语学了几个月了？</p>
+                <p>◇ 我 已经学了五个月了，可是口语很差。</p>
+                <p>学 习外语要多听、多说、多写、多练习。</p>
+                <p>不 用你说，大家都知道，可是我就是说不好。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content" id="grammar-tab">
+        <div class="card">
+            <h2>语法要点</h2>
+            <div class="grammar-points">
+
+                <div class="grammar-card">
+                    <h3 class="grammar-header">⚫ 语气助词“呢”的用法（表示疑问）</h3>
+                    <div class="grammar-body">
+                        <p>表示疑问或代反问，常用在代词和名词后。</p>
+                        <p class="grammar-note">The modal particle “ne” is used after a noun or pronoun to indicate an **alternative interrogation**, e. g.</p>
+                        <div class="grammar-example">
+                            <p>我 骑自行车去，你**呢**？</p>
+                            <p>你 爸爸是老师，你妈妈**呢**？</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grammar-card">
+                    <h3 class="grammar-header">⚫ 语气助词“呢”的用法（表示停顿）</h3>
+                    <div class="grammar-body">
+                        <p>语气助词“呢”的一个用法是表示停顿。</p>
+                        <p class="grammar-note">The modal particle “ne” can also be used to **mark a pause**, e. g.</p>
+                        <div class="grammar-example">
+                            <p>他 祖父母**呢**，已经退休了。</p>
+                            <p>我 爱人喜欢喝茶，我**呢**，喜欢喝啤酒。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grammar-card">
+                    <h3 class="grammar-header">⚫ 表示动作在进行阶段（“在”...“呢”）</h3>
+                    <div class="grammar-body">
+                        <p>要表示动作处在进行的阶段，可在动词前加副词“**在**”或在句尾加语气助词“**呢**”。“**在**”和“**呢**”常一起用。</p>
+                        <p class="grammar-note">To show that an action is in **progress**, either place the adverb **在** before the verb or put **呢** at the end of the sentence. **在** is very often used together with **呢** to express the **progressive aspect**, e. g.</p>
+                        <div class="grammar-example">
+                            <p>S <span style="font-size: large;">**在**</span> V O <span style="font-size: large;">**呢**</span></p>
+                            <p>我 妈妈 <span style="font-size: large;">**在**</span> 喝茶。</p>
+                            <p>我 爸爸 备课 <span style="font-size: large;">**呢**</span>。</p>
+                            <p>我 <span style="font-size: large;">**在**</span> 写汉字 <span style="font-size: large;">**呢**</span>。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grammar-card">
+                    <h3 class="grammar-header">⚫ 副词“多”的用法（问程度）</h3>
+                    <div class="grammar-body">
+                        <p>副词“**多**”常放在单音节形容词“**长**”、“**大**”等前边，用来询问程度。</p>
+                        <p class="grammar-note">The adverb **多** often goes before monosyllabic adjectives such as **长**, **大** to **ask about degree or extent**, e. g.</p>
+                        <div class="grammar-example">
+                            <p>**多**长时<span class="phrase-chinese">间</span> 他去日本**多**长时<span class="phrase-chinese">间</span>了？</p>
+                            <p>他 去日本一年半了。</p>
+                            <p>**多**大 你**多**大<span class="phrase-chinese">了</span>？</p>
+                            <p>我 二十岁了。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grammar-card">
+                    <h3 class="grammar-header">⚫ 用“多”也表示概数</h3>
+                    <div class="grammar-body">
+                        <p>用“**多**”也能表示概数。“**多**”不能单用，要放在整数之后表示零头。代表个位数零头的**多**，放在量词和名词之间，或带量词性的名词之后。</p>
+                        <p class="grammar-note">**多** as an approximate indicator of number cannot stand alone, but must be used after an integer to show the **remainder** of the figure. **多** may be used between a measure word and a noun, or after a noun which functions as a measure word, to express the remainder of a round figure, e. g.</p>
+                        <div class="grammar-example">
+                            <p>二<span style="font-size: large;">**十**</span><span style="font-size: large;">**多**</span>人</p>
+                            <p>一<span style="font-size: large;">**个**</span><span style="font-size: large;">**多**</span>月 (over one month)</p>
+                            <p>二<span style="font-size: large;">**十**</span><span style="font-size: large;">**多**</span>本书</p>
+                            <p>一<span style="font-size: large;">**个**</span><span style="font-size: large;">**多**</span>小时 (a little over an hour)</p>
+                            <p>一<span style="font-size: large;">**百**</span><span style="font-size: large;">**多**</span>年</p>
+                            <p>一<span style="font-size: large;">**年**</span><span style="font-size: large;">**多**</span> (over one year)</p>
+                            <p>一<span style="font-size: large;">**天**</span><span style="font-size: large;">**多**</span> (a little more than one day)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="tab-content" id="exercises-tab">
+    <div class="card">
+        <h2>练习</h2>
+
+        <h3>选择正确的位置 Choose a correct position:</h3>
+        
+        <div class="question-card" id="q1-card">
+            <div class="question-number">1.</div>
+            <div class="question-text">你 <span class="blank-option" id="q1_A" onclick="checkAnswer('q1', 'A')">A</span> 妈妈 <span class="blank-option" id="q1_B" onclick="checkAnswer('q1', 'B')">B</span> 不喜欢喝花茶 <span class="blank-option" id="q1_C" onclick="checkAnswer('q1', 'C')">C</span>，你老师 <span class="blank-option" id="q1_D" onclick="checkAnswer('q1', 'D')">D</span>？ <span class="phrase-chinese">呢</span></div>
+            <div class="result-block" id="result_q1"></div> 
+        </div>
+
+        <div class="question-card" id="q2-card">
+            <div class="question-number">2.</div>
+            <div class="question-text">我 <span class="blank-option" id="q2_A" onclick="checkAnswer('q2', 'A')">A</span> 写汉字 <span class="blank-option" id="q2_B" onclick="checkAnswer('q2', 'B')">B</span>，我父母 <span class="blank-option" id="q2_C" onclick="checkAnswer('q2', 'C')">C</span> 作饭 <span class="blank-option" id="q2_D" onclick="checkAnswer('q2', 'D')">D</span> 呢。 <span class="phrase-chinese">在</span></div>
+            <div class="result-block" id="result_q2"></div> 
+        </div>
+
+        <div class="question-card" id="q3-card">
+            <div class="question-number">3.</div>
+            <div class="question-text">他汉语已经 <span class="blank-option" id="q3_A" onclick="checkAnswer('q3', 'A')">A</span> 学了 <span class="blank-option" id="q3_B" onclick="checkAnswer('q3', 'B')">B</span> 一个月 <span class="blank-option" id="q3_C" onclick="checkAnswer('q3', 'C')">C</span> 了。 <span class="phrase-chinese">多</span></div>
+            <div class="result-block" id="result_q3"></div>
+        </div>
+
+        <div class="question-card" id="q4-card">
+            <div class="question-number">4.</div>
+            <div class="question-text">昨天 <span class="blank-option" id="q4_A" onclick="checkAnswer('q4', 'A')">A</span> 我 <span class="blank-option" id="q4_B" onclick="checkAnswer('q4', 'B')">B</span> 花了 <span class="blank-option" id="q4_C" onclick="checkAnswer('q4', 'C')">C</span> 四百多块钱 <span class="blank-option" id="q4_D" onclick="checkAnswer('q4', 'D')">D</span>。 <span class="phrase-chinese">差不多</span></div>
+            <div class="result-block" id="result_q4"></div> 
+        </div>
+
+        <h3>选择正确的答案 Choose a correct answer:</h3>
+        
+        <div class="question-card" id="qa1-card">
+            <div class="question-number">1.</div>
+            <div class="question-text">他从去年九月到今年二月在北京学习汉语，一共学了<span style="border-bottom: 1px solid black; padding: 0 10px;"></span>个月。</div>
+            <div class="choices">
+                <button class="choice-btn" onclick="checkAnswer('qa1', 'A')">A. 八</button>
+                <button class="choice-btn" onclick="checkAnswer('qa1', 'B')">B. 十一</button>
+                <button class="choice-btn" onclick="checkAnswer('qa1', 'C')">C. 五</button>
+                <button class="choice-btn" onclick="checkAnswer('qa1', 'D')">D. 六</button>
+            </div>
+            <div class="result-block" id="result_qa1"></div>
+        </div>
+
+        <div class="question-card" id="qa2-card">
+            <div class="question-number">2.</div>
+            <div class="question-text">我想今年八月去中国，明年六月回国。我想在中国多长时间？</div>
+            <div class="choices">
+                <button class="choice-btn" onclick="checkAnswer('qa2', 'A')">A. 十四个月</button>
+                <button class="choice-btn" onclick="checkAnswer('qa2', 'B')">B. 十个月</button>
+                <button class="choice-btn" onclick="checkAnswer('qa2', 'C')">C. 九个月</button>
+                <button class="choice-btn" onclick="checkAnswer('qa2', 'D')">D. 十二个月</button>
+            </div>
+            <div class="result-block" id="result_qa2"></div>
+        </div>
+
+        <div class="question-card" id="qa3-card">
+            <div class="question-number">3.</div>
+            <div class="question-text">三斤花茶三百六十九块，一斤花茶多少钱？</div>
+            <div class="choices">
+                <button class="choice-btn" onclick="checkAnswer('qa3', 'A')">A. 一百三十三块</button>
+                <button class="choice-btn" onclick="checkAnswer('qa3', 'B')">B. 一百二十三块</button>
+                <button class="choice-btn" onclick="checkAnswer('qa3', 'C')">C. 一百四十二块</button>
+                <button class="choice-btn" onclick="checkAnswer('qa3', 'D')">D. 一百三十二块</button>
+            </div>
+            <div class="result-block" id="result_qa3"></div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+</html>
