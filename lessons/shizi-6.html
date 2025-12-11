@@ -2062,107 +2062,217 @@ details[open] summary::before {
     });
 
 
-    // =======================================================
-    // 2. 练习题答案反馈功能 (基于识字九提供的答案)
-    // =======================================================
-    
-    // 识字九 练习题答案：
-    // 一、D /二、AD /三、C /四、C/◆一、C/二、B/ 三、B
-    const correctAnswers = {
-        // 选择正确的位置 (Q1-Q4)
-        'q1': 'D', 
-        'q2': ['A', 'D'], // 两个正确位置: '在' (A) 和 '呢' (D)
-        'q3': 'C',
-        'q4': 'C',
-        
-        // 选择正确的答案 (QA1-QA3)
-        'qa1': 'C', 
-        'qa2': 'B', 
-        'qa3': 'B' 
-    };
+// =======================================================
+// 2. 练习题答案反馈功能
+// =======================================================
 
-    // 存储多选答案 (仅用于 Q2: '在...呢')
-    const userAnswers = {};
+// 正确答案
+const correctAnswers = {
+    1: 'A',  // 跟我朋友 - 位置A 
+    2: 'B',  // 跟老师 - 位置B  
+    3: 'C',  // 坐汽车 - 位置C
+    4: 'C',  // 新 - 位置C
+    5: ['C', 'D'],  // 星期日/星期天
+    6: 'C',  // 七十五分钟
+    7: ['A', 'B', 'D']   // 差一刻四点/差十五分钟四点/三点三刻
+};
 
-    function checkAnswer(questionId, choice) {
-        const feedbackElement = document.getElementById('feedback_' + questionId);
-        const questionCard = feedbackElement.closest('.question-card');
-        const correct = correctAnswers[questionId];
+// 存储用户选择
+const userSelections = {};
+const completedQuestions = new Set();
 
-        // 清除上一次的样式
-        questionCard.querySelectorAll('.choice-btn, .blank-option').forEach(el => 
-            el.classList.remove('correct', 'incorrect', 'user-selected')
-        );
-
-        // --- 处理选择正确的答案 (单选题 QA1-QA3) ---
-        if (questionId.startsWith('qa')) {
-            const chosenButton = questionCard.querySelector(`.choice-btn[onclick="checkAnswer('${questionId}', '${choice}')"]`);
-            const correctButton = questionCard.querySelector(`.choice-btn[onclick="checkAnswer('${questionId}', '${correct}')"]`);
-            
-            if (choice === correct) {
-                feedbackElement.innerHTML = '✅ 回答正确！';
-                feedbackElement.style.color = 'green';
-                chosenButton.classList.add('correct');
-            } else {
-                feedbackElement.innerHTML = `❌ 回答错误。正确答案是 ${correct}。`;
-                feedbackElement.style.color = 'red';
-                chosenButton.classList.add('incorrect');
-                correctButton.classList.add('correct');
-            }
-            
-        // --- 处理选择正确的位置 Q2 (多选填空) ---
-        } else if (questionId === 'q2') {
-            userAnswers[questionId] = userAnswers[questionId] || [];
-            const choiceElement = document.getElementById(questionId + '_' + choice);
-
-            // 切换选中状态
-            if (userAnswers[questionId].includes(choice)) {
-                userAnswers[questionId] = userAnswers[questionId].filter(c => c !== choice);
-                choiceElement.classList.remove('user-selected');
-            } else {
-                userAnswers[questionId].push(choice);
-                choiceElement.classList.add('user-selected');
-            }
-            
-            // 检查当前状态
-            const selected = userAnswers[questionId].sort().join('');
-            const correctStr = correct.sort().join('');
-
-            if (selected.length > 0) {
-                // 提供实时反馈
-                if (selected.length === correctStr.length && selected === correctStr) {
-                    feedbackElement.innerHTML = '✅ 位置选择正确！';
-                    feedbackElement.style.color = 'green';
-                    correct.forEach(c => document.getElementById(questionId + '_' + c).classList.add('correct'));
-                } else if (selected.length === correctStr.length) {
-                    feedbackElement.innerHTML = '❌ 位置选择错误。';
-                    feedbackElement.style.color = 'red';
-                } else {
-                    feedbackElement.innerHTML = `已选择 ${selected.length} 个位置。`;
-                    feedbackElement.style.color = '#333';
-                }
-            } else {
-                 feedbackElement.innerHTML = '请选择位置...';
-                 feedbackElement.style.color = '#333';
-            }
-            
-        // --- 处理选择正确的位置 Q1, Q3, Q4 (单选填空) ---
-        } else { 
-            const choiceElement = document.getElementById(questionId + '_' + choice);
-            const correctElement = document.getElementById(questionId + '_' + correct);
-            
-            if (choice === correct) {
-                feedbackElement.innerHTML = '✅ 位置选择正确！';
-                feedbackElement.style.color = 'green';
-                choiceElement.classList.add('correct');
-            } else {
-                feedbackElement.innerHTML = '❌ 位置选择错误。';
-                feedbackElement.style.color = 'red';
-                choiceElement.classList.add('incorrect');
-                correctElement.classList.add('correct');
-            }
+// 选择填空位置 - 直接通过data-position定位
+function selectBlank(questionId, position) {
+    // 清除该题所有选项的选中状态
+    const allBlanks = document.querySelectorAll(`[onclick*="selectBlank(${questionId}"]`);
+    allBlanks.forEach(blank => {
+        const parentCard = blank.closest('.question-card');
+        if (parentCard) {
+            parentCard.querySelectorAll('.blank-option').forEach(el => {
+                el.classList.remove('selected');
+            });
         }
+    });
+    
+    // 找到被点击的blank并标记
+    const clickedBlank = Array.from(document.querySelectorAll('.blank-option'))
+        .find(el => el.getAttribute('data-position') === position && 
+                    el.getAttribute('onclick') === `selectBlank(${questionId}, '${position}')`);
+    
+    if (clickedBlank) {
+        clickedBlank.classList.add('selected');
     }
+    
+    userSelections[questionId] = position;
+}
+
+// 选择多选题答案
+function selectChoice(questionId, choice, button) {
+    // 初始化该题的选择数组
+    if (!userSelections[questionId]) {
+        userSelections[questionId] = [];
+    }
+    
+    // 切换选中状态
+    if (userSelections[questionId].includes(choice)) {
+        userSelections[questionId] = userSelections[questionId].filter(c => c !== choice);
+        button.classList.remove('selected');
+    } else {
+        userSelections[questionId].push(choice);
+        button.classList.add('selected');
+    }
+}
+
+// 检查单选填空答案 (问题1-4)
+function checkAnswer(questionId) {
+    const feedbackElement = document.getElementById('feedback' + questionId);
+    
+    if (!feedbackElement) {
+        console.error('找不到反馈元素: feedback' + questionId);
+        return;
+    }
+    
+    const questionCard = feedbackElement.closest('.question-card');
+    const correct = correctAnswers[questionId];
+    const selectedAnswer = userSelections[questionId];
+    
+    console.log(`题目${questionId}: 用户选择=${selectedAnswer}, 正确答案=${correct}`);
+    
+    if (!selectedAnswer) {
+        feedbackElement.innerHTML = '⚠️ 请先选择一个位置！';
+        feedbackElement.style.color = '#F57C00';
+        feedbackElement.style.background = '#FFE0B2';
+        feedbackElement.style.display = 'block';
+        return;
+    }
+    
+    // 清除之前的样式
+    questionCard.querySelectorAll('.blank-option').forEach(el => {
+        el.classList.remove('correct', 'incorrect');
+    });
+    
+    // 找到所有blank选项
+    const blanks = questionCard.querySelectorAll('.blank-option');
+    let selectedOption = null;
+    let correctOption = null;
+    
+    blanks.forEach(blank => {
+        const pos = blank.getAttribute('data-position');
+        if (pos === selectedAnswer) {
+            selectedOption = blank;
+        }
+        if (pos === correct) {
+            correctOption = blank;
+        }
+    });
+    
+    if (selectedAnswer === correct) {
+        feedbackElement.innerHTML = '✅ 位置选择正确！';
+        feedbackElement.style.color = '#2E7D32';
+        feedbackElement.style.background = '#C8E6C9';
+        feedbackElement.style.display = 'block';
+        if (selectedOption) selectedOption.classList.add('correct');
+        completedQuestions.add(questionId);
+    } else {
+        feedbackElement.innerHTML = `❌ 位置选择错误。正确答案是 ${correct}。`;
+        feedbackElement.style.color = '#C62828';
+        feedbackElement.style.background = '#FFCDD2';
+        feedbackElement.style.display = 'block';
+        if (selectedOption) selectedOption.classList.add('incorrect');
+        if (correctOption) correctOption.classList.add('correct');
+    }
+    
+    updateProgress();
+}
+
+// 检查多选题答案 (问题5-7)
+function checkMultipleAnswer(questionId, correctChoices) {
+    const feedbackElement = document.getElementById('feedback' + questionId);
+    
+    if (!feedbackElement) {
+        console.error('找不到反馈元素: feedback' + questionId);
+        return;
+    }
+    
+    const questionCard = feedbackElement.closest('.question-card');
+    const userAnswer = userSelections[questionId] || [];
+    
+    console.log(`题目${questionId}: 用户选择=${userAnswer}, 正确答案=${correctChoices}`);
+    
+    if (userAnswer.length === 0) {
+        feedbackElement.innerHTML = '⚠️ 请先选择答案！';
+        feedbackElement.style.color = '#F57C00';
+        feedbackElement.style.background = '#FFE0B2';
+        feedbackElement.style.display = 'block';
+        return;
+    }
+    
+    // 清除之前的样式
+    questionCard.querySelectorAll('.choice-btn').forEach(el => {
+        el.classList.remove('correct', 'incorrect');
+    });
+    
+    // 检查答案
+    const userSorted = [...userAnswer].sort().join(',');
+    const correctSorted = [...correctChoices].sort().join(',');
+    const isCorrect = userSorted === correctSorted;
+    
+    if (isCorrect) {
+        feedbackElement.innerHTML = '✅ 回答正确！';
+        feedbackElement.style.color = '#2E7D32';
+        feedbackElement.style.background = '#C8E6C9';
+        feedbackElement.style.display = 'block';
+        
+        // 标记正确答案
+        userAnswer.forEach(choice => {
+            const btn = Array.from(questionCard.querySelectorAll('.choice-btn'))
+                .find(b => b.textContent.trim().startsWith(choice + '.'));
+            if (btn) btn.classList.add('correct');
+        });
+        
+        completedQuestions.add(questionId);
+    } else {
+        feedbackElement.innerHTML = `❌ 回答错误。正确答案是：${correctChoices.join(', ')}`;
+        feedbackElement.style.color = '#C62828';
+        feedbackElement.style.background = '#FFCDD2';
+        feedbackElement.style.display = 'block';
+        
+        // 标记用户错误选择
+        userAnswer.forEach(choice => {
+            if (!correctChoices.includes(choice)) {
+                const btn = Array.from(questionCard.querySelectorAll('.choice-btn'))
+                    .find(b => b.textContent.trim().startsWith(choice + '.'));
+                if (btn) btn.classList.add('incorrect');
+            }
+        });
+        
+        // 显示正确答案
+        correctChoices.forEach(choice => {
+            const btn = Array.from(questionCard.querySelectorAll('.choice-btn'))
+                .find(b => b.textContent.trim().startsWith(choice + '.'));
+            if (btn) btn.classList.add('correct');
+        });
+    }
+    
+    updateProgress();
+}
+
+// 更新进度条
+function updateProgress() {
+    const totalQuestions = 7;
+    const completed = completedQuestions.size;
+    const percentage = Math.round((completed / totalQuestions) * 100);
+    
+    const percentElement = document.getElementById('progress-percent');
+    const barElement = document.getElementById('progress-bar');
+    
+    if (percentElement) percentElement.textContent = percentage + '%';
+    if (barElement) {
+        barElement.style.width = percentage + '%';
+        barElement.textContent = percentage + '%';
+    }
+}
+</script>
 
 
     // =======================================================
