@@ -6,43 +6,47 @@
         <title>Chinese with Elisa - 海洋中文教室</title>
         <link rel="stylesheet" href="assets/style.css">
     </head>
+
+<script> // =======================================================
+    // <!-- sideabr 侧边栏 -->     // 活动状态
+    // =======================================================     
+                // 1. 获取当前页面的路径 (例如: /lessons/shizi-5.html)
+                const currentPath = window.location.pathname;
+
+                // 2. 加载侧边栏内容
+                fetch('/sidebar.html') 
+                    .then(response => response.text())
+                    .then(data => {
+                        // 将侧边栏内容插入到占位符中
+                        const sidebarPlaceholder = document.getElementById('sidebar-placeholder');
+                        sidebarPlaceholder.innerHTML = data;
+
+                        // --- 3. 设置活动状态 (高亮) ---
+                        
+                        // 找到侧边栏中所有的链接
+                        const sidebarLinks = sidebarPlaceholder.querySelectorAll('a');
+                        
+                        sidebarLinks.forEach(link => {
+                            // 获取链接的 href 属性 (例如: /lessons/shizi-5.html)
+                            const linkPath = link.getAttribute('href');
+                            
+                            // 检查链接的路径是否与当前页面的路径匹配
+                            // 注意: linkPath 可能包含查询参数或哈希，所以用 startsWith 进行宽松匹配
+                            if (currentPath.endsWith(linkPath)) {
+                                // 如果匹配，则给这个链接添加 'active' 类
+                                link.classList.add('active');
+                            }
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error loading sidebar:', error);
+                    });
+</script>
+
     <body>
         <!-- 側邊欄 -->
-        <div class="sidebar">      
-            <h2 class="lessons">📚 Literacy for  gooogle site</h2>
-            <a href="lessons/shizi-5-google-site.html">识字5     </a> 
-            <a href="lessons/shizi-6-google-site.html>识字6       </a>
-            <a href="lessons/shizi-7-google-site.html">识字7       </a>
-            <a href="lessons/shizi-9-google-site.html">识字9       </a>
-            <h2 class="lessons">📚 识字课程 Literacy</h2>
-            <a href="lessons/shizi-1.html">识字一</a>
-            <a href="lessons/shizi-2.html">识字二</a>
-            <a href="lessons/shizi-3.html">识字三</a>
-            <a href="lessons/shizi-4.html">识字四</a>
-            <a href="lessons/shizi-5.html">识字五</a>    
-            <a href="lessons/shizi-6.html">识字六</a>
-            <a href="lessons/shizi-7.html">识字七</a>
-            <a href="lessons/shizi-8.html">识字八</a>
-            <a href="lessons/shizi-9.html">识字九</a>
-            <a href="lessons/shizi-10.html">识字十</a>
-            <a href="lessons/shizi-11.html">识字十一</a>
-            <a href="lessons/shizi-12.html">识字十二</a>
-            <a href="lessons/shizi-13.html">识字十三</a>
-            <a href="lessons/shizi-14.html">识字十四</a>
-            <a href="lessons/shizi-15.html">识字十五</a>
-            <a href="lessons/shizi-16.html">识字十六</a>
-
-            
-            <div class="section-gap"></div>
-            
-            <h2 class="lessons">💬 对话课程 Conversation</h2>
-            <a href="#">Lessons:coming soon</a>
-
-            
-            <div class="section-gap"></div>
-            
-            <a href="#top" style="background: #3B9797; text-align: center; font-weight: 700;">📚 课程总览</a>
-        </div>
+<!-- 側邊欄容器 占位符 标签-->
+<div id="sidebar-placeholder"></div>>
         
         <!-- 主內容區 -->
         <div class="main">
