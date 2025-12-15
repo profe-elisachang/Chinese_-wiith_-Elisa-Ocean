@@ -288,7 +288,8 @@ h4 {
     font-weight: 600;
 }
 
-.english {
+/* .english 在生词表中使用不同的颜色 */
+.vocab-table .english {
     color: var(--color-text-secondary);
 }
 
@@ -517,9 +518,10 @@ h4 {
     margin-top: 15px;
     padding: 15px;
     border-radius: 8px;
-    font-weight: 600;
+    font-weight: bold;
     text-align: center;
     display: none;
+    /* 颜色会由 JS 动态设置 (feedback.style.color) */
 }
 
 .feedback.correct {
@@ -708,11 +710,8 @@ details[open] summary::before {
 }
 
 /* 确保文字反馈也清晰可见 */
-.feedback {
-    margin-top: 10px;
-    font-weight: bold;
-    /* 这里的颜色会由 JS 动态设置 (feedback.style.color) */
-}
+/* 注意：.feedback 的基础样式已在上面定义（第516行），这里只补充说明 */
+/* 如需调整 margin-top，请修改上面的定义 */
 
 </style>
 

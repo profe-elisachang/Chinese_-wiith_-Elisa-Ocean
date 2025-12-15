@@ -247,6 +247,12 @@ h4 {
     padding: 5px 0;
 }
 
+.pronunciation-cue strong {
+    font-weight: 900;
+    color: var(--color-accent-strong);
+    text-decoration: underline;
+}
+
 /* ======================= 生词表样式 ======================= */
 .vocab-table {
     width: 100%;
@@ -665,26 +671,46 @@ details[open] summary::before {
 }
 
 /* ======================= 图片 ======================= */
-.char-image {
-    text-align: center;
-    margin: 15px 0;
-    padding: 15px;
-    background: var(--color-background-light-accent);
-    border-radius: 8px;
-}
-
-.char-image img {
+/* 默认图片样式（中等大小） */
+.content-area img {
     max-width: 100%;
+    max-height: 10.8em; /* 约6倍字符高度 (1.8em × 6) */
     height: auto;
-    max-height: 300px;
+    display: block;
+    margin: 15px auto;
     border-radius: 6px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* 纯图片（较小，用于字符图片等） */
+.img-char {
+    max-width: 40%;
+    max-height: 5.4em; /* 约3倍字符高度 (1.8em × 3) */
+    height: auto;
+    display: block;
+    margin: 15px auto;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* PDF截取的图文说明（较大，方便阅读文字） */
+.content-area .img-pdf,
+.img-pdf {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    display: block;
+    margin: 20px 0;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    /* 强制填满容器宽度，让PDF截图显示更大 */
 }
 </style>
 
 
 <body>
-    <div class="main">
+        <div class="main">
   
         <div class="welcome-banner">
             <h2>识字七：日常物品与购物</h2>
@@ -735,19 +761,22 @@ details[open] summary::before {
         <div class="character-section">
             
             <details>
-    <summary>1. <span class="character">夬</span> guài (to separate, finger puller)</summary>
+    <summary>1. <span class="character">夬</span> guài (to cut apart / to separate decisively / a decisive break)</summary>
     <div class="content-area">
+        <img src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765666631/%E5%A4%AC_qtxolq.png" alt="夬">
         <h4>🧩 Components:</h4>
         <p>ユ (target) + 人 (person)</p>
         
-        <h4>📘 Book Story:</h4>
-        <div class="story-block">A kind of hook used in archery. It was used to protect the fingers when hooking the string. It is commonly known as the finger puller.</div>
+        <h4>📘 Explanation:</h4>
+        <div class="story-block">A kind of hook used in archery. It was used to protect the fingers when hooking the string. It is commonly known as the finger puller.Because the thumb ring grips and releases the bowstring cleanly,
+            夬 later came to mean a <strong>clean cut</strong> or a <strong>decisive break</strong>.</div>
         
         <h4>😂 Fun Story (English):</h4>
-        <div class="story-block">A person (人) is aiming at a tiny target (ユ) with an invisible bow, using a finger puller to separate his finger from the bowstring. He shouts "Gwhy!" every time he hits the target.</div>
+        <div class="story-block">A person (人) is aiming at a tiny target (ユ), using a <strong>finger puller</strong>  to <strong>separate</strong> his finger from the bowstring. He shouts "Gwhy!" every time he hits the target.</div>
         
         <h4>🔊 Pronunciation Cue:</h4>
-        <p class="pronunciation-cue">guài → Sounds like "Gwhy" (like Why with a hard G). "Gwhy did that person separate himself from the group?"</p>
+         <p class="pronunciation-cue">"the componet is not common; 不是常字, 很少人记得“夬”的发音。"</p>
+        <p class="pronunciation-cue">guài → Sounds like "Gwhy" (like Why with a hard G). "<strong>Gwhy</strong> did that person <strong>separate</strong> himself from the group?"</p>
     </div>
 </details>
 
@@ -755,13 +784,13 @@ details[open] summary::before {
     <summary>2. <span class="character">革</span> gé (leather)</summary>
     <div class="content-area">
         <h4>🧩 Components:</h4>
-        <p>廿 (twenty) + 中 (middle) + 一 (one)</p>
-        
+        <p>one componet or 廿 (twenty) + 中 (middle) + 一 (one)</p>
+        <img src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765409053/%E9%9D%A9_g0sbf4.png"   alt="革">
         <h4>📘 Book Story:</h4>
         <div class="story-block">Leather, animal skins treated to remove their hair</div>
         
         <h4>😂 Fun Story (English):</h4>
-        <div class="story-block">A magician uses a thin sheet of leather to cover a pile of twenty (廿) identical magic boxes, all lined up in the middle (中) of the stage. The leather makes a cracking "Guh" sound.</div>
+        <div class="story-block">A magician uses a thin sheet of leather to cover a pile of <strong>twenty (廿)</strong>  identical magic boxes, all lined up in the <strong>middle (中)</strong> of the stage. The leather makes a cracking "Guh" sound.</div>
         
         <h4>🔊 Pronunciation Cue:</h4>
         <p class="pronunciation-cue">gé → Sounds like "Guh" (like Gum). A piece of leather is "Guh"-y and hard to chew.</p>
@@ -769,16 +798,14 @@ details[open] summary::before {
 </details>
 
 <details>
-    <summary>3. <span class="character">冈</span> gāng (ridge)</summary>
+    <summary>3. <span class="character">冈</span> gāng (ridge；la cresta de la montaña)</summary>
     <div class="content-area">
         <h4>🧩 Components:</h4>
         <p>冂 (outer limits) + 乂 (shears)</p>
-        
-        <h4>📘 Book Story:</h4>
-        <div class="story-block">In the outer limits (冂) they use shears (乂) to trim the hedges on the ridge of the hill, so that they can peer over into the neighboring kingdom.</div>
-        
+        <img class="img-pdf" src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765653137/%E5%86%88_cdabik.png"   alt="冈">
+                
         <h4>😂 Fun Story (English):</h4>
-        <div class="story-block">Two mischievous mountain goats use giant shears to cut a hole in the invisible outer limits fence, just so they can sit on the ridge and watch the sunset.</div>
+        <div class="story-block">The <strong>gang</strong> who used the <strong>shears</strong>  to trim the beard of the <strong>ridge</strong>  within the <strong>outer limits</strong>  is <strong>gone</strong></div>
         
         <h4>🔊 Pronunciation Cue:</h4>
         <p class="pronunciation-cue">gāng → Sounds like "Gong". A giant ridge is guarded by a massive gong.</p>
@@ -789,16 +816,16 @@ details[open] summary::before {
     <summary>4. <span class="character">帛</span> bó (high-quality silk fabrics)</summary>
     <div class="content-area">
         <h4>🧩 Components:</h4>
-        <p>白 (white) + 巾 (towel)</p>
+        <p>白 (white) + 巾 (towel)"巾" itself is a general concept, broadly referring to fabrics used for wiping, wrapping, or covering.</p>
         
-        <h4>📘 Book Story:</h4>
+        <h4>📘 Explanation:</h4>
         <div class="story-block">High-quality silk fabrics, were valuable items in ancient times, used for rewards, sacrifices, and even writing.</div>
         
         <h4>😂 Fun Story (English):</h4>
-        <div class="story-block">A wizard uses a white magic towel to summon a roll of enchanted silk fabrics that float on air.</div>
+        <div class="story-block">A fairy uses a magic<strong> white towel</strong> to summon a roll of enchanted <strong>silk fabrics</strong> that float on air.</div>
         
         <h4>🔊 Pronunciation Cue:</h4>
-        <p class="pronunciation-cue">bó → Sounds like "Baw" (like a soft Bawl). A bolt of expensive silk feels like a soft "Baw".</p>
+        <p class="pronunciation-cue">bó →Only the <strong>boss of the fairies</strong> gets to wear silk robes.</p>
     </div>
 </details>
 
@@ -807,15 +834,13 @@ details[open] summary::before {
     <div class="content-area">
         <h4>🧩 Components:</h4>
         <p>none</p>
-        
-        <h4>📘 Book Story:</h4>
-        <div class="story-block">none</div>
+        <img src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765654995/%E8%A1%A3%E9%A2%86_j1hgnh.png"   alt="𧘇">
         
         <h4>😂 Fun Story (English):</h4>
-        <div class="story-block">A simple dress is so important that it is honored with its own complex character shape, representing cloth and a simple neckline.</div>
+        <div class="story-block">A simple <strong>dress</strong> is so important that it is honored with its own complex character shape, representing <strong>cloth</strong> and a simple <strong>neckline</strong>.</div>
         
         <h4>🔊 Pronunciation Cue:</h4>
-        <p class="pronunciation-cue">yī → (Same as 衣)</p>
+        <p class="pronunciation-cue">yī → This piece of clothing <strong>yī</strong> is especially comfortable and particularly <strong>easy</strong> to put on/wear.</p>
     </div>
 </details>
 
@@ -824,15 +849,14 @@ details[open] summary::before {
     <div class="content-area">
         <h4>🧩 Components:</h4>
         <p>亠 (lid) + 𧘇 (dress)</p>
-        
+        <img src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765409037/%E8%A1%A3_c9ytik.png"   alt="衣">
         <h4>📘 Book Story:</h4>
-        <div class="story-block">She lifts the lid (亠) of the box to reveal a beautiful dress (𧘇) — she has never been given clothes like this as a present before.</div>
-        
+        <img class="img-pdf" src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765667275/%E8%A1%A3%E8%A7%A3%E9%87%8A_z2f3qr.png"   alt="衣">
         <h4>😂 Fun Story (English):</h4>
-        <div class="story-block">A tiny ghost puts a lid on top of a beautiful floating dress to keep the clothes from flying away while he yells "Yee!"</div>
-        
+            <div class="story-block">A giant puts a <strong>lid</strong> on top of a beautiful floating <strong>dress</strong> to keep the clothes from flying away while he yells "Yee!"</div>
+            
         <h4>🔊 Pronunciation Cue:</h4>
-        <p class="pronunciation-cue">yī → Sounds like "Yee". "Yee! What lovely new clothes!"</p>
+        <p class="pronunciation-cue">yī →衣服 is <strong>easy</strong> to put on/wear. Put on your clothes and go to <strong>EAT</strong> some food!</p>
     </div>
 </details>
 
@@ -842,14 +866,14 @@ details[open] summary::before {
         <h4>🧩 Components:</h4>
         <p>none</p>
         
-        <h4>📘 Book Story:</h4>
-        <div class="story-block">This is the form which 衣 takes when appearing as the left-hand side of characters.</div>
+        <h4>📘 Explanation:</h4>
+        <div class="story-block">This is the form which <strong>衣</strong> takes when appearing as the left-hand side of characters.</div>
         
         <h4>😂 Fun Story (English):</h4>
         <div class="story-block">This little version of clothes always hangs on the left side of the closet. It still reminds us of fabric and garments.</div>
         
         <h4>🔊 Pronunciation Cue:</h4>
-        <p class="pronunciation-cue">yī → (Same as 衣)</p>
+   yī → (Same as 衣)衬衣<strong>chèn yī</strong> ，衣衫<strong>yī shān</strong>，袖子<strong>xiù zi</strong>，衣裳<strong>yī shang</strong></p>
     </div>
 </details>
 
@@ -859,14 +883,18 @@ details[open] summary::before {
         <h4>🧩 Components:</h4>
         <p>广 (shelter) + 车 (car)</p>
         
-        <h4>📘 Book Story:</h4>
-        <div class="story-block">广 + 车 indicating the parking of vehicles under a spacious roof. 车库</div>
+        <h4>📘 Explanation:</h4>
+        <div class="story-block"><strong>广</strong> + <strong>车</strong> indicating the parking of vehicles under a spacious roof. 
+            <strong>车库chē kù</strong> is a place to store cars.→Garage<br>
+            <strong>仓库cāng kù</strong> is a place to store goods.→Warehouse<br>
+            <strong>水库shuǐ kù</strong> is a place to store water.→Reservoir<br>
+            <strong>资料库zī liào kù</strong> is a place to store information.→Database, Library </div>
         
         <h4>😂 Fun Story (English):</h4>
-        <div class="story-block">A vast shelter is used as a warehouse to keep thousands of tiny toy cars safe from rain.</div>
+        <div class="story-block">A <strong>vast shelter</strong> is used as a <strong>warehouse</strong> to keep <strong>cars</strong> safe from rain.</div>
         
         <h4>🔊 Pronunciation Cue:</h4>
-        <p class="pronunciation-cue">kù → Sounds like "Coo" (like a pigeon). A pigeon says "Coo, coo" while flying over the warehouse.</p>
+        <p class="pronunciation-cue">kù →there's a surper COOL car parking in the <strong></strong>garage</strong>!</p>
     </div>
 </details>
 
@@ -874,54 +902,59 @@ details[open] summary::before {
     <summary>9. <span class="character">牛</span> niú (cow)</summary>
     <div class="content-area">
         <h4>🧩 Components:</h4>
-        <p>𠂒 (unknown component)</p>
-        
-        <h4>📘 Book Story:</h4>
-        <div class="story-block">none</div>
-        
+        <p>𠂒 (the animal cow ,as shown in先)</p>
+        <img src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765409026/%E7%89%9B_ufnnat.png"   alt="牛">
+               
         <h4>😂 Fun Story (English):</h4>
         <div class="story-block">A cow is doing a dramatic opera performance, stretching its head and horns to the sky.</div>
         
         <h4>🔊 Pronunciation Cue:</h4>
-        <p class="pronunciation-cue">niú → Sounds like "Niu" (similar to New). A new type of cow that sings opera.</p>
+        <p class="pronunciation-cue"> A <strong>new</strong> type of cow that sings opera.</p>
     </div>
 </details>
 
 <details>
-    <summary>10. <span class="character">长</span> cháng / zhǎng (length / long / chief / elder / to grow)</summary>
+    <summary>10-1. <span class="character">长</span> cháng (length / long)</summary>
     <div class="content-area">
         <h4>🧩 Components:</h4>
-        <p>独体字 / a unicorn with two horns + hook</p>
-        
-        <h4>📘 Book Story (cháng - length/long):</h4>
-        <div class="story-block">On the bridge of the spaceship the captain looked at the long row of wheels on the engineer's desk. He had no idea which one to turn...</div>
-        
-        <h4>📘 Book Story (zhǎng - chief/elder/grow):</h4>
-        <div class="story-block">"Big Chief Wheel" was so called because he collected wagon wheels from raids on the passing wagon trains.</div>
-        
+        <p>none / a unicorn with two horns + hook</p>
+       <img src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765409030/%E9%95%BF_jme2s6.png"   alt="长"> 
+             
         <h4>😂 Fun Story (English):</h4>
-        <div class="story-block">A long line of people is waiting to see a unicorn with two horns, all shouting "Chang!" because the line is too long. / The chief of the village has a magnificent unicorn with two horns on his helmet. He watches the young trees grow (zhǎng) taller and taller.</div>
+        <div class="story-block">A <strong>long</strong> line of fairy is waiting to see a unicorn with two horns at mr. Chang's shop.</div>
         
         <h4>🔊 Pronunciation Cue:</h4>
-        <p class="pronunciation-cue">cháng → Sounds like "Chang". The line is long for Mr. Chang's donut shop.<br>
-        zhǎng → Sounds like "Jang". The elder makes a big "Jang" sound when he stamps his foot.</p>
+        <p class="pronunciation-cue">cháng → The line is long for Mr. Chang's unicorn shop.</p>
     </div>
 </details>
 
 <details>
-    <summary>11. <span class="character">弓</span> gōng (a bow)</summary>
+    <summary>10-2. <span class="character">长</span> zhǎng (chief / elder / to grow)</summary>
     <div class="content-area">
         <h4>🧩 Components:</h4>
-        <p>none</p>
-        
-        <h4>📘 Book Story:</h4>
-        <div class="story-block">none</div>
-        
+        <p>none / a unicorn with two horns + hook</p>
+        <img src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765409030/%E9%95%BF_jme2s6.png"   alt="长">
+      
         <h4>😂 Fun Story (English):</h4>
+        <div class="story-block">The <strong>chief</strong> of the village has a magnificent unicorn with two horns on his helmet. He watches the young trees <strong>grow</strong> taller and taller.</div>
+        
+        <h4>🔊 Pronunciation Cue:</h4>
+        <p class="pronunciation-cue">zhǎng →In order to <strong>grow (长大)</strong>grow and become the <strong>chief</strong>, Teddy Bear practiced opening his arms wide and <strong>jumping</strong> every day.</p>
+    </div>
+</details>
+<details> <summary>"长" 有两个发音</summary><img class="img-pdf" src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765658235/%E9%95%BF%E9%95%BF_kfeari.png"   alt="长"> </details>
+
+<details>
+    <summary>11. <span class="character">弓</span> gōng (a bow, for a violin or for archery.)</summary>
+        <div class="content-area">
+        <h4>🧩 Components:</h4>
+        <img src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765409026/%E5%BC%93_zt70wb.png"   alt="弓">
+        
+        <h4>📘 explanation:</h4>
         <div class="story-block">The character looks like a powerful hunter's bow, ready to shoot an arrow.</div>
-        
+        <div class="story-block">the giant bought a huge bow in a bow factory 工厂 .</div>
         <h4>🔊 Pronunciation Cue:</h4>
-        <p class="pronunciation-cue">gōng → Sounds like "Gong". Hitting a giant gong with an invisible bow.</p>
+        <p class="pronunciation-cue"> Hitting a giant <strong>gong</strong> with an invisible bow.</p>
     </div>
 </details>
 
@@ -930,32 +963,27 @@ details[open] summary::before {
     <div class="content-area">
         <h4>🧩 Components:</h4>
         <p>亠 (lid) + ⺈ (bow)</p>
-        
-        <h4>📘 Book Story:</h4>
-        <div class="story-block">The old man has a lid (亠) on his head (instead of a hat) and silently bows (⺈) to show which direction the vet must go.</div>
-        
-        <h4>😂 Fun Story (English):</h4>
-        <div class="story-block">A giant puts a lid on his head and points his invisible bow in a specific direction to tell his dog, Fang, which way to go.</div>
+        <img class="img-pdf" src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765660828/%E6%96%B9_vpadcy.png"   alt="方">
+        <h4>📘 Story (English):</h4>
+        <div class="story-block">A giant has to <STRONG>bent over</STRONG> because he's holding a heavy <STRONG>LID</STRONG>. The <STRONG>LID</STRONG> is acctualy a <STRONG>SQUARE</STRONG> map that shos him the <STRONG>DIRECTION</STRONG>.</div>
         
         <h4>🔊 Pronunciation Cue:</h4>
-        <p class="pronunciation-cue">fāng → Sounds like "Fang" (like a dog's tooth). Fang the dog is running in the wrong direction.</p>
+        <p class="pronunciation-cue">It is <STRONG>FUN</STRONG>  to find the right <STRONG>DIRECTION</STRONG> on his <STRONG>square lid</STRONG> map!"</p>
     </div>
 </details>
 
 <details>
-    <summary>13. <span class="character">斿</span> yóu (banner)</summary>
+    <summary>13. <span class="character">斿</span> yóu (roam, play around)</summary>
+    <img class="img-pdf" src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765662281/%E6%96%BF_wc8wkz.png">
     <div class="content-area">
         <h4>🧩 Components:</h4>
         <p>方 (direction) + 𠂉 (clouds)</p>
-        
-        <h4>📘 Book Story:</h4>
-        <div class="story-block">he looks to see what direction the clouds are coming from, so that he can work out where to hang the banner...</div>
-        
-        <h4>😂 Fun Story (English):</h4>
+         
+        <h4>📘 Story (English):</h4>
         <div class="story-block">A small flag (like a banner) is pointing in the direction the angry clouds are moving.</div>
         
         <h4>🔊 Pronunciation Cue:</h4>
-        <p class="pronunciation-cue">yóu → (Same as 游)</p>
+        <p class="pronunciation-cue">the kid is playing <strong>Yoyo </strong> under the banner flag.</p>
     </div>
 </details>
 
@@ -964,7 +992,7 @@ details[open] summary::before {
     <div class="content-area">
         <h4>🧩 Components:</h4>
         <p>夂 (pursue) + 冫 (ice crystals)</p>
-        
+        <img class="img-pdf" src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765662711/%E5%86%AC_c7j6wo.png">
         <h4>📘 Book Story:</h4>
         <div class="story-block">a keen photographer likes to pursue (夂) unusual ice crystals (冫) — although he can only indulge this hobby in winter.</div>
         
@@ -979,19 +1007,17 @@ details[open] summary::before {
 <details>
     <summary>15. <span class="character">艹</span> cǎo (grass)</summary>
     <div class="content-area">
-        <h4>🧩 Components:</h4>
-        <p>none</p>
-        
-        <h4>📘 Book Story:</h4>
-        <div class="story-block">none</div>
-        
-        <h4>😂 Fun Story (English):</h4>
+        <img src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765663969/%E8%89%B9_w0ygpf.png">
+        <h4>Explanation:</h4>
         <div class="story-block">This component looks like two tufts of grass growing side by side.</div>
         
-        <h4>🔊 Pronunciation Cue:</h4>
-        <p class="pronunciation-cue">cǎo → Sounds like "Tsao" (like a whispered Tss-ow). Grass makes a whispering "Tsao" sound when you walk through it.</p>
+        <p class="pronunciation-cue">cǎo ≈ Cow + tOWel<br>
+        A <strong>COW</strong> is eating the <strong>grass</strong> (cǎo), and it needs a <strong>TOWEL</strong> to wipe its mouth!</p>
+        </p>
     </div>
 </details>
+
+
 
 <details>
     <summary>16. <span class="character">块</span> kuài (the basic unit of money = yuan, piece, lump)</summary>
@@ -1000,34 +1026,33 @@ details[open] summary::before {
         <p>土 (earth) + 夬 (separate)</p>
         
         <h4>📘 Book Story:</h4>
-        <div class="story-block">he separates (夬) the good earth (土) from the lumps which he dumps on a neighboring plot. / The ghostly dwarf, who looks after the gardens, hoists a red kite to alert the authorities.</div>
-        
+        <img class="img-pdf" src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765667994/%E5%9D%97PDF_tjtshf.png">
         <h4>😂 Fun Story (English):</h4>
         <div class="story-block">A farmer has to separate the good earth from a giant lump of magic soil. This lump costs one "Kwai" (块) dollar to move!</div>
         
         <h4>🔊 Pronunciation Cue:</h4>
-        <p class="pronunciation-cue">kuài → Sounds like "Kwai" (like Quay). That lump of earth is the price of the magical Kwai river boat ride.</p>
+        <p class="pronunciation-cue">kuài → Sounds like "Kwai" (like Quay/muelles). That lump of earth is the price of the magical Kwai river boat ride.</p>
     </div>
 </details>
+
  <h2>🧭 II. Target Characters for Lesson 7 (识字七目标)</h2>
         <p style="margin-bottom: 20px;">These are your 30 core characters for this lesson! <strong>Click the character to see the full story!</strong></p>
 
         <div class="character-section">
             
 <details>
-    <summary>17. <span class="character">刚</span> gāng (barely)</summary>
+    <summary>17. <span class="character">刚</span> gāng (just / barely )</summary>
     <div class="content-area">
         <h4>🧩 Components:</h4>
         <p>冈 (ridge) + 刂 (knife)</p>
         
         <h4>📘 Book Story:</h4>
-        <div class="story-block">Imagine crawling up to the ridge (冈) (at dusk, to investigate a suspicious noise), knife (刂) at the ready, but there's barely enough light to see what's going on.</div>
-        
+        <img class="img-pdf" src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765668676/%E5%88%9A_gtowod.png">
         <h4>😂 Fun Story (English):</h4>
-        <div class="story-block">The spy on the ridge has barely any light to see, so he accidentally tries to cut the mountain with his knife, making a dull "Gong" sound.</div>
+        <div class="story-block">The spy on the <b>ridge</b> has <b>barely</b> any light to see, so he accidentally tries to cut the mountain with his <strong>knife</strong>, making a dull "Gong" sound.</div>
         
         <h4>🔊 Pronunciation Cue:</h4>
-        <p class="pronunciation-cue">gāng → Sounds like "Gong". The mountain ridge is too tough for the knife, making a "Gong" noise as it barely scratches the surface.</p>
+        <p class="pronunciation-cue">gāng → Sounds like "Gong". The mountain ridge is too tough for the <b>knife</b>, making a "Gong" noise as it <b>barely</b> scratches the surface.</p>
     </div>
 </details>
 
@@ -1036,15 +1061,8 @@ details[open] summary::before {
     <div class="content-area">
         <h4>🧩 Components:</h4>
         <p>又 (right hand) + 又 (right hand)</p>
-        
-        <h4>📘 Book Story:</h4>
-        <div class="story-block">Someone who has two right hands is shopping for gloves. "We only sell them as a pair," all the shops tell him.</div>
-        
-        <h4>😂 Fun Story (English):</h4>
-        <div class="story-block">A mythical creature has two right hands (又 and 又), so it needs a double amount of rings for its fingers. The creature yells "Shoo-ung!" as it juggles rings with its pair of hands.</div>
-        
-        <h4>🔊 Pronunciation Cue:</h4>
-        <p class="pronunciation-cue">shuāng → Sounds like "Shoo-ung" (like Shoe with a nasal ng). The pair of gloves smells like an old shoe!</p>
+        <img class="img-pdf" src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765722395/%E5%8F%8C_dzmrlx.png">
+       
     </div>
 </details>
 
@@ -1052,13 +1070,13 @@ details[open] summary::before {
     <summary>19. <span class="character">皮</span> pí (skin, leather)</summary>
     <div class="content-area">
         <h4>🧩 Components:</h4>
-        <p>㇖ (cap) + 丿 (slide) + 丨 + 又 (right hand)</p>
-        
-        <h4>📘 Book Story:</h4>
-        <div class="story-block">In ancient scripts is depicted as a hand holding a spade.</div>
+        <p>none/ ㇖ (cap) + 丿 (slide) + 丨(stick) + 又 (right hand)</p>
+        <img src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765409028/%E7%9A%AE_aucwzd.png">
+        <h4>📘Explanation:</h4>
+        <div class="story-block">In ancient scripts 皮 is depicted as a hand holding a spade.</div>
         
         <h4>😂 Fun Story (English):</h4>
-        <div class="story-block">A tiny thief with a small cap uses his right hand to peel the skin off a giant banana. The skin slides (丿) off in one long piece.</div>
+        <div class="story-block">A <strong>fairy</strong> with a small <strong>cap</strong> uses her <strong>right hand</strong> to peel the <strong>skin</strong> off a giant banana. The skin <strong>slides (丿)</strong> off in one long piece.</div>
         
         <h4>🔊 Pronunciation Cue:</h4>
         <p class="pronunciation-cue">pí → Sounds like "Pee". The monkey is so excited to eat the banana peel (skin) that he goes "Pee! Pee!"</p>
@@ -1072,25 +1090,29 @@ details[open] summary::before {
         <p>革 (leather) + 圭 (jade block)</p>
         
         <h4>📘 Book Story:</h4>
-        <div class="story-block">the cobbler rubs the leather (革) with a jade block (圭) to soften it up to make the best shoes.</div>
+        <img class="img-pdf" src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765722404/%E9%9E%8B_vs87ku.png">        
         
         <h4>😂 Fun Story (English):</h4>
-        <div class="story-block">The most expensive shoes are made of space leather and polished with a huge jade block. The wearer yells "Shh-yay!" when they put on the shiny shoes.</div>
-        
+        <div class="story-block">I give the <b>fairy</b> a pair of <b>shoes</b> made of <b>leather</b> and polished with a huge <b>jade block</b>. She said <b>谢谢</b>.</div>
+        <div class="story-block">There are some <b>dirt</b> and the <b>fairies</b> use <b>leather</b> to cover their feet so they won't step on <b>shit</b></div>
         <h4>🔊 Pronunciation Cue:</h4>
-        <p class="pronunciation-cue">xié → Sounds like "Shh-yay" (like Shay with an s). "Shh-yay! I love my new shoes!"</p>
+        <p class="pronunciation-cue">谢谢or shit </p>
     </div>
 </details>
 
+
+
+
+
+
 <details>
-    <summary>21. <span class="character">支</span> zhī (branch; a measure word; prop up)</summary>
+    <summary>21. <span class="character">支</span> zhī (branch; a measure word; pop up)</summary>
     <div class="content-area">
         <h4>🧩 Components:</h4>
         <p>十 (ten) + 又 (right hand)</p>
-        
+        <img class="img-char" src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765409026/%E6%94%AF_uhnhvz.png" alt="支">
         <h4>📘 Book Story:</h4>
-        <div class="story-block">At the crossroads in the maze the two friends shake hands and each chooses a branch of the maze to head down.</div>
-        
+        <img class="img-pdf" src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765727176/%E6%94%AFPDF_vic4a3.png" alt="支">
         <h4>😂 Fun Story (English):</h4>
         <div class="story-block">You need ten hands to hold up a giant branch that is propping up the sky. The person with the right hand is holding one branch. They say "Jee" (支) as they prop it up.</div>
         
@@ -1100,16 +1122,16 @@ details[open] summary::before {
 </details>
 
 <details>
-    <summary>22. <span class="character">钢</span> gāng (steel)</summary>
+    <summary>22. <span class="character">钢</span> gāng (steel/acero)</summary>
     <div class="content-area">
         <h4>🧩 Components:</h4>
         <p>钅 (gold/metal) + 冈 (ridge)</p>
         
         <h4>📘 Book Story:</h4>
-        <div class="story-block">You take gold (钅) up to the ridge (冈) to trade it for steel.</div>
-        
+        <img class="img-pdf" src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765728632/%E9%92%A2_svxnif.png" alt="钢">
+ 
         <h4>😂 Fun Story (English):</h4>
-        <div class="story-block">A giant metal bird (钅) sits on a mountain ridge (冈), and it is made entirely of invincible steel. The bird says "Gong!"</div>
+        <div class="story-block">A giant <b>metal(钅)</b> bird  sits on a <B>mountain ridge (冈)</B>, and it is made entirely of invincible <b>steel</b>. The bird says "Gong!"</div>
         
         <h4>🔊 Pronunciation Cue:</h4>
         <p class="pronunciation-cue">gāng → Sounds like "Gong". Hitting a block of steel makes a loud "Gong".</p>
@@ -1123,30 +1145,30 @@ details[open] summary::before {
         <p>九 (nine) + 木 (tree)</p>
         
         <h4>📘 Book Story:</h4>
-        <div class="story-block">the baseball has got stuck in the tree; when you climb up to get it, you find all kinds of stuff mixed together up there.</div>
-        
-        <h4>😂 Fun Story (English):</h4>
-        <div class="story-block">There are nine different kinds of magical animals sleeping in one single tree, making a mixed and very "Zah"-ny group.</div>
-        
+        <img class="img-pdf" src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765731739/%E6%9D%82_gdvdhr.png" alt="杂">
+            
         <h4>🔊 Pronunciation Cue:</h4>
-        <p class="pronunciation-cue">zá → Sounds like "Zah". "Zah! What a mixed mess in that tree!"</p>
+        <p class="pronunciation-cue"><b>9 baseball palyers</b> play <b>saxphone</b> in the <b>tree</b>. "</p>
     </div>
 </details>
 
 <details>
-    <summary>24. <span class="character">志</span> zhì (records, intention)</summary>
+    <summary>24. <span class="character">志</span> zhì ( intention/aspiration / ambition / the will)</summary>
     <div class="content-area">
         <h4>🧩 Components:</h4>
         <p>士 (scholar) + 心 (heart)</p>
         
         <h4>📘 Book Story:</h4>
-        <div class="story-block">The scholar (士) has set his heart (心) on carrying out his latest project: "It's my intention to record every species of orchid in the world."</div>
+        <img class="img-pdf" src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765736912/%E5%BF%97_h7wwfw.png" alt="志">
+
         
         <h4>😂 Fun Story (English):</h4>
-        <div class="story-block">A lonely scholar keeps all his secret records hidden in his heart. His secret intention is to be a spy. He whispers "Jee" (志) while writing in his mind.</div>
+        <div class="story-block">A lonely <b>scholar</b> keeps all his secret <b>records</b> hidden in his <b>heart</b>. His secret <b>intention</b> is to be a spy..</div>
         
         <h4>🔊 Pronunciation Cue:</h4>
-        <p class="pronunciation-cue">zhì → Sounds like "Jee" (like Gee whiz, but shorter). "Jee! That scholar's secret records are huge!"</p>
+        <p class="pronunciation-cue">To achieve your Ambition, you must never CHEAT!<br>
+            <strong>James Bond</strong> and the dwarf are in the <strong>church</strong>, what do they <strong>intend</strong> to do? 
+        </p>
     </div>
 </details>
 
@@ -1157,30 +1179,33 @@ details[open] summary::before {
         <p>夂 (pursue) + 木 (tree)</p>
         
         <h4>📘 Book Story:</h4>
-        <div class="story-block">The squirrels pursue (夂) one another through the branches of the tree (木) until one slips on a slip of paper and falls.</div>
+        <img class="img-pdf" src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765738016/%E6%9D%A1_gomiz2.png" alt="条">
         
         <h4>😂 Fun Story (English):</h4>
-        <div class="story-block">An invisible man tries to pursue a magical tree, but the only thing left of the tree is a long wooden strip or slip of paper. He sighs "Tiaw!" (条).</div>
+        <div class="story-block">An invisible man tries to <b> pursue</b> a magical <b> tree</b>, but the only thing left of the tree is a long wooden strip or slip of paper.</div>
         
         <h4>🔊 Pronunciation Cue:</h4>
-        <p class="pronunciation-cue">tiáo → Sounds like "Tiaw" (like Tee-ow). That long strip of paper is my favorite Tee-ow-y.</p>
+        <p class="pronunciation-cue">The sound <strong>tiáo</strong> is what the fairy shouts when she spills hot <strong>TEA</strong> and burns herself, screaming <strong>"OW!"</strong>
+            <br>
+            Imagine the burn mark is a long <u>strip</u> (<strong>tiáo</strong>) on her hand! 
+            <br></p>
     </div>
 </details>
 
 <details>
-    <summary>26. <span class="character">棉</span> mián (cotton)</summary>
+    <summary>26. <span class="character">棉</span> mián ( refers to plants that have fruits containing white fibers→cotton)</summary>
     <div class="content-area">
         <h4>🧩 Components:</h4>
         <p>木 (tree) + 帛 (silk fabrics)</p>
-        
-        <h4>📘 Book Story:</h4>
-        <div class="story-block">The kapok tree (木), whose flowers and fibers in the fruit can be made into textiles, later extended to refer to cotton fibers themselves.</div>
+        <img  src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765740845/%E6%A3%89_ws3rgx.png" alt="棉">
+        <h4>📘 Explanation:</h4>
+        <div class="story-block">fabrics that are not made from the silk but from the fiber of tree fruit.</div>
         
         <h4>😂 Fun Story (English):</h4>
-        <div class="story-block">The secret ingredient for the softest cotton is mixing fibers from a magical tree with rare silk fabrics. This soft mix makes you hum "Me-an!"</div>
+        <div class="story-block">The fairy wanted to sleep on a soft cloud of <b>cotton</b>.She hugged the "cloud," but it suddenly shouted <b>MÈÈH</b> . It wasn't cotton, it was a flock of sheep!</div>
         
         <h4>🔊 Pronunciation Cue:</h4>
-        <p class="pronunciation-cue">mián → Sounds like "Me-an" (like Me-an person). That cotton shirt is so soft, it makes me feel mean because I want to keep it all to myself!</p>
+        <p class="pronunciation-cue">This sheep was so loud, it was being <strong> MEAN</strong>and kept her from sleeping on the soft <strong>cotton</strong></p>
     </div>
 </details>
 
@@ -1190,15 +1215,15 @@ details[open] summary::before {
         <h4>🧩 Components:</h4>
         <p>衤 (clothes) + 库 (warehouse)</p>
         
-        <h4>📘 Book Story:</h4>
-        <div class="story-block">mini Cooper wears only a dress and a dwarf is helping it to wear pants.</div>
+        <h4>📘 Explanation:</h4>
+        <div class="story-block">mini Cooper wears only a shirt and a dwarf is helping it to wear pants.</div>
         
         <h4>😂 Fun Story (English):</h4>
-        <div class="story-block">The only place to find magical, flying pants is inside the gigantic warehouse. The pants (clothes) try to escape the warehouse. They yell "Coo!" as they fly off.</div>
-        
+        <div class="story-block">The only place to find magical, flying pants is inside the garage. The pants try to escape the garage. They yell "Coo!" as they fly off.</div>
+        <img src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765749623/%E8%A3%A4_jtirwt.png" alt="裤">
         <h4>🔊 Pronunciation Cue:</h4>
-        <p class="pronunciation-cue">kù → Sounds like "Coo" (like a dove). A pigeon coos "Coo, coo" inside the pants to make them fly.</p>
-    </div>
+        <p class="pronunciation-cue">kù → Sounds like "Coo" (like a dove). A pigeon coos "Coo, coo" inside the pants to make them fly.  </div>            
+        
 </details>
 
 <details>
@@ -1206,15 +1231,16 @@ details[open] summary::before {
     <div class="content-area">
         <h4>🧩 Components:</h4>
         <p>亻 (person) + 牛 (cow)</p>
-        
+        <strong>件</strong> (<strong>jiàn</strong>) is a measure word for <strong>items</strong>, <strong>clothing</strong>, and <strong>events</strong> (e.g., 一件衣服, 一件事情).
         <h4>📘 Book Story:</h4>
-        <div class="story-block">Harry trains his cow to do a number of things (juggling, standing on its head, etc.) / It finishes by genuflecting to the two dwarf adjudicators.</div>
+        <div class="story-block">(In the “Best Trained Cow” competition,Harry trains his cow to do <b>a number of things</b> (juggling, standing on its head, etc.) / It finishes by <b> genuﬂecting</b> to the two dwarf adjudicators.<br>
+        Harry entrena a su vaca para hacer unas cosas (malabares, pararse de cabeza, etc.) / Termina haciendo una genuflexión ante los dos árbitros enanos.</div>
         
         <h4>😂 Fun Story (English):</h4>
-        <div class="story-block">A tiny person is trying to ride a very large cow, and he uses the word "Jee-an" to count the number of silly things (件) the cow is doing.</div>
+        <div class="story-block">Harry is trying to ride a very large cow. They have many pieces (<strong>件</strong>) of luggage (items)!.</div>
         
         <h4>🔊 Pronunciation Cue:</h4>
-        <p class="pronunciation-cue">jiàn → Sounds like "Jee-an" (like Gee-Anne). "Jee-an! Look at that cow doing that silly thing (件)!"</p>
+        <p class="pronunciation-cue">The <strong>CHANCES</strong> are they need to rent a <strong>JET</strong>  to carry all these <strong>items</strong>."</p>
     </div>
 </details>
 
@@ -1223,7 +1249,7 @@ details[open] summary::before {
     <div class="content-area">
         <h4>🧩 Components:</h4>
         <p>弓 (a bow) + 长 (long)</p>
-        
+        <img class="img-pdf" src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765748207/%E5%BC%A0_b9ubbh.png" alt="张">
         <h4>📘 Book Story:</h4>
         <div class="story-block">The chief tries to show off by taking his long (长) bow (弓) and aiming at sheets of paper pinned to trees in the forest.</div>
         
@@ -1235,6 +1261,8 @@ details[open] summary::before {
     </div>
 </details>
 
+
+
 <details>
     <summary>30. <span class="character">导</span> dǎo (lead, guide)</summary>
     <div class="content-area">
@@ -1242,13 +1270,13 @@ details[open] summary::before {
         <p>巳 (snake) + 寸 (inch)</p>
         
         <h4>📘 Book Story:</h4>
-        <div class="story-block">Nobody saw the snake (巳) inching (寸) along the ground behind the tour guide.</div>
+        <img class="img-pdf" src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765748088/%E5%AF%BC_jujesl.png" alt="游">
         
         <h4>😂 Fun Story (English):</h4>
-        <div class="story-block">A tiny magical snake is the best tour guide; it slithers inch by inch and whispers directions. It says "Dow!" (导) to point the way.</div>
+        <div class="story-block"> <b>Teddy bears </b>lost and in <strong>DOUBT</strong> about where to go. He follows a <strong>snake an inch behind</strong>  hoping it will <strong>guide</strong> him. </div>
         
         <h4>🔊 Pronunciation Cue:</h4>
-        <p class="pronunciation-cue">dǎo → Sounds like "Dow" (like Dough). Follow the guide to get the secret magical cookie dough.</p>
+        <p class="pronunciation-cue">The <strong>snake</strong> acts as his <strong>guide</strong>to lead him out of his <strong>DOUBT</strong>..</p>
     </div>
 </details>
 
@@ -1256,13 +1284,13 @@ details[open] summary::before {
     <summary>31. <span class="character">游</span> yóu (swim, travel)</summary>
     <div class="content-area">
         <h4>🧩 Components:</h4>
-        <p>氵 (water) + 斿 (roam/banner)</p>
+        <p>氵 (water) + 斿 (roam/play around)</p>
         
         <h4>📘 Book Story:</h4>
-        <div class="story-block">We love roaming about on the water, and it's an easy way for us to tour the world.</div>
+        <img class="img-pdf" src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765744771/%E6%B8%B8_xm9mxh.png" alt="游">
         
         <h4>😂 Fun Story (English):</h4>
-        <div class="story-block">A tiny banner (斿) is floating on the water and decides to travel the world. It says "Yoo!" (游) as it swims away.</div>
+        <div class="story-block">A tiny banner (斿) is floating on the water and decides to travel the world. It says "Yoo!" as it swims away.</div>
         
         <h4>🔊 Pronunciation Cue:</h4>
         <p class="pronunciation-cue">yóu → Sounds like "Yoo" (like the word You). "Yoo! Come swim with me!"</p>
@@ -1276,10 +1304,10 @@ details[open] summary::before {
         <p>囗 (enclosed) + 冬 (winter)</p>
         
         <h4>📘 Book Story:</h4>
-        <div class="story-block">the planned winter (冬) garden is enclosed (囗) by a wall, and attached to the wall is a diagram showing the planned layout.</div>
+        <img class="img-pdf" src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765744760/%E5%9B%BE_edds0n.png"图">
         
         <h4>😂 Fun Story (English):</h4>
-        <div class="story-block">A secret treasure map is hidden inside a giant snow globe (enclosed in winter). To read the map, you have to shake the globe. You say "Too!" (图) when you find the map.</div>
+        <div class="story-block">A secret treasure <b>map</b> is hidden inside a giant snow globe (enclosed in winter). To read the map, you have to shake the globe.</div>
         
         <h4>🔊 Pronunciation Cue:</h4>
         <p class="pronunciation-cue">tú → Sounds like "Too". The treasure map is too difficult to read!</p>
@@ -1290,18 +1318,39 @@ details[open] summary::before {
     <summary>33. <span class="character">共</span> gòng (altogether, common)</summary>
     <div class="content-area">
         <h4>🧩 Components:</h4>
-        <p>井 + 八 OR bacon rashers + eight</p>
-        
+        <p>井 + 八 OR bacon rashers（In the UK and Ireland, a rasher refers to a serving of bacon comprised of multiple slices – usually between 3-4 pieces.） + eight</p>
+        <img class="img-char" src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765750810/bacon_-rashers_drvyh5.png" alt="共">
         <h4>📘 Book Story:</h4>
-        <div class="story-block">One octopus was cooking bacon rashers, another eggs, and collectively they produced a huge breakfast.</div>
+        <img class="img-pdf " src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765750205/%E5%85%B1_c8lfgw.png" alt="共">
         
         <h4>😂 Fun Story (English):</h4>
-        <div class="story-block">Eight superheroes collectively push a giant well. They are working altogether and say "Gong!" (共) to keep the rhythm.</div>
-        
+        <div class="story-block"> <b>Eight dwarves</b> collectively push a <b>well</b>. They are working <b>altogether</b> and say <b>GO</b>  to keep the rhythm.</div>
+        <img class="img-char" src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765750960/%E4%BA%95_zt3tjg.png" alt="共">
         <h4>🔊 Pronunciation Cue:</h4>
-        <p class="pronunciation-cue">gòng → Sounds like "Gong". Hitting the gong means everyone should come altogether for dinner.</p>
+        <p class="pronunciation-cue"> Sounds like "Gong". Hitting the gong means everyone should come altogether for dinner.</p>
     </div>
 </details>
+
+
+
+
+<details>
+    <summary>34. <span class="character">毛</span> máo wool, fur, hair</summary>
+    <div class="content-area">
+           
+        <h4>📘 Book Story:</h4>
+        <img class="img-pdf" src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765751592/%E6%AF%9BPDF_vs0rsl.png" alt="毛">
+        
+        
+        <h4>🔊 Pronunciation Cue:</h4>
+        <p class="pronunciation-cue"    The sound <strong>máo</strong> is like a happy cat's cry!
+            <br>
+            Imagine petting a fluffy cat, and its <strong>毛</strong> <strong>fur</strong> stands up. 
+            <br>
+            It shouts a loud, rising <strong>"MEOW!"</strong>to show its pleasure.</p>
+    </div>
+</details>
+
 
         </div>
     </div>
