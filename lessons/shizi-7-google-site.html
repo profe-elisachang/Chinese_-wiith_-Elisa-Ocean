@@ -5,710 +5,750 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>识字七：日常物品与购物 - Chinese with Elisa</title>
-  <style>
-/* ======================= CSS 变量与配色定义 ======================= */
-:root {
-    /* 主题颜色 */
-    --color-background-main: #16476A;        /* 主框架/主要深色背景 */
-    --color-background-panel: white;         /* 学习内容卡片的主背景色 */
-    --color-background-light-accent: #E3F2F2; /* 浅色强调背景/Hover色 */
-    --color-background-warning: #FFF4E6;     /* 警告/示例背景色 */
+
+<style>/* ======================= CSS 变量与配色定义 ======================= */
+    :root {
+        /* 主题颜色 */
+        --color-background-main: #16476A;        /* 主框架/主要深色背景 */
+        --color-background-panel: white;         /* 学习内容卡片的主背景色 */
+        --color-background-light-accent: #E3F2F2; /* 浅色强调背景/Hover色 */
+        --color-background-warning: #FFF4E6;     /* 警告/示例背景色 */
+        
+        /* 文本颜色 */
+        --color-text-deep: #132440;              /* 最深文字色 (用于关键汉字/H2) */
+        --color-text-on-dark: white;             /* 位于深色框架上的文字 */
+        --color-text-primary: #333;              /* 位于浅色面板上的一般文本 */
+        --color-text-secondary: #666;            /* 次要文本色 */
+        --color-text-pinyin: #FF6B6B;            /* 拼音/强烈强调文字色 */
+        
+        /* 强调色 */
+        --color-accent-secondary: #3B9797;       /* 次强调色/边框/按钮 */
+        --color-accent-strong: #FF6B6B;          /* 主强调色 (用于错误/高亮) */
+        --color-accent-warning: #FFA500;         /* 警告/示例边框色 */
+        
+        /* 其他 */
+        --color-gradient-start: #f5f7fa;         /* Body 渐变开始 */
+    }
     
-    /* 文本颜色 */
-    --color-text-deep: #132440;              /* 最深文字色 (用于关键汉字/H2) */
-    --color-text-on-dark: white;             /* 位于深色框架上的文字 */
-    --color-text-primary: #333;              /* 位于浅色面板上的一般文本 */
-    --color-text-secondary: #666;            /* 次要文本色 */
-    --color-text-pinyin: #FF6B6B;            /* 拼音/强烈强调文字色 */
+    /* ======================= 基础与全局样式 ======================= */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+    }
     
-    /* 强调色 */
-    --color-accent-secondary: #3B9797;       /* 次强调色/边框/按钮 */
-    --color-accent-strong: #FF6B6B;          /* 主强调色 (用于错误/高亮) */
-    --color-accent-warning: #FFA500;         /* 警告/示例边框色 */
+    body {
+        background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-background-light-accent) 100%);
+        color: var(--color-text-primary);
+        line-height: 1.6;
+        padding: 20px;
+        min-height: 100vh;
+    }
     
-    /* 其他 */
-    --color-gradient-start: #f5f7fa;         /* Body 渐变开始 */
-}
-
-/* ======================= 基础与全局样式 ======================= */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
-}
-
-body {
-    background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-background-light-accent) 100%);
-    color: var(--color-text-primary);
-    line-height: 1.6;
-    padding: 20px;
-    min-height: 100vh;
-}
-
-/* ======================= 主布局与容器 ======================= */
-.main {
-    max-width: 1400px;
-    margin: 0 auto;
-    background: var(--color-background-panel);
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    padding: 30px;
-}
-
-#learning-panel {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 20px;
-    background-color: var(--color-background-panel);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
-
-/* ======================= 标题与文本样式 ======================= */
-h1 {
-    color: var(--color-background-main);
-    font-size: 2.5em;
-    margin-bottom: 10px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-h2 {
-    color: var(--color-background-main);
-    font-size: 1.6em;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--color-background-light-accent);
-}
-
-h2.special {
-    color: var(--color-text-deep);
-    border-bottom: 3px solid var(--color-accent-secondary);
-    padding-bottom: 5px;
-    margin-top: 30px;
-}
-
-h4 {
-    color: var(--color-accent-secondary);
-    margin-top: 15px;
-    margin-bottom: 5px;
-    font-size: 1.1em;
-}
-
-/* 欢迎横幅 */
-.welcome-banner {
-    background: var(--color-background-main);
-    color: var(--color-text-on-dark);
-    padding: 25px;
-    border-radius: 12px;
-    margin: 20px 0 30px;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(59, 151, 151, 0.3);
-}
-
-.welcome-banner h2 {
-    font-size: 1.8em;
-    margin-bottom: 10px;
-    color: var(--color-text-on-dark);
-    border-bottom: none;
-}
-
-.welcome-banner p {
-    font-size: 1.1em;
-    opacity: 0.9;
-}
-
-/* ======================= Tab 切换样式 ======================= */
-.tabs {
-    display: flex;
-    gap: 0;
-    margin: 30px 0 0 0;
-    border-bottom: 3px solid var(--color-accent-secondary);
-    max-width: 100%;
-    flex-wrap: wrap;
-}
-
-.tab-button {
-    background: var(--color-background-panel);
-    border: none;
-    padding: 15px 25px;
-    font-size: 1.1em;
-    font-weight: 600;
-    color: var(--color-background-main);
-    cursor: pointer;
-    border-radius: 8px 8px 0 0;
-    transition: all 0.3s;
-    border: 2px solid transparent;
-    border-bottom: none;
-    flex: 1;
-    min-width: 120px;
-    text-align: center;
-}
-
-.tab-button:hover {
-    background: var(--color-background-light-accent);
-}
-
-.tab-button.active {
-    background: var(--color-accent-secondary);
-    color: var(--color-text-on-dark);
-    border-color: var(--color-accent-secondary);
-}
-
-.tab-content {
-    display: none;
-    max-width: 100%;
-    padding: 30px 0;
-    animation: fadeIn 0.5s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.tab-content.active {
-    display: block;
-}
-
-/* ======================= 卡片与组件样式 ======================= */
-.card {
-    background: var(--color-background-panel);
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    margin-bottom: 25px;
-}
-
-/* 部件介绍 */
-.components-intro {
-    background: var(--color-background-light-accent);
-    padding: 25px;
-    border-radius: 12px;
-    margin-bottom: 25px;
-    text-align: center;
-    font-size: 1.1em;
-    line-height: 1.8;
-}
-
-.component-link {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 10px 20px;
-    background: var(--color-accent-secondary);
-    color: var(--color-text-on-dark);
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: all 0.3s;
-}
-
-.component-link:hover {
-    background: var(--color-background-main);
-    transform: translateY(-2px);
-}
-
-/* ======================= 语言相关样式 ======================= */
-.chinese {
-    color: var(--color-background-main);
-    font-weight: 600;
-}
-
-.english {
-    color: var(--color-text-pinyin);
-    font-style: italic;
-}
-
-.spanish {
-    color: var(--color-accent-secondary);
-    font-style: normal;
-}
-
-.char-highlight {
-    font-size: 1.4em;
-    color: var(--color-text-deep);
-    font-weight: 900;
-    margin-right: 8px;
-    background-color: var(--color-background-light-accent);
-    padding: 2px 4px;
-    border-radius: 4px;
-}
-
-.pronunciation-cue {
-    font-style: italic;
-    color: var(--color-text-pinyin);
-    font-weight: bold;
-    margin-top: 5px;
-    padding: 5px 0;
-}
-
-.pronunciation-cue strong {
-    font-weight: 900;
-    color: var(--color-accent-strong);
-    text-decoration: underline;
-}
-
-/* ======================= 生词表样式 ======================= */
-.vocab-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--color-background-panel);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-.vocab-table th {
-    background: var(--color-background-main);
-    color: var(--color-text-on-dark);
-    padding: 15px;
-    text-align: left;
-    font-weight: 600;
-    font-size: 1.05em;
-}
-
-.vocab-table td {
-    padding: 12px 15px;
-    border-bottom: 1px solid var(--color-background-light-accent);
-}
-
-.vocab-table tr:hover {
-    background-color: #f5f5f5;
-}
-
-.char-number {
-    font-weight: bold;
-    color: var(--color-accent-secondary);
-    text-align: center;
-}
-
-.character {
-    font-size: 1.8em;
-    font-weight: bold;
-    color: var(--color-text-deep);
-}
-
-.pinyin {
-    color: var(--color-text-pinyin);
-    font-style: italic;
-    font-weight: 600;
-}
-
-.english {
-    color: var(--color-text-secondary);
-}
-
-.example {
-    color: var(--color-text-primary);
-    font-size: 0.95em;
-}
-
-/* 底部短句块 */
-.vocab-table + div {
-    background: var(--color-background-warning);
-    border-left: 4px solid var(--color-accent-warning) !important;
-}
-
-/* ======================= 词组网格 ======================= */
-.phrases-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 15px;
-    margin: 25px 0;
-}
-
-.phrase-card {
-    background: var(--color-background-panel);
-    padding: 15px;
-    border-radius: 8px;
-    border-left: 4px solid var(--color-accent-secondary);
-    transition: all 0.3s;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.phrase-card:hover {
-    transform: translateX(5px);
-    box-shadow: 0 4px 12px rgba(59, 151, 151, 0.2);
-}
-
-.phrase-chinese {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: var(--color-text-deep);
-    margin-bottom: 5px;
-}
-
-.phrase-english {
-    color: var(--color-text-secondary);
-    font-style: italic;
-    font-size: 0.9em;
-}
-
-/* ======================= 对话样式 ======================= */
-.dialogue-box {
-    background: var(--color-background-panel);
-    padding: 30px;
-    border-radius: 12px;
-    line-height: 2;
-    font-size: 1.15em;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    margin: 20px 0;
-}
-
-.dialogue-title {
-    font-size: 1.3em;
-    font-weight: bold;
-    color: var(--color-background-main);
-    margin: 25px 0 15px 0;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--color-accent-secondary);
-}
-
-.dialogue-box p {
-    margin-bottom: 15px;
-    color: var(--color-text-primary);
-}
-
-.speaker {
-    color: var(--color-accent-secondary);
-    font-weight: bold;
-}
-
-/* ======================= 语法样式 ======================= */
-.grammar-points {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.grammar-card {
-    background: var(--color-background-panel);
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    border-left: 5px solid var(--color-accent-strong);
-}
-
-.grammar-header {
-    background: var(--color-accent-strong);
-    color: var(--color-text-on-dark);
-    padding: 15px;
-    font-weight: bold;
-    font-size: 1.2em;
-}
-
-.grammar-body {
-    padding: 20px;
-}
-
-.grammar-example {
-    background: var(--color-background-warning);
-    padding: 15px;
-    border-radius: 8px;
-    margin: 15px 0;
-    border-left: 3px solid var(--color-accent-warning);
-}
-
-.grammar-note {
-    background: var(--color-background-light-accent);
-    padding: 10px 15px;
-    border-radius: 8px;
-    margin-top: 15px;
-    font-style: italic;
-    color: var(--color-background-main);
-}
-
-.grammar-note p {
-    color: var(--color-background-main);
-}
-
-/* ======================= 练习样式 ======================= */
-.question-card {
-    background: var(--color-background-panel);
-    padding: 25px;
-    margin-bottom: 25px;
-    border-radius: 12px;
-    border: 2px solid var(--color-background-light-accent);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.question-number {
-    font-size: 1.2em;
-    color: var(--color-accent-secondary);
-    font-weight: 700;
-    margin-bottom: 15px;
-}
-
-.question-text {
-    font-size: 1.3em;
-    color: var(--color-text-deep);
-    margin-bottom: 20px;
-    line-height: 1.8;
-}
-
-.blank-option {
-    display: inline-block;
-    min-width: 50px;
-    padding: 5px 12px;
-    margin: 0 5px;
-    border: 2px dashed var(--color-accent-secondary);
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s;
-    background: var(--color-background-panel);
-    font-weight: 600;
-}
-
-.blank-option:hover {
-    border-color: var(--color-accent-strong);
-    background: var(--color-background-warning);
-}
-
-.blank-option.selected {
-    border: 2px solid var(--color-accent-secondary);
-    background: var(--color-accent-secondary);
-    color: var(--color-text-on-dark);
-}
-
-.choices {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.choice-btn {
-    padding: 15px 20px;
-    font-size: 1.1em;
-    background: var(--color-background-panel);
-    border: 2px solid var(--color-background-light-accent);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s;
-    color: var(--color-text-deep);
-}
-
-.choice-btn:hover {
-    border-color: var(--color-accent-secondary);
-    background: var(--color-background-light-accent);
-}
-
-.choice-btn.selected {
-    border: 2px solid var(--color-accent-secondary);
-    background: var(--color-accent-secondary);
-    color: var(--color-text-on-dark);
-}
-
-.submit-btn {
-    display: block;
-    margin: 20px auto 0;
-    padding: 12px 30px;
-    font-size: 1.1em;
-    background: var(--color-accent-secondary);
-    color: var(--color-text-on-dark);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 700;
-    transition: all 0.3s;
-}
-
-.submit-btn:hover {
-    background: var(--color-background-main);
-    transform: translateY(-2px);
-}
-
-.feedback {
-    margin-top: 15px;
-    padding: 15px;
-    border-radius: 8px;
-    font-weight: 600;
-    text-align: center;
-    display: none;
-}
-
-.feedback.correct {
-    background: #c6f6d5;
-    color: #22543d;
-    border: 2px solid #6BCB77;
-    display: block;
-}
-
-.feedback.incorrect {
-    background: #fed7d7;
-    color: #742a2a;
-    border: 2px solid var(--color-accent-strong);
-    display: block;
-}
-
-/* ======================= 进度条样式 ======================= */
-.progress-container {
-    background: var(--color-background-light-accent);
-    border-radius: 10px;
-    height: 12px;
-    margin: 30px 0;
-    overflow: hidden;
-}
-
-.progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, var(--color-accent-secondary), var(--color-background-main));
-    width: 0%;
-    transition: width 0.5s ease;
-}
-
-.progress-text {
-    text-align: center;
-    font-weight: 600;
-    color: var(--color-background-main);
-    margin-bottom: 10px;
-}
-
-/* ======================= 详情/折叠卡片样式 ======================= */
-details {
-    margin-bottom: 10px;
-    border: 1px solid var(--color-background-light-accent);
-    border-radius: 6px;
-    background-color: var(--color-background-panel);
-    transition: all 0.3s ease;
-}
-
-details[open] {
-    border-color: var(--color-accent-secondary);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-summary {
-    font-size: 1.25em;
-    font-weight: bold;
-    color: var(--color-text-deep);
-    padding: 15px;
-    cursor: pointer;
-    outline: none;
-    user-select: none;
-    list-style: none;
-    position: relative;
-}
-
-summary::before {
-    content: '▶';
-    color: var(--color-accent-secondary);
-    margin-right: 10px;
-    font-size: 0.8em;
-    transition: transform 0.3s;
-    display: inline-block;
-}
-
-details[open] summary::before {
-    content: '▼';
-    transform: rotate(0deg);
-}
-
-.content-area {
-    padding: 0 15px 15px 35px;
-    border-top: 1px solid var(--color-background-light-accent);
-}
-
-.story-block {
-    padding: 10px;
-    margin-top: 10px;
-    background-color: var(--color-background-warning);
-    border-left: 4px solid var(--color-accent-warning);
-    color: var(--color-text-secondary);
-    border-radius: 0 4px 4px 0;
-    font-style: italic;
-}
-
-/* ======================= 控制按钮样式 ======================= */
-#controls button {
-    background-color: var(--color-accent-secondary);
-    color: var(--color-text-on-dark);
-    border: none;
-    padding: 10px 15px;
-    margin-left: 8px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: bold;
-    transition: background-color 0.2s, transform 0.1s;
-}
-
-#controls button:hover {
-    background-color: #337a7a;
-}
-
-#controls button:active {
-    transform: scale(0.98);
-}
-
-/* ======================= 响应式设计 ======================= */
-@media (max-width: 768px) {
+    /* ======================= 主布局与容器 ======================= */
+    .main {
+        max-width: 1400px;
+        margin: 0 auto;
+        background: var(--color-background-panel);
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        padding: 30px;
+    }
+    
+    #learning-panel {
+        max-width: 900px;
+        margin: 30px auto;
+        padding: 20px;
+        background-color: var(--color-background-panel);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+    
+    /* ======================= 标题与文本样式 ======================= */
+    h1 {
+        color: var(--color-background-main);
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    h2 {
+        color: var(--color-background-main);
+        font-size: 1.6em;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--color-background-light-accent);
+    }
+    
+    h2.special {
+        color: var(--color-text-deep);
+        border-bottom: 3px solid var(--color-accent-secondary);
+        padding-bottom: 5px;
+        margin-top: 30px;
+    }
+    
+    h4 {
+        color: var(--color-accent-secondary);
+        margin-top: 15px;
+        margin-bottom: 5px;
+        font-size: 1.1em;
+    }
+    
+    /* 欢迎横幅 */
+    .welcome-banner {
+        background: var(--color-background-main);
+        color: var(--color-text-on-dark);
+        padding: 25px;
+        border-radius: 12px;
+        margin: 20px 0 30px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(59, 151, 151, 0.3);
+    }
+    
+    .welcome-banner h2 {
+        font-size: 1.8em;
+        margin-bottom: 10px;
+        color: var(--color-text-on-dark);
+        border-bottom: none;
+    }
+    
+    .welcome-banner p {
+        font-size: 1.1em;
+        opacity: 0.9;
+    }
+    
+    /* ======================= Tab 切换样式 ======================= */
     .tabs {
-        flex-direction: column;
+        display: flex;
+        gap: 0;
+        margin: 30px 0 0 0;
+        border-bottom: 3px solid var(--color-accent-secondary);
+        max-width: 100%;
+        flex-wrap: wrap;
     }
     
     .tab-button {
+        background: var(--color-background-panel);
+        border: none;
+        padding: 15px 25px;
+        font-size: 1.1em;
+        font-weight: 600;
+        color: var(--color-background-main);
+        cursor: pointer;
+        border-radius: 8px 8px 0 0;
+        transition: all 0.3s;
+        border: 2px solid transparent;
+        border-bottom: none;
+        flex: 1;
+        min-width: 120px;
+        text-align: center;
+    }
+    
+    .tab-button:hover {
+        background: var(--color-background-light-accent);
+    }
+    
+    .tab-button.active {
+        background: var(--color-accent-secondary);
+        color: var(--color-text-on-dark);
+        border-color: var(--color-accent-secondary);
+    }
+    
+    .tab-content {
+        display: none;
+        max-width: 100%;
+        padding: 30px 0;
+        animation: fadeIn 0.5s ease;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    .tab-content.active {
+        display: block;
+    }
+    
+    /* ======================= 卡片与组件样式 ======================= */
+    .card {
+        background: var(--color-background-panel);
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        margin-bottom: 25px;
+    }
+    
+    /* 部件介绍 */
+    .components-intro {
+        background: var(--color-background-light-accent);
+        padding: 25px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+        text-align: center;
+        font-size: 1.1em;
+        line-height: 1.8;
+    }
+    
+    .component-link {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 20px;
+        background: var(--color-accent-secondary);
+        color: var(--color-text-on-dark);
+        text-decoration: none;
         border-radius: 8px;
-        margin-bottom: 5px;
-        border: 2px solid var(--color-background-light-accent);
+        font-weight: 600;
+        transition: all 0.3s;
     }
     
-    .components-grid,
-    .grammar-points,
-    .choices {
-        grid-template-columns: 1fr;
+    .component-link:hover {
+        background: var(--color-background-main);
+        transform: translateY(-2px);
     }
     
+    /* ======================= 语言相关样式 ======================= */
+    .chinese {
+        color: var(--color-background-main);
+        font-weight: 600;
+    }
+    
+    .english {
+        color: var(--color-text-pinyin);
+        font-style: italic;
+    }
+    
+    .spanish {
+        color: var(--color-accent-secondary);
+        font-style: normal;
+    }
+    
+    .char-highlight {
+        font-size: 1.4em;
+        color: var(--color-text-deep);
+        font-weight: 900;
+        margin-right: 8px;
+        background-color: var(--color-background-light-accent);
+        padding: 2px 4px;
+        border-radius: 4px;
+    }
+    
+    .pronunciation-cue {
+        font-style: italic;
+        color: var(--color-text-pinyin);
+        font-weight: bold;
+        margin-top: 5px;
+        padding: 5px 0;
+    }
+    
+    .pronunciation-cue strong {
+        font-weight: 900;
+        color: var(--color-accent-strong);
+        text-decoration: underline;
+    }
+    
+    /* ======================= 生词表样式 ======================= */
     .vocab-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--color-background-panel);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    
+    .vocab-table th {
+        background: var(--color-background-main);
+        color: var(--color-text-on-dark);
+        padding: 15px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 1.05em;
+    }
+    
+    .vocab-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid var(--color-background-light-accent);
+    }
+    
+    .vocab-table tr:hover {
+        background-color: #f5f5f5;
+    }
+    
+    .char-number {
+        font-weight: bold;
+        color: var(--color-accent-secondary);
+        text-align: center;
+    }
+    
+    .character {
+        font-size: 1.8em;
+        font-weight: bold;
+        color: var(--color-text-deep);
+    }
+    
+    .pinyin {
+        color: var(--color-text-pinyin);
+        font-style: italic;
+        font-weight: 600;
+    }
+    
+    .english {
+        color: var(--color-text-secondary);
+    }
+    
+    .example {
+        color: var(--color-text-primary);
+        font-size: 0.95em;
+    }
+    
+    /* 底部短句块 */
+    .vocab-table + div {
+        background: var(--color-background-warning);
+        border-left: 4px solid var(--color-accent-warning) !important;
+    }
+    
+    /* ======================= 词组网格 ======================= */
+    .phrases-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+        margin: 25px 0;
+    }
+    
+    .phrase-card {
+        background: var(--color-background-panel);
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 4px solid var(--color-accent-secondary);
+        transition: all 0.3s;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    
+    .phrase-card:hover {
+        transform: translateX(5px);
+        box-shadow: 0 4px 12px rgba(59, 151, 151, 0.2);
+    }
+    
+    .phrase-chinese {
+        font-size: 1.2em;
+        font-weight: bold;
+        color: var(--color-text-deep);
+        margin-bottom: 5px;
+    }
+    
+    .phrase-english {
+        color: var(--color-text-secondary);
+        font-style: italic;
         font-size: 0.9em;
     }
-}
-
-/* ======================= 图片 ======================= */
-/* 默认图片样式（中等大小） */
-.content-area img {
-    max-width: 100%;
-    max-height: 10.8em; /* 约6倍字符高度 (1.8em × 6) */
-    height: auto;
-    display: block;
-    margin: 15px auto;
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-/* 纯图片（较小，用于字符图片等） */
-.img-char {
-    max-width: 40%;
-    max-height: 5.4em; /* 约3倍字符高度 (1.8em × 3) */
-    height: auto;
-    display: block;
-    margin: 15px auto;
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-/* PDF截取的图文说明（较大，方便阅读文字） */
-.content-area .img-pdf,
-.img-pdf {
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-    max-height: none !important;
-    display: block;
-    margin: 20px 0;
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    /* 强制填满容器宽度，让PDF截图显示更大 */
-}
-</style>
-
-
+    
+    /* ======================= 对话样式 ======================= */
+    .dialogue-box {
+        background: var(--color-background-panel);
+        padding: 30px;
+        border-radius: 12px;
+        line-height: 2;
+        font-size: 1.15em;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        margin: 20px 0;
+    }
+    
+    .dialogue-title {
+        font-size: 1.3em;
+        font-weight: bold;
+        color: var(--color-background-main);
+        margin: 25px 0 15px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--color-accent-secondary);
+    }
+    
+    .dialogue-box p {
+        margin-bottom: 15px;
+        color: var(--color-text-primary);
+    }
+    
+    .speaker {
+        color: var(--color-accent-secondary);
+        font-weight: bold;
+    }
+    
+    /* ======================= 语法样式 ======================= */
+    .grammar-points {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+    }
+    
+    .grammar-card {
+        background: var(--color-background-panel);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        border-left: 5px solid var(--color-accent-strong);
+    }
+    
+    .grammar-header {
+        background: var(--color-accent-strong);
+        color: var(--color-text-on-dark);
+        padding: 15px;
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+    
+    .grammar-body {
+        padding: 20px;
+    }
+    
+    .grammar-example {
+        background: var(--color-background-warning);
+        padding: 15px;
+        border-radius: 8px;
+        margin: 15px 0;
+        border-left: 3px solid var(--color-accent-warning);
+    }
+    
+    .grammar-note {
+        background: var(--color-background-light-accent);
+        padding: 10px 15px;
+        border-radius: 8px;
+        margin-top: 15px;
+        font-style: italic;
+        color: var(--color-background-main);
+    }
+    
+    .grammar-note p {
+        color: var(--color-background-main);
+    }
+    
+    /* ======================= 练习样式 ======================= */
+    .question-card {
+        background: var(--color-background-panel);
+        padding: 25px;
+        margin-bottom: 25px;
+        border-radius: 12px;
+        border: 2px solid var(--color-background-light-accent);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    
+    .question-number {
+        font-size: 1.2em;
+        color: var(--color-accent-secondary);
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+    
+    .question-text {
+        font-size: 1.3em;
+        color: var(--color-text-deep);
+        margin-bottom: 20px;
+        line-height: 1.8;
+    }
+    
+    .blank-option {
+        display: inline-block;
+        min-width: 50px;
+        padding: 5px 12px;
+        margin: 0 5px;
+        border: 2px dashed var(--color-accent-secondary);
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s;
+        background: var(--color-background-panel);
+        font-weight: 600;
+    }
+    
+    .blank-option:hover {
+        border-color: var(--color-accent-strong);
+        background: var(--color-background-warning);
+    }
+    
+    .blank-option.selected {
+        border: 2px solid var(--color-accent-secondary);
+        background: var(--color-accent-secondary);
+        color: var(--color-text-on-dark);
+    }
+    
+    .blank-option.multi-selected {
+        border: 2px solid var(--color-accent-strong);
+        background: linear-gradient(135deg, var(--color-accent-secondary), var(--color-accent-strong));
+        color: var(--color-text-on-dark);
+        box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+    }
+    
+    .choices {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-top: 20px;
+    }
+    
+    .choice-btn {
+        padding: 15px 20px;
+        font-size: 1.1em;
+        background: var(--color-background-panel);
+        border: 2px solid var(--color-background-light-accent);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s;
+        color: var(--color-text-deep);
+    }
+    
+    .choice-btn:hover {
+        border-color: var(--color-accent-secondary);
+        background: var(--color-background-light-accent);
+    }
+    
+    .choice-btn.selected {
+        border: 2px solid var(--color-accent-secondary);
+        background: var(--color-accent-secondary);
+        color: var(--color-text-on-dark);
+    }
+    
+    .submit-btn {
+        display: block;
+        margin: 20px auto 0;
+        padding: 12px 30px;
+        font-size: 1.1em;
+        background: var(--color-accent-secondary);
+        color: var(--color-text-on-dark);
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 700;
+        transition: all 0.3s;
+    }
+    
+    .submit-btn:hover {
+        background: var(--color-background-main);
+        transform: translateY(-2px);
+    }
+    
+    .feedback {
+        margin-top: 15px;
+        padding: 15px;
+        border-radius: 8px;
+        font-weight: 600;
+        text-align: center;
+        display: none;
+    }
+    
+    .feedback.correct {
+        background: #c6f6d5;
+        color: #22543d;
+        border: 2px solid #6BCB77;
+        display: block;
+    }
+    
+    .feedback.incorrect {
+        background: #fed7d7;
+        color: #742a2a;
+        border: 2px solid var(--color-accent-strong);
+        display: block;
+    }
+    
+    /* ======================= 进度条样式 ======================= */
+    .progress-container {
+        background: var(--color-background-light-accent);
+        border-radius: 10px;
+        height: 12px;
+        margin: 30px 0;
+        overflow: hidden;
+    }
+    
+    .progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, var(--color-accent-secondary), var(--color-background-main));
+        width: 0%;
+        transition: width 0.5s ease;
+    }
+    
+    .progress-text {
+        text-align: center;
+        font-weight: 600;
+        color: var(--color-background-main);
+        margin-bottom: 10px;
+    }
+    
+    /* ======================= 练习提示样式 ======================= */
+    .exercise-notice {
+        background: var(--color-background-warning);
+        padding: 20px;
+        border-radius: 12px;
+        border-left: 5px solid var(--color-accent-warning);
+        margin: 20px 0 30px;
+        font-size: 1.05em;
+    }
+    
+    .exercise-notice h4 {
+        color: var(--color-accent-warning);
+        margin-bottom: 15px;
+        font-size: 1.2em;
+    }
+    
+    .exercise-notice ul {
+        padding-left: 25px;
+        margin: 15px 0;
+    }
+    
+    .exercise-notice li {
+        margin-bottom: 10px;
+        line-height: 1.6;
+    }
+    
+    .exercise-notice strong {
+        color: var(--color-background-main);
+    }
+    
+    /* ======================= 详情/折叠卡片样式 ======================= */
+    details {
+        margin-bottom: 10px;
+        border: 1px solid var(--color-background-light-accent);
+        border-radius: 6px;
+        background-color: var(--color-background-panel);
+        transition: all 0.3s ease;
+    }
+    
+    details[open] {
+        border-color: var(--color-accent-secondary);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+    
+    summary {
+        font-size: 1.25em;
+        font-weight: bold;
+        color: var(--color-text-deep);
+        padding: 15px;
+        cursor: pointer;
+        outline: none;
+        user-select: none;
+        list-style: none;
+        position: relative;
+    }
+    
+    summary::before {
+        content: '▶';
+        color: var(--color-accent-secondary);
+        margin-right: 10px;
+        font-size: 0.8em;
+        transition: transform 0.3s;
+        display: inline-block;
+    }
+    
+    details[open] summary::before {
+        content: '▼';
+        transform: rotate(0deg);
+    }
+    
+    .content-area {
+        padding: 0 15px 15px 35px;
+        border-top: 1px solid var(--color-background-light-accent);
+    }
+    
+    .story-block {
+        padding: 10px;
+        margin-top: 10px;
+        background-color: var(--color-background-warning);
+        border-left: 4px solid var(--color-accent-warning);
+        color: var(--color-text-secondary);
+        border-radius: 0 4px 4px 0;
+        font-style: italic;
+    }
+    
+    /* ======================= 控制按钮样式 ======================= */
+    #controls button {
+        background-color: var(--color-accent-secondary);
+        color: var(--color-text-on-dark);
+        border: none;
+        padding: 10px 15px;
+        margin-left: 8px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+        font-weight: bold;
+        transition: background-color 0.2s, transform 0.1s;
+    }
+    
+    #controls button:hover {
+        background-color: #337a7a;
+    }
+    
+    #controls button:active {
+        transform: scale(0.98);
+    }
+    
+    /* ======================= 响应式设计 ======================= */
+    @media (max-width: 768px) {
+        .tabs {
+            flex-direction: column;
+        }
+        
+        .tab-button {
+            border-radius: 8px;
+            margin-bottom: 5px;
+            border: 2px solid var(--color-background-light-accent);
+        }
+        
+        .components-grid,
+        .grammar-points,
+        .choices {
+            grid-template-columns: 1fr;
+        }
+        
+        .vocab-table {
+            font-size: 0.9em;
+        }
+        
+        .blank-option {
+            min-width: 40px;
+            padding: 4px 8px;
+            margin: 0 3px;
+        }
+    }
+    
+    /* ======================= 图片 ======================= */
+    /* 默认图片样式（中等大小） */
+    .content-area img {
+        max-width: 100%;
+        max-height: 10.8em; /* 约6倍字符高度 (1.8em × 6) */
+        height: auto;
+        display: block;
+        margin: 15px auto;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    /* 纯图片（较小，用于字符图片等） */
+    .img-char {
+        max-width: 40%;
+        max-height: 5.4em; /* 约3倍字符高度 (1.8em × 3) */
+        height: auto;
+        display: block;
+        margin: 15px auto;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    /* PDF截取的图文说明（较大，方便阅读文字） */
+    .content-area .img-pdf,
+    .img-pdf {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        display: block;
+        margin: 20px 0;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        /* 强制填满容器宽度，让PDF截图显示更大 */
+    }</style>
 <body>
         <div class="main">
   
@@ -781,13 +821,13 @@ details[open] summary::before {
 </details>
 
 <details>
-    <summary>2. <span class="character">革</span> gé (leather)</summary>
+    <summary>2. <span class="character">革</span> gé (leather/transform)</summary>
     <div class="content-area">
         <h4>🧩 Components:</h4>
         <p>one componet or 廿 (twenty) + 中 (middle) + 一 (one)</p>
         <img src="https://res.cloudinary.com/dxc8rcjuh/image/upload/v1765409053/%E9%9D%A9_g0sbf4.png"   alt="革">
         <h4>📘 Book Story:</h4>
-        <div class="story-block">Leather, animal skins treated to remove their hair</div>
+        <div class="story-block">Leather, animal skins treated to remove their hair. <br>The original form of the character resembles a complete animal skin with head, body, and tail hanging. The 'leather' that has its 'fur' removed is processed and altered animal skin. Therefore, it extends to the meaning of transformation.</div>
         
         <h4>😂 Fun Story (English):</h4>
         <div class="story-block">A magician uses a thin sheet of leather to cover a pile of <strong>twenty (廿)</strong>  identical magic boxes, all lined up in the <strong>middle (中)</strong> of the stage. The leather makes a cracking "Guh" sound.</div>
@@ -2036,186 +2076,296 @@ details[open] summary::before {
         </div>
     </div>
     
-    <!-- 练习 Tab -->
-    <div class="tab-content" id="exercises-tab">
-        <div class="card">
-            <h2>练习 Exercises</h2>
-            
-            <div class="progress-text">完成进度: <span id="progress-percent">0%</span></div>
-            <div class="progress-container">
-                <div class="progress-bar" id="progress-bar"></div>
-            </div>
-            
-            <h3 style="color: #16476A; margin: 30px 0 20px 0; font-size: 1.3em;">● 选择正确的位置 Choose a correct position:</h3>
-            
-            <div class="question-card">
-                <div class="question-number">1. 这些吃<span class="blank-option" data-position="A" onclick="selectBlank(1, 'A')">A</span>用<span class="blank-option" data-position="B" onclick="selectBlank(1, 'B')">B</span>是<span class="blank-option" data-position="C" onclick="selectBlank(1, 'C')">C</span>今天下午去商店买<span class="blank-option" data-position="D" onclick="selectBlank(1, 'D')">D</span>的。</div>
-                <div style="margin: 15px 0; padding: 15px; background: #E3F2F2; border-radius: 8px;">
-                    <strong class="chinese">选项:</strong> <span class="chinese">的</span>
+                <!-- 练习 Tab -->
+                <div class="tab-content" id="exercises-tab">
+                    <div class="card">
+                        <h2>练习 Exercises</h2>
+                        
+                        <!-- 练习提示 -->
+                        <div class="exercise-notice">
+                            <h4>📝 答题提示</h4>
+                            <p class="chinese">本练习包含<strong>单选</strong>和<strong>多选</strong>题目：</p>
+                            <ul>
+                                <li><span class="chinese"><strong>单选题</strong>：点击一个空白处选择答案</span></li>
+                                <li><span class="chinese"><strong>多选题</strong>：可以点击多个空白处，再次点击可取消选择</span></li>
+                                <li><span class="english"><strong>Single-choice</strong>: Click one blank to select answer</span></li>
+                                <li><span class="english"><strong>Multiple-choice</strong>: Click multiple blanks, click again to deselect</span></li>
+                            </ul>
+                            <p class="spanish" style="margin-top: 10px;"><strong>Nota</strong>: Algunas preguntas tienen una respuesta correcta, otras tienen varias.</p>
+                        </div>
+                        
+                        <div class="progress-text">完成进度: <span id="progress-percent">0%</span></div>
+                        <div class="progress-container">
+                            <div class="progress-bar" id="progress-bar"></div>
+                        </div>
+                        
+                        <h3 style="color: #16476A; margin: 30px 0 20px 0; font-size: 1.3em;">● 选择正确的位置 Choose a correct position:</h3>
+                        
+                        <!-- 第1题：多选题（答案AB） -->
+                        <div class="question-card">
+                            <div class="question-number">1. 这些吃<span class="blank-option" data-position="A" onclick="selectBlankMode(1, 'A', 'multiple')">A</span>用<span class="blank-option" data-position="B" onclick="selectBlankMode(1, 'B', 'multiple')">B</span>是<span class="blank-option" data-position="C" onclick="selectBlankMode(1, 'C', 'multiple')">C</span>今天下午去商店买<span class="blank-option" data-position="D" onclick="selectBlankMode(1, 'D', 'multiple')">D</span>的。</div>
+                            <div style="margin: 15px 0; padding: 15px; background: #E3F2F2; border-radius: 8px;">
+                                <strong class="chinese">选项:</strong> <span class="chinese">的</span>
+                            </div>
+                            <button class="submit-btn" onclick="checkAnswerMode(1, ['A', 'B'], 'multiple')">提交</button>
+                            <div class="feedback" id="feedback1"></div>
+                        </div>
+                        
+                        <!-- 第2题：多选题（答案AC） -->
+                        <div class="question-card">
+                            <div class="question-number">2. 这<span class="blank-option" data-position="A" onclick="selectBlankMode(2, 'A', 'multiple')">A</span>本子是我在<span class="blank-option" data-position="B" onclick="selectBlankMode(2, 'B', 'multiple')">B</span>一<span class="blank-option" data-position="C" onclick="selectBlankMode(2, 'C', 'multiple')">C</span>小<span class="blank-option" data-position="D" onclick="selectBlankMode(2, 'D', 'multiple')">D</span>商店买的。</div>
+                            <div style="margin: 15px 0; padding: 15px; background: #E3F2F2; border-radius: 8px;">
+                                <strong class="chinese">选项:</strong> <span class="chinese">个</span>
+                            </div>
+                            <button class="submit-btn" onclick="checkAnswerMode(2, ['A', 'C'], 'multiple')">提交</button>
+                            <div class="feedback" id="feedback2"></div>
+                        </div>
+                        
+                        <!-- 第3题：单选题（答案C） -->
+                        <div class="question-card">
+                            <div class="question-number">3. 我<span class="blank-option" data-position="A" onclick="selectBlankMode(3, 'A', 'single')">A</span>想<span class="blank-option" data-position="B" onclick="selectBlankMode(3, 'B', 'single')">B</span>跟我的同学<span class="blank-option" data-position="C" onclick="selectBlankMode(3, 'C', 'single')">C</span>去餐厅吃饭<span class="blank-option" data-position="D" onclick="selectBlankMode(3, 'D', 'single')">D</span>。</div>
+                            <div style="margin: 15px 0; padding: 15px; background: #E3F2F2; border-radius: 8px;">
+                                <strong class="chinese">选项:</strong> <span class="chinese">一块儿</span>
+                            </div>
+                            <button class="submit-btn" onclick="checkAnswerMode(3, ['C'], 'single')">提交</button>
+                            <div class="feedback" id="feedback3"></div>
+                        </div>
+                        
+                        <!-- 第4题：单选题（答案A） -->
+                        <div class="question-card">
+                            <div class="question-number">4. 你打听<span class="blank-option" data-position="A" onclick="selectBlankMode(4, 'A', 'single')">A</span>,去<span class="blank-option" data-position="B" onclick="selectBlankMode(4, 'B', 'single')">B</span>北京饭店<span class="blank-option" data-position="C" onclick="selectBlankMode(4, 'C', 'single')">C</span>在哪儿下<span class="blank-option" data-position="D" onclick="selectBlankMode(4, 'D', 'single')">D</span>车。</div>
+                            <div style="margin: 15px 0; padding: 15px; background: #E3F2F2; border-radius: 8px;">
+                                <strong class="chinese">选项:</strong> <span class="chinese">一下</span>
+                            </div>
+                            <button class="submit-btn" onclick="checkAnswerMode(4, ['A'], 'single')">提交</button>
+                            <div class="feedback" id="feedback4"></div>
+                        </div>
+                        
+                        <h3 style="color: #16476A; margin: 40px 0 20px 0; font-size: 1.3em;">● 选择正确的答案 Choose a correct answer:</h3>
+                        
+                        <!-- 第5题：单选题（答案C） -->
+                        <div class="question-card">
+                            <div class="question-number">5. 你买什么？我买一______书。</div>
+                            <div class="choices">
+                                <button class="choice-btn" onclick="selectChoice(5, 'A', this, 'single')">A. 个</button>
+                                <button class="choice-btn" onclick="selectChoice(5, 'B', this, 'single')">B. 张</button>
+                                <button class="choice-btn" onclick="selectChoice(5, 'C', this, 'single')">C. 本</button>
+                                <button class="choice-btn" onclick="selectChoice(5, 'D', this, 'single')">D. 支</button>
+                            </div>
+                            <button class="submit-btn" onclick="checkMultipleAnswer(5, ['C'])">提交</button>
+                            <div class="feedback" id="feedback5"></div>
+                        </div>
+                        
+                        <!-- 第6题：单选题（答案B） -->
+                        <div class="question-card">
+                            <div class="question-number">6. 今天下午我在商店买了一条______。</div>
+                            <div class="choices">
+                                <button class="choice-btn" onclick="selectChoice(6, 'A', this, 'single')">A. 大衣</button>
+                                <button class="choice-btn" onclick="selectChoice(6, 'B', this, 'single')">B. 毛裤</button>
+                                <button class="choice-btn" onclick="selectChoice(6, 'C', this, 'single')">C. 上衣</button>
+                                <button class="choice-btn" onclick="selectChoice(6, 'D', this, 'single')">D. 皮鞋</button>
+                            </div>
+                            <button class="submit-btn" onclick="checkMultipleAnswer(6, ['B'])">提交</button>
+                            <div class="feedback" id="feedback6"></div>
+                        </div>
+                        
+                        <!-- 第7题：单选题（答案D） -->
+                        <div class="question-card">
+                            <div class="question-number">7. 他早上八点坐车去学校，上午十点半到。他用了______小时。</div>
+                            <div class="choices">
+                                <button class="choice-btn" onclick="selectChoice(7, 'A', this, 'single')">A. 二个小时半</button>
+                                <button class="choice-btn" onclick="selectChoice(7, 'B', this, 'single')">B. 二个半小时</button>
+                                <button class="choice-btn" onclick="selectChoice(7, 'C', this, 'single')">C. 两个小时半</button>
+                                <button class="choice-btn" onclick="selectChoice(7, 'D', this, 'single')">D. 两个半小时</button>
+                            </div>
+                            <button class="submit-btn" onclick="checkMultipleAnswer(7, ['D'])">提交</button>
+                            <div class="feedback" id="feedback7"></div>
+                        </div>
+                    </div>
                 </div>
-                <button class="submit-btn" onclick="checkAnswer(1, 'A')">提交</button>
-                <div class="feedback" id="feedback1"></div>
             </div>
-            
-            <div class="question-card">
-                <div class="question-number">2. 这<span class="blank-option" data-position="A" onclick="selectBlank(2, 'A')">A</span>本子是我在<span class="blank-option" data-position="B" onclick="selectBlank(2, 'B')">B</span>一<span class="blank-option" data-position="C" onclick="selectBlank(2, 'C')">C</span>小<span class="blank-option" data-position="D" onclick="selectBlank(2, 'D')">D</span>商店买的。</div>
-                <div style="margin: 15px 0; padding: 15px; background: #E3F2F2; border-radius: 8px;">
-                    <strong class="chinese">选项:</strong> <span class="chinese">个</span>
-                </div>
-                <button class="submit-btn" onclick="checkAnswer(2, 'B')">提交</button>
-                <div class="feedback" id="feedback2"></div>
-            </div>
-            
-            <div class="question-card">
-                <div class="question-number">3. 我<span class="blank-option" data-position="A" onclick="selectBlank(3, 'A')">A</span>想<span class="blank-option" data-position="B" onclick="selectBlank(3, 'B')">B</span>跟我的同学<span class="blank-option" data-position="C" onclick="selectBlank(3, 'C')">C</span>去餐厅吃饭<span class="blank-option" data-position="D" onclick="selectBlank(3, 'D')">D</span>。</div>
-                <div style="margin: 15px 0; padding: 15px; background: #E3F2F2; border-radius: 8px;">
-                    <strong class="chinese">选项:</strong> <span class="chinese">一块儿</span>
-                </div>
-                <button class="submit-btn" onclick="checkAnswer(3, 'C')">提交</button>
-                <div class="feedback" id="feedback3"></div>
-            </div>
-            
-            <div class="question-card">
-                <div class="question-number">4. 你打听<span class="blank-option" data-position="A" onclick="selectBlank(4, 'A')">A</span>,去<span class="blank-option" data-position="B" onclick="selectBlank(4, 'B')">B</span>北京饭店<span class="blank-option" data-position="C" onclick="selectBlank(4, 'C')">C</span>在哪儿下<span class="blank-option" data-position="D" onclick="selectBlank(4, 'D')">D</span>车。</div>
-                <div style="margin: 15px 0; padding: 15px; background: #E3F2F2; border-radius: 8px;">
-                    <strong class="chinese">选项:</strong> <span class="chinese">一下</span>
-                </div>
-                <button class="submit-btn" onclick="checkAnswer(4, 'A')">提交</button>
-                <div class="feedback" id="feedback4"></div>
-            </div>
-            
-            <h3 style="color: #16476A; margin: 40px 0 20px 0; font-size: 1.3em;">● 选择正确的答案 Choose a correct answer:</h3>
-            
-            <div class="question-card">
-                <div class="question-number">1. 你买什么？我买一______书。</div>
-                <div class="choices">
-                    <button class="choice-btn" onclick="selectChoice(5, 'A', this)">A. 个</button>
-                    <button class="choice-btn" onclick="selectChoice(5, 'B', this)">B. 张</button>
-                    <button class="choice-btn" onclick="selectChoice(5, 'C', this)">C. 本</button>
-                    <button class="choice-btn" onclick="selectChoice(5, 'D', this)">D. 支</button>
-                </div>
-                <button class="submit-btn" onclick="checkMultipleAnswer(5, ['C'])">提交</button>
-                <div class="feedback" id="feedback5"></div>
-            </div>
-            
-            <div class="question-card">
-                <div class="question-number">2. 今天下午我在商店买了一条______。</div>
-                <div class="choices">
-                    <button class="choice-btn" onclick="selectChoice(6, 'A', this)">A. 大衣</button>
-                    <button class="choice-btn" onclick="selectChoice(6, 'B', this)">B. 毛裤</button>
-                    <button class="choice-btn" onclick="selectChoice(6, 'C', this)">C. 上衣</button>
-                    <button class="choice-btn" onclick="selectChoice(6, 'D', this)">D. 皮鞋</button>
-                </div>
-                <button class="submit-btn" onclick="checkMultipleAnswer(6, ['B'])">提交</button>
-                <div class="feedback" id="feedback6"></div>
-            </div>
-            
-            <div class="question-card">
-                <div class="question-number">3. 他早上八点坐车去学校，上午十点半到。他用了______小时。</div>
-                <div class="choices">
-                    <button class="choice-btn" onclick="selectChoice(7, 'A', this)">A. 二个小时半</button>
-                    <button class="choice-btn" onclick="selectChoice(7, 'B', this)">B. 二个半小时</button>
-                    <button class="choice-btn" onclick="selectChoice(7, 'C', this)">C. 两个小时半</button>
-                    <button class="choice-btn" onclick="selectChoice(7, 'D', this)">D. 两个半小时</button>
-                </div>
-                <button class="submit-btn" onclick="checkMultipleAnswer(7, ['D'])">提交</button>
-                <div class="feedback" id="feedback7"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    let selectedOptions = {};
-    let answers = {};
-    let completedQuestions = new Set();
-    const totalQuestions = 7;
-    
-    function switchTab(tabName) {
-        document.querySelectorAll('.tab-content').forEach(tab => {
-            tab.classList.remove('active');
-        });
-        document.querySelectorAll('.tab-button').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        
-        document.getElementById(tabName + '-tab').classList.add('active');
-        event.target.classList.add('active');
-    }
-    
-    function selectBlank(questionNum, position) {
-        selectedOptions[questionNum] = position;
-        const card = document.getElementById('feedback' + questionNum).parentElement;
-        card.querySelectorAll('.blank-option').forEach(opt => {
-            opt.classList.remove('selected');
-        });
-        card.querySelector(`[data-position="${position}"]`).classList.add('selected');
-    }
-    
-    function checkAnswer(questionNum, correctAnswer) {
-        const feedback = document.getElementById('feedback' + questionNum);
-        const selected = selectedOptions[questionNum];
-        
-        if (!selected) {
-            feedback.className = 'feedback incorrect';
-            feedback.innerHTML = '<span class="chinese">请先选择一个位置!</span><br><span class="spanish">Por favor, selecciona una posición primero.</span><br><span class="english">Please select a position first.</span>';
-            return;
-        }
-        
-        if (selected === correctAnswer) {
-            feedback.className = 'feedback correct';
-            feedback.innerHTML = '✓ <span class="chinese">正确!</span> <span class="spanish">¡Correcto!</span> <span class="english">Correct!</span>';
-            completedQuestions.add(questionNum);
-            updateProgress();
-        } else {
-            feedback.className = 'feedback incorrect';
-            feedback.innerHTML = `✗ <span class="chinese">不对。应该是 ${correctAnswer}。</span><br><span class="spanish">Incorrecto. Debería ser ${correctAnswer}.</span><br><span class="english">Incorrect. Should be ${correctAnswer}.</span>`;
-        }
-    }
-    
-    function selectChoice(questionNum, choice, element) {
-        selectedOptions[questionNum] = choice;
-        const card = element.closest('.question-card');
-        card.querySelectorAll('.choice-btn').forEach(btn => {
-            btn.classList.remove('selected');
-        });
-        element.classList.add('selected');
-    }
-    
-    function checkMultipleAnswer(questionNum, correctAnswers) {
-        const feedback = document.getElementById('feedback' + questionNum);
-        const selected = selectedOptions[questionNum];
-        
-        if (!selected) {
-            feedback.className = 'feedback incorrect';
-            feedback.innerHTML = '<span class="chinese">请先选择一个答案!</span><br><span class="spanish">Por favor, selecciona una respuesta primero.</span><br><span class="english">Please select an answer first.</span>';
-            return;
-        }
-        
-        if (correctAnswers.includes(selected)) {
-            feedback.className = 'feedback correct';
-            feedback.innerHTML = '✓ <span class="chinese">正确!</span> <span class="spanish">¡Correcto!</span> <span class="english">Correct!</span>';
-            completedQuestions.add(questionNum);
-            updateProgress();
-        } else {
-            feedback.className = 'feedback incorrect';
-            feedback.innerHTML = `✗ <span class="chinese">不对。正确答案是 ${correctAnswers.join('、')}。</span><br><span class="spanish">Incorrecto. La respuesta correcta es ${correctAnswers.join(', ')}.</span><br><span class="english">Incorrect. Correct answer is ${correctAnswers.join(', ')}.</span>`;
-        }
-    }
-    
-    function updateProgress() {
-        const progress = (completedQuestions.size / totalQuestions) * 100;
-        document.getElementById('progress-bar').style.width = progress + '%';
-        document.getElementById('progress-percent').textContent = Math.round(progress) + '%';
-        
-        if (completedQuestions.size === totalQuestions) {
-            setTimeout(() => {
-                alert('🎉 恭喜完成所有练习！\n¡Felicitaciones por completar todos los ejercicios!\nCongratulations on completing all exercises!');
-            }, 500);
-        }
-    }
-    
-    updateProgress();
-</script>
+            <script>
+                let selectedOptions = {};
+                let answers = {};
+                let completedQuestions = new Set();
+                const totalQuestions = 7;
+                
+                function switchTab(tabName) {
+                    document.querySelectorAll('.tab-content').forEach(tab => {
+                        tab.classList.remove('active');
+                    });
+                    document.querySelectorAll('.tab-button').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    document.getElementById(tabName + '-tab').classList.add('active');
+                    event.target.classList.add('active');
+                }
+                
+                // ======================= 空白题函数（支持单选和多选） =======================
+                
+                // 选择空白处（支持单选和多选模式）
+                function selectBlankMode(questionNum, position, mode) {
+                    const card = document.getElementById('feedback' + questionNum).parentElement;
+                    const option = card.querySelector(`[data-position="${position}"]`);
+                    
+                    if (mode === 'single') {
+                        // 单选模式：只能选一个
+                        card.querySelectorAll('.blank-option').forEach(opt => {
+                            opt.classList.remove('selected', 'multi-selected');
+                        });
+                        option.classList.add('selected');
+                        selectedOptions[questionNum] = [position];
+                    } else {
+                        // 多选模式：可以选多个
+                        if (!selectedOptions[questionNum]) {
+                            selectedOptions[questionNum] = [];
+                        }
+                        
+                        const index = selectedOptions[questionNum].indexOf(position);
+                        
+                        if (index === -1) {
+                            // 如果还没选中，添加
+                            selectedOptions[questionNum].push(position);
+                            option.classList.add('multi-selected');
+                        } else {
+                            // 如果已经选中，移除
+                            selectedOptions[questionNum].splice(index, 1);
+                            option.classList.remove('multi-selected');
+                        }
+                    }
+                }
+                
+                // 检查空白题答案（支持单选和多选模式）
+                function checkAnswerMode(questionNum, correctAnswers, mode) {
+                    const feedback = document.getElementById('feedback' + questionNum);
+                    const selected = selectedOptions[questionNum] || [];
+                    
+                    if (selected.length === 0) {
+                        feedback.className = 'feedback incorrect';
+                        feedback.innerHTML = '<span class="chinese">请先选择一个位置!</span><br><span class="spanish">Por favor, selecciona una posición.</span><br><span class="english">Please select a position.</span>';
+                        return;
+                    }
+                    
+                    if (mode === 'single') {
+                        // 单选模式检查
+                        if (selected.length !== 1) {
+                            feedback.className = 'feedback incorrect';
+                            feedback.innerHTML = '<span class="chinese">这是单选题，只能选一个!</span><br><span class="spanish">Esta es una pregunta de selección única.</span><br><span class="english">This is a single-choice question.</span>';
+                            return;
+                        }
+                        
+                        if (selected[0] === correctAnswers[0]) {
+                            feedback.className = 'feedback correct';
+                            feedback.innerHTML = '✓ <span class="chinese">正确!</span> <span class="spanish">¡Correcto!</span> <span class="english">Correct!</span>';
+                            completedQuestions.add(questionNum);
+                            updateProgress();
+                        } else {
+                            feedback.className = 'feedback incorrect';
+                            feedback.innerHTML = `✗ <span class="chinese">不对。应该是 ${correctAnswers[0]}。</span><br><span class="spanish">Incorrecto. Debería ser ${correctAnswers[0]}.</span><br><span class="english">Incorrect. Should be ${correctAnswers[0]}.</span>`;
+                        }
+                    } else {
+                        // 多选模式检查
+                        const correctSet = new Set(correctAnswers);
+                        const selectedSet = new Set(selected);
+                        
+                        let isCorrect = true;
+                        let missing = [];
+                        let extra = [];
+                        
+                        // 检查是否选了所有正确答案
+                        correctAnswers.forEach(ans => {
+                            if (!selectedSet.has(ans)) {
+                                missing.push(ans);
+                                isCorrect = false;
+                            }
+                        });
+                        
+                        // 检查是否选了错误答案
+                        selected.forEach(sel => {
+                            if (!correctSet.has(sel)) {
+                                extra.push(sel);
+                                isCorrect = false;
+                            }
+                        });
+                        
+                        if (isCorrect) {
+                            feedback.className = 'feedback correct';
+                            feedback.innerHTML = '✓ <span class="chinese">完全正确!</span> <span class="spanish">¡Perfecto!</span> <span class="english">Perfect!</span>';
+                            completedQuestions.add(questionNum);
+                            updateProgress();
+                        } else {
+                            feedback.className = 'feedback incorrect';
+                            let msg = '<span class="chinese">';
+                            
+                            if (missing.length > 0 && extra.length > 0) {
+                                msg += `部分正确。少了: ${missing.join('、')}，多了: ${extra.join('、')}`;
+                            } else if (missing.length > 0) {
+                                msg += `部分正确。少了: ${missing.join('、')}`;
+                            } else if (extra.length > 0) {
+                                msg += `部分正确。多了: ${extra.join('、')}`;
+                            }
+                            
+                            msg += ` 正确答案是: ${correctAnswers.join('、')}。</span>`;
+                            
+                            feedback.innerHTML = `✗ ${msg}<br><span class="spanish">Respuesta correcta: ${correctAnswers.join(', ')}</span><br><span class="english">Correct answer: ${correctAnswers.join(', ')}</span>`;
+                        }
+                    }
+                }
+                
+                // ======================= 选择题函数 =======================
+                
+                // 选择答案
+                function selectChoice(questionNum, choice, element, mode) {
+                    const card = element.closest('.question-card');
+                    
+                    if (mode === 'single') {
+                        // 单选模式：清空其他选项
+                        card.querySelectorAll('.choice-btn').forEach(btn => {
+                            btn.classList.remove('selected');
+                        });
+                        element.classList.add('selected');
+                        selectedOptions[questionNum] = [choice];
+                    }
+                }
+                
+                // 检查选择题答案
+                function checkMultipleAnswer(questionNum, correctAnswers) {
+                    const feedback = document.getElementById('feedback' + questionNum);
+                    const selected = selectedOptions[questionNum] || [];
+                    
+                    if (selected.length === 0) {
+                        feedback.className = 'feedback incorrect';
+                        feedback.innerHTML = '<span class="chinese">请先选择一个答案!</span><br><span class="spanish">Por favor, selecciona una respuesta.</span><br><span class="english">Please select an answer.</span>';
+                        return;
+                    }
+                    
+                    if (correctAnswers.includes(selected[0])) {
+                        feedback.className = 'feedback correct';
+                        feedback.innerHTML = '✓ <span class="chinese">正确!</span> <span class="spanish">¡Correcto!</span> <span class="english">Correct!</span>';
+                        completedQuestions.add(questionNum);
+                        updateProgress();
+                    } else {
+                        feedback.className = 'feedback incorrect';
+                        feedback.innerHTML = `✗ <span class="chinese">不对。正确答案是 ${correctAnswers.join('、')}。</span><br><span class="spanish">Incorrecto. La respuesta correcta es ${correctAnswers.join(', ')}.</span><br><span class="english">Incorrect. Correct answer is ${correctAnswers.join(', ')}.</span>`;
+                    }
+                }
+                
+                // ======================= 进度条函数 =======================
+                
+                function updateProgress() {
+                    const progress = (completedQuestions.size / totalQuestions) * 100;
+                    document.getElementById('progress-bar').style.width = progress + '%';
+                    document.getElementById('progress-percent').textContent = Math.round(progress) + '%';
+                    
+                    if (completedQuestions.size === totalQuestions) {
+                        setTimeout(() => {
+                            alert('🎉 恭喜完成所有练习！\n¡Felicitaciones por completar todos los ejercicios!\nCongratulations on completing all exercises!');
+                        }, 500);
+                    }
+                }
+                
+                updateProgress();
+            </script>
 
 </html>
